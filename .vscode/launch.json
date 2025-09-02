@@ -1,0 +1,40 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Client",
+        "type": "node-terminal",
+        "request": "launch",
+        "command": "npm run start",
+        "cwd": "${workspaceFolder}/client",
+        "serverReadyAction": {
+          "pattern": "- Local:.+(https?://.+)",
+          "uriFormat": "%s",
+          "action": "debugWithChrome"
+        }
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Server",
+        "runtimeExecutable": "npm",
+        "runtimeArgs": [
+          "run",
+          "start:serverdebug",
+          "--",
+          "--inspect-brk"
+        ],
+        "autoAttachChildProcesses": true,
+        "restart": true,
+        "sourceMaps": true,
+        "stopOnEntry": false,
+        "console": "integratedTerminal",
+      },
+      {
+        "name": "test",
+        "type": "node",
+        "request": "launch",
+        "program": "test.js"
+      }
+    ]
+}
