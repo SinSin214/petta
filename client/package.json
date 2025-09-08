@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"tailwindcss --input ./globals.css --output ./output.css --watch\" \"npx tsc\" \"next dev\"",
-    "build": "tailwindcss ./globals.css --output ./output.css && next build",
+    "dev": "concurrently \"--watch\" \"npx tsc\" \"next dev\"",
+    "build": "next build",
     "start": "npm run dev",
     "lint": "next lint",
     "next": "next dev"
   },
   "dependencies": {
-    "concurrently": "^9.2.0",
+    "@heroui/react": "^2.8.3",
+    "concurrently": "^9.2.1",
     "next": "15.4.5",
     "react": "19.1.0",
     "react-dom": "19.1.0"
@@ -21,9 +22,11 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.4.5",
-    "tailwindcss": "^4",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.13",
     "typescript": "^5"
   }
 }
