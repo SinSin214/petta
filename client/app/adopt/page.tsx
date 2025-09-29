@@ -1,4 +1,4 @@
-import { SearchBar } from "@/components/Adopt/SearchBar";
+import { Filter } from "@/components/Adopt/Filter";
 import { Button } from "@heroui/react";
 
 export default function Adopt() {
@@ -14,7 +14,7 @@ export default function Adopt() {
             </div>
 
             <div className="mb-8">
-              <SearchBar />
+              <Filter />
             </div>
 
             {/* {filteredPets.length === 0 ? (
