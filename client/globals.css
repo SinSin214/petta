@@ -31,6 +31,18 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.test {
-  margin-top: 100px
+/* #region common css */
+.text-truncate-5 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
 }
+/* #endregion common css */
+
+/* #region Pet Card */
+.pet-card-body .rounded-large {
+  border-radius: var(--heroui-radius-large) var(--heroui-radius-large) 0 0;
+  height: 100%;
+}
+/* #endregion End Pet */

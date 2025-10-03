@@ -1,4 +1,7 @@
+'use client';
 import { Filter } from "@/components/Adopt/Filter";
+import { PetCard } from "@/components/Adopt/PetCard";
+import { samplePets } from '../data/pets';
 import { Button } from "@heroui/react";
 
 export default function Adopt() {
@@ -6,15 +9,27 @@ export default function Adopt() {
         <div>
         <section className="py-16 px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-12">
+            <div className="text-center my-12">
               <h2 className="mb-4">Meet Our Available Pets</h2>
               <p className="text-xl text-gray-600">
                 Every pet has a unique story and personality. Find the one that speaks to your heart.
               </p>
             </div>
 
-            <div className="mb-8">
+            <div className="mb-14">
               <Filter />
+            </div>
+
+            <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[1fr]">
+              {samplePets.map((pet) => (
+                <PetCard
+                  key={pet.id}
+                  pet={pet}
+                  onViewDetails={() => {}}
+                  onFavorite={() => {}}
+                  isFavorited={false}
+                />
+              ))}
             </div>
 
             {/* {filteredPets.length === 0 ? (
