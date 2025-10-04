@@ -1,5 +1,5 @@
-import { AboutSection } from "@/components/AboutSection";
-import { Banner } from "@/components/Banner";
+import { AboutSection } from "@/components/Home/AboutSection";
+import { Banner } from "@/components/Home/Banner";
 
 export default function Home() {
 	return (

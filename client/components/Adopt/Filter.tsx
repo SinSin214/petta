@@ -71,7 +71,7 @@ export function Filter() {
 	};
 
 	return (
-		<div className="bg-white p-4 rounded-lg shadow-sm border space-y-4">
+		<div className="bg-white p-6 rounded-lg shadow-sm border space-y-4">
 			<div className="relative">
 				<Input
 					classNames={{

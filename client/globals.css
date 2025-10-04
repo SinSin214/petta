@@ -32,10 +32,10 @@ body {
 }
 
 /* #region common css */
-.text-truncate-5 {
+.text-truncate-4 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
     overflow: hidden;
 }
 /* #endregion common css */
@@ -43,6 +43,5 @@ body {
 /* #region Pet Card */
 .pet-card-body .rounded-large {
   border-radius: var(--heroui-radius-large) var(--heroui-radius-large) 0 0;
-  height: 100%;
 }
 /* #endregion End Pet */
