@@ -1,4 +1,5 @@
 import { Button } from "@heroui/react";
+import { ArrowDown } from "lucide-react";
 
 export function Banner() {
     let bannerSrc = 'https://images.unsplash.com/photo-1526363269865-60998e11d82d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZXQlMjBhZG9wdGlvbiUyMGZhbWlseXxlbnwxfHx8fDE3NTY3OTU2MjR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
@@ -41,10 +42,9 @@ export function Banner() {
       
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <Button
-          variant="ghost"
           size="lg"
-          className="text-white hover:bg-white/20 rounded-full p-3">
-          {/* <ArrowDown className="h-6 w-6" /> */}
+          className="text-white bg-white/40 rounded-full p-3 backdrop-blur-sm">
+          <ArrowDown className="h-6 w-6" />
         </Button>
       </div>
     </div>
