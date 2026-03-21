@@ -1,15 +1,35 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
-}
-
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client"
+  output        = "../src/generated/prisma"
+}
+
+model Pet {
+  id       Int       @id @default(autoincrement())
+  name    String
+  type_id String
+  age Int?
+  age_type_id String
+  size_type_id  String
+  location  String
+  personality String[]
+  description String?
+}
+
+model PetType {
+  id  String  @id
+  name  String
+}
+
+model PetAge {
+  id  String  @id
+  name  String
+}
+
+model PetSize {
+  id  String  @id
+  name  String
 }

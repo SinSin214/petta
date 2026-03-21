@@ -5,6 +5,7 @@ import { samplePets } from '../data/pets';
 import { Button } from "@heroui/react";
 
 export default function Adopt() {
+  
   return (
         <div>
         <section className="py-16 px-4">

@@ -1,10 +1,11 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 // import { PrismaModule } from 'src/prisma/prisma.module';
 import { PetController } from './pet.controller';
+import { PetRepository } from './pet.repository';
 import { PetService } from './pet.service';
 
 @Module({
-  providers: [PetService],
+  providers: [PetService, PetRepository],
   controllers: [PetController],
 //   imports: [PrismaModule]
 })

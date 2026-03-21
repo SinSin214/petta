@@ -89,7 +89,7 @@ export function Filter() {
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-10 gap-4">
 				{filterBoxes.map((filterBox: FilterBox) => renderFilters(filterBox))}
-				<Button  className="self-end" size="sm">
+				<Button className="self-end" size="sm" onPress={getAdoptPet()}>
 					<Search size={20} />
 				</Button>
 			</div>
