@@ -17,7 +17,7 @@ type FilterBox = {
 	handler: (keys: SharedSelection) => void;
 }
 
-export function Filter() {
+export function Filter(props: { getAdoptPet: Function }) {
 	const [typeValues, setTypeValues] = useState<Selection>(new Set([]));
 	const [ageValues, setAgeValues] = useState<Selection>(new Set([]));
 	const [sizeValues, setSizeValues] = useState<Selection>(new Set([]));
@@ -45,9 +45,9 @@ export function Filter() {
 	]
 
 	const filterBoxes: FilterBox[] = [
-		{key: 'type', label: 'Pet', items: petType, placeholder: 'What type of pet are you looking for ?', selectedKeys: typeValues, handler: setTypeValues},
-		{key: 'age', label: 'Age', items: petAge, placeholder: 'How old is your friend ?', selectedKeys: ageValues, handler: setAgeValues},
-		{key: 'size', label: 'Size', items: petSize, placeholder: 'Do you like a large or tiny friend ?', selectedKeys: sizeValues, handler: setSizeValues}
+		{key: 'type_ids', label: 'Pet', items: petType, placeholder: 'What type of pet are you looking for ?', selectedKeys: typeValues, handler: setTypeValues},
+		{key: 'age_ids', label: 'Age', items: petAge, placeholder: 'How old is your friend ?', selectedKeys: ageValues, handler: setAgeValues},
+		{key: 'size_ids', label: 'Size', items: petSize, placeholder: 'Do you like a large or tiny friend ?', selectedKeys: sizeValues, handler: setSizeValues}
 	]
 
 	const renderFilters = (filter: FilterBox) => {
@@ -70,6 +70,10 @@ export function Filter() {
 		)
 	};
 
+	const getAdoptPet = () => {
+		props.getAdoptPet(typeValues, ageValues, sizeValues);
+	}
+
 	return (
 		<div className="bg-white p-6 rounded-lg shadow-sm border space-y-4">
 			<div className="relative">
@@ -89,7 +93,7 @@ export function Filter() {
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-10 gap-4">
 				{filterBoxes.map((filterBox: FilterBox) => renderFilters(filterBox))}
-				<Button className="self-end" size="sm" onPress={getAdoptPet()}>
+				<Button className="self-end" size="sm" onPress={e => getAdoptPet()}>
 					<Search size={20} />
 				</Button>
 			</div>

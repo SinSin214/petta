@@ -1,11 +1,21 @@
 'use client';
 import { Filter } from "@/components/Adopt/Filter";
 import { PetCard } from "@/components/Adopt/PetCard";
-import { samplePets } from '../data/pets';
+import { Pet } from '../data/pets';
+import { getRequest, postRequest } from "@/services/requestAPI";
 import { Button } from "@heroui/react";
 
 export default function Adopt() {
-  
+  let pets: Pet[] = [];
+  const getAdoptPet = async (type: Set<string>, age: Set<string>, size: Set<string>) => {
+    pets = await postRequest('/pet/selection', {
+    type_ids: Array.from(type),
+    age_type_ids: Array.from(age),
+    size_type_ids: Array.from(size)
+  });
+  console.log(pets);
+  };
+
   return (
         <div>
         <section className="py-16 px-4">
@@ -18,11 +28,11 @@ export default function Adopt() {
             </div>
 
             <div className="mb-14">
-              <Filter />
+              <Filter getAdoptPet={getAdoptPet} />
             </div>
 
             <div className="grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 auto-rows-[1fr]">
-              {samplePets.map((pet) => (
+              {pets.map((pet) => (
                 <PetCard
                   key={pet.id}
                   pet={pet}

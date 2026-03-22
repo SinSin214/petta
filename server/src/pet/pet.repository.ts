@@ -1,17 +1,17 @@
 import { Injectable } from "@nestjs/common"
-import { PrismaService } from "src/prisma/prisma.service.js"
+import { PrismaService } from "../prisma/prisma.service"
 
 @Injectable()
 export class PetRepository {
 
   constructor(private prisma: PrismaService) {}
 
-  async findManyBySelection(type_id: string, age_type_id: string, size_type_id: string) {
+  async findManyBySelection(type_ids: string[], age_type_ids: string[], size_type_ids: string[]) {
     return this.prisma.pet.findMany({
         where: {
-            type_id: type_id,
-            age_type_id: age_type_id,
-            size_type_id: size_type_id
+            type_id: { in: type_ids },
+            age_type_id: { in: age_type_ids },
+            size_type_id: { in: size_type_ids }
         }
     })
   }

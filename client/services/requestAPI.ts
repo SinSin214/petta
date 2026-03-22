@@ -6,53 +6,39 @@ export enum RequestMethod {
   POST = "POST",
 }
 
-export const api = {
-  get: (path: string, data?: Object) =>
-    requestAPI(path, RequestMethod.GET),
+const fetchApi = async (path: string, method: RequestMethod, data: Object): Promise<Object> => {
+  try{
+      console.log(`${process.env.NEXT_PUBLIC_API_ROUTE}`);
+      const axiosRes = await axios({
+        method: method,
+        url: `${process.env.NEXT_PUBLIC_API_ROUTE}${path}`,
+        data: data,
+        withCredentials: true
+      });
+    return axiosRes.data;
+  }
+  catch(err: any) {
+    console.log(err);
+    throw new Error(err);
+  }
+}
 
-  post: (path: string, data: Object) =>
-    requestAPI(path, RequestMethod.POST, data),
-};
-
-export const requestAPI = async (path: string, method: RequestMethod, data?: Object): Promise<any> => {
+export const getRequest = async (path: string): Promise<any> => {
     try {
-        const data = await fetchApi(path, method, {});
-
-        return data;
+        const result = await fetchApi(path, RequestMethod.GET, {});
+        return result;
     } catch(err: any) {
         console.log(err);
         throw new Error(err);
     }
 }
 
-const fetchApi = async (path: string, method: RequestMethod, data: Object): Promise<Object> => {
-    const axiosRes = await axios({
-        method: method,
-        url: `${process.env.NEXT_PUBLIC_API_ROUTE}${path}`,
-        data: data,
-        withCredentials: true
-    });
-
-    return axiosRes.data;
-}
-
-export function useApi() {
-  const [loading, setLoading] = useState(false);
-
-  async function callApi(apiCall: () => Promise<T>): Promise<T | null> {
+export const postRequest = async (path: string, data: Object): Promise<any> => {
     try {
-      setLoading(true);
-
-      const data = await apiCall();
-
-      return data;
-    } catch (err) {
-      console.error(err);
-      return null;
-    } finally {
-      setLoading(false);
+        const result = await fetchApi(path, RequestMethod.POST, data);
+        return result;
+    } catch(err: any) {
+        console.log(err);
+        throw new Error(err);
     }
-  }
-
-  return { callApi, loading };
 }

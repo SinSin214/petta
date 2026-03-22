@@ -7,9 +7,9 @@ export class PetService {
     constructor(private petRepository: PetRepository) {}
 
     async getBySelection(petSelection: PetSelectionDto) {
-        const { type_id, age_type_id, size_type_id } = petSelection;
+        const { type_ids, age_type_ids, size_type_ids } = petSelection;
 
-        const res = await this.petRepository.findManyBySelection(type_id, age_type_id, size_type_id);
+        const res = await this.petRepository.findManyBySelection(type_ids, age_type_ids, size_type_ids);
         return res;
     }
 }

@@ -1,20 +1,12 @@
-import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
-// import { PrismaModule } from 'src/prisma/prisma.module';
+import { Module } from '@nestjs/common';
 import { PetController } from './pet.controller';
 import { PetRepository } from './pet.repository';
 import { PetService } from './pet.service';
+import { PrismaModule } from '../prisma/prisma.module';
 
 @Module({
+  imports: [PrismaModule],
   providers: [PetService, PetRepository],
   controllers: [PetController],
-//   imports: [PrismaModule]
 })
-export class PetModule {
-  public configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply()
-      .forRoutes(
-        { path: 'pet/selection', method: RequestMethod.POST },
-      )
-  }
-}
+export class PetModule {}

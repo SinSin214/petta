@@ -8,7 +8,7 @@ generator client {
 }
 
 model Pet {
-  id       Int       @id @default(autoincrement())
+  id       String       @id @default(uuid())
   name    String
   type_id String
   age Int?
