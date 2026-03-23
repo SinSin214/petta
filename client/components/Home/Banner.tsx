@@ -43,7 +43,7 @@ export function Banner() {
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <Button
           size="lg"
-          className="text-white bg-white/40 rounded-full p-3 backdrop-blur-sm">
+          className="text-white hover:bg-white/20 rounded-full p-3">
           <ArrowDown className="h-6 w-6" />
         </Button>
       </div>
