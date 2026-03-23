@@ -3,33 +3,6 @@ datasource db {
 }
 
 generator client {
-  provider      = "prisma-client"
-  output        = "../src/generated/prisma"
-}
-
-model Pet {
-  id       String       @id @default(uuid())
-  name    String
-  type_id String
-  age Int?
-  age_type_id String
-  size_type_id  String
-  location  String
-  personality String[]
-  description String?
-}
-
-model PetType {
-  id  String  @id
-  name  String
-}
-
-model PetAge {
-  id  String  @id
-  name  String
-}
-
-model PetSize {
-  id  String  @id
-  name  String
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }

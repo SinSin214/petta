@@ -1,0 +1,51 @@
+enum Role {
+  USER  @map("user")
+  ADMIN @map("admin")
+  @@map("user_role")
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  name     String
+  role     Role     @default(USER)
+  sessions     Session[]
+  tokens       Token[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+  isDeleted Boolean @default(false)
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  userId       String
+  refreshToken String   @unique
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  isRevoked     Boolean  @default(false)
+  
+  @@index([userId])
+}
+
+enum TokenType {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
+model Token {
+  id        Int       @id @default(autoincrement())
+  userId    String
+  tokenHash String    @unique
+  type      TokenType
+
+  expiresAt DateTime
+  used      Boolean   @default(false)
+
+  createdAt DateTime  @default(now())
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+}

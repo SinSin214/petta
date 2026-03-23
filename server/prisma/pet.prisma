@@ -1,0 +1,40 @@
+model Pet {
+  id            String           @id @default(uuid())
+  name          String
+  age           Int
+  type          PetType          @relation(fields: [type_id], references: [id])
+  type_id       String
+  age_type      PetAge           @relation(fields: [age_type_id], references: [id])
+  age_type_id   String
+  size_type     PetSize          @relation(fields: [size_type_id], references: [id])
+  size_type_id  String
+  location      String
+  personalities PetPersonality[]
+  description   String
+
+  @@index([type_id, age_type_id, size_type_id])
+}
+
+model PetType {
+  id   String @id
+  name String
+  pets Pet[]
+}
+
+model PetAge {
+  id   String @id
+  name String
+  pets Pet[]
+}
+
+model PetSize {
+  id   String @id
+  name String
+  pets Pet[]
+}
+
+model PetPersonality {
+  id   String @id
+  name String
+  pets Pet[]
+}

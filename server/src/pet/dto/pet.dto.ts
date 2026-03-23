@@ -1,10 +1,16 @@
 import { Transform } from 'class-transformer';
-import { IsString } from "class-validator"
+import { IsArray, IsString } from "class-validator";
 
 export class PetSelectionDto {
-    type_ids: string[]
+    @IsString({ each: true })
+    @Transform(({ value }) => value.toLowerCase())
+    type_ids: string[] | undefined
 
-    age_type_ids: string[]
+    @IsString({ each: true })
+    @Transform(({ value }) => value.toLowerCase())
+    age_type_ids: string[] | undefined
 
-    size_type_ids: string[]
+    @IsString({ each: true })
+    @Transform(({ value }) => value.toLowerCase())
+    size_type_ids: string[] | undefined
 }
