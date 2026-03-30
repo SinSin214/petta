@@ -12,6 +12,8 @@
 
 import * as process from 'node:process'
 import * as path from 'node:path'
+import { fileURLToPath } from 'node:url'
+globalThis['__dirname'] = path.dirname(fileURLToPath(import.meta.url))
 
 import * as runtime from "@prisma/client/runtime/client"
 import * as $Enums from "./enums.js"
@@ -59,3 +61,23 @@ export type PetAge = Prisma.PetAgeModel
  * 
  */
 export type PetSize = Prisma.PetSizeModel
+/**
+ * Model PetPersonality
+ * 
+ */
+export type PetPersonality = Prisma.PetPersonalityModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
+ * Model Token
+ * 
+ */
+export type Token = Prisma.TokenModel

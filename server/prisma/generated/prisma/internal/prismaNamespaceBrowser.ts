@@ -54,7 +54,11 @@ export const ModelName = {
   Pet: 'Pet',
   PetType: 'PetType',
   PetAge: 'PetAge',
-  PetSize: 'PetSize'
+  PetSize: 'PetSize',
+  PetPersonality: 'PetPersonality',
+  User: 'User',
+  Session: 'Session',
+  Token: 'Token'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -76,12 +80,11 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 export const PetScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  type_id: 'type_id',
   age: 'age',
+  type_id: 'type_id',
   age_type_id: 'age_type_id',
   size_type_id: 'size_type_id',
   location: 'location',
-  personality: 'personality',
   description: 'description'
 } as const
 
@@ -90,7 +93,8 @@ export type PetScalarFieldEnum = (typeof PetScalarFieldEnum)[keyof typeof PetSca
 
 export const PetTypeScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  language_id: 'language_id'
 } as const
 
 export type PetTypeScalarFieldEnum = (typeof PetTypeScalarFieldEnum)[keyof typeof PetTypeScalarFieldEnum]
@@ -98,7 +102,8 @@ export type PetTypeScalarFieldEnum = (typeof PetTypeScalarFieldEnum)[keyof typeo
 
 export const PetAgeScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  language_id: 'language_id'
 } as const
 
 export type PetAgeScalarFieldEnum = (typeof PetAgeScalarFieldEnum)[keyof typeof PetAgeScalarFieldEnum]
@@ -106,10 +111,59 @@ export type PetAgeScalarFieldEnum = (typeof PetAgeScalarFieldEnum)[keyof typeof 
 
 export const PetSizeScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  language_id: 'language_id'
 } as const
 
 export type PetSizeScalarFieldEnum = (typeof PetSizeScalarFieldEnum)[keyof typeof PetSizeScalarFieldEnum]
+
+
+export const PetPersonalityScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  language_id: 'language_id'
+} as const
+
+export type PetPersonalityScalarFieldEnum = (typeof PetPersonalityScalarFieldEnum)[keyof typeof PetPersonalityScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  password: 'password',
+  name: 'name',
+  role: 'role',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  refreshToken: 'refreshToken',
+  isRevoked: 'isRevoked',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+export const TokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  type: 'type',
+  isRevoked: 'isRevoked',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+} as const
+
+export type TokenScalarFieldEnum = (typeof TokenScalarFieldEnum)[keyof typeof TokenScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -126,12 +180,4 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

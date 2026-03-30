@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { PetModule } from './pet/pet.module';
+import { AppController } from './app.controller.js';
+import { AppService } from './app.service.js';
+import { PetModule } from './pet/pet.module.js';
+import { AuthModule } from './auth/auth.module.js';
 
 @Module({
-  imports: [PetModule, ConfigModule.forRoot({
+  imports: [PetModule, AuthModule, ConfigModule.forRoot({
       // Example: .env file is one level up from the project root
       envFilePath: '../.env', 
       isGlobal: true,

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { PetSelectionDto } from './dto/pet.dto';
-import { PetRepository } from './pet.repository';
+import { PetSelectionDto } from './dto/pet.dto.js';
+import { PetRepository } from './pet.repository.js';
 
 @Injectable()
 export class PetService {

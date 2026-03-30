@@ -4,6 +4,11 @@ enum Role {
   @@map("user_role")
 }
 
+enum TokenType {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+}
+
 model User {
   id       String @id @default(uuid())
   email    String @unique
@@ -12,28 +17,23 @@ model User {
   role     Role     @default(USER)
   sessions     Session[]
   tokens       Token[]
+  isDeleted Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
-  isDeleted Boolean @default(false)
 }
 
 model Session {
   id           Int      @id @default(autoincrement())
   userId       String
   refreshToken String   @unique
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isRevoked     Boolean  @default(false)
 
   expiresAt    DateTime
   createdAt    DateTime @default(now())
-  isRevoked     Boolean  @default(false)
   
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@index([userId])
-}
-
-enum TokenType {
-  EMAIL_VERIFICATION
-  PASSWORD_RESET
 }
 
 model Token {
@@ -41,10 +41,9 @@ model Token {
   userId    String
   tokenHash String    @unique
   type      TokenType
+  isRevoked      Boolean   @default(false)
 
   expiresAt DateTime
-  used      Boolean   @default(false)
-
   createdAt DateTime  @default(now())
 
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)

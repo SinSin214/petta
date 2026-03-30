@@ -37,3 +37,23 @@ export type PetAge = Prisma.PetAgeModel
  * 
  */
 export type PetSize = Prisma.PetSizeModel
+/**
+ * Model PetPersonality
+ * 
+ */
+export type PetPersonality = Prisma.PetPersonalityModel
+/**
+ * Model User
+ * 
+ */
+export type User = Prisma.UserModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel
+/**
+ * Model Token
+ * 
+ */
+export type Token = Prisma.TokenModel
