@@ -1,0 +1,46 @@
+import { AUTH_MODE } from '@/constants/auth';
+
+export const AUTH_MESSAGES = {
+  titles: {
+    login: 'Welcome back',
+    signup: 'Create your account',
+    forgot: 'Reset your password',
+    authenticated: 'You are signed in',
+  },
+  subtitles: {
+    login: 'Sign in to manage your adoptions and profile.',
+    signup: 'Join Petta to save favorites and continue your applications.',
+    forgot: 'Enter your email and we will send a password reset link.',
+    authenticated: 'You can continue adopting or log out from this session.',
+  },
+  feedback: {
+    loginSuccess: 'Login successful.',
+    loginError: 'Unable to login. Please check your credentials.',
+    signupSuccess: 'Sign up successful. You can now log in.',
+    signupError: 'Unable to sign up. Please try again later.',
+    forgotSuccess: 'Password reset email sent if the account exists.',
+    forgotError: 'Unable to send reset email right now.',
+    logoutSuccess: 'You are now logged out.',
+    logoutError: 'Unable to logout. Please try again.',
+    passwordMismatch: 'Passwords do not match.',
+  },
+  labels: {
+    email: 'Email',
+    password: 'Password',
+    fullName: 'Full name',
+    confirmPassword: 'Confirm password',
+    signedInAs: 'Signed in as',
+    forgotQuestion: 'Forgot password?',
+    loginButton: 'Login',
+    signupButton: 'Sign up',
+    sendResetButton: 'Send reset email',
+    logoutButton: 'Logout',
+  },
+  placeholders: {
+    email: 'you@example.com',
+    password: 'Enter your password',
+    newPassword: 'Create a password',
+    confirmPassword: 'Re-enter your password',
+    fullName: 'Jane Doe',
+  },
+};
