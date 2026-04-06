@@ -1,5 +1,7 @@
+ 'use client';
+
 import { Button } from "@heroui/react";
-import { Clock, Facebook, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 
 export function Footer() {
   return (
@@ -12,7 +14,7 @@ export function Footer() {
               <h3 className="text-2xl font-semibold">Petta</h3>
             </div>
             <p className="text-gray-400 mb-6 leading-relaxed">
-              We're dedicated to connecting loving families with rescued animals in need of forever homes. 
+              We&apos;re dedicated to connecting loving families with rescued animals in need of forever homes. 
               Every adoption creates space for us to save another life.
             </p>
             <div className="flex space-x-4">

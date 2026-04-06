@@ -1,9 +1,10 @@
-@import "tailwindcss";
-/* @tailwind base; */
-/* @tailwind components; */
-@tailwind utilities;
-@plugin './hero.ts';
+@import "@heroui/styles/css";
 
+@source './app/**/*.{js,ts,jsx,tsx,mdx}';
+@source './components/**/*.{js,ts,jsx,tsx,mdx}';
+@source './constants/**/*.{js,ts,jsx,tsx,mdx}';
+@source './services/**/*.{js,ts,jsx,tsx,mdx}';
+@source './types/**/*.{js,ts,jsx,tsx,mdx}';
 @source './node_modules/@heroui/**/*.{js,ts,jsx,tsx}';
 
 :root {

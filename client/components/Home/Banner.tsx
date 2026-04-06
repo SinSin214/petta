@@ -1,8 +1,10 @@
+ 'use client';
+
 import { Button } from "@heroui/react";
 import { ArrowDown } from "lucide-react";
 
 export function Banner() {
-    let bannerSrc = 'https://images.unsplash.com/photo-1526363269865-60998e11d82d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZXQlMjBhZG9wdGlvbiUyMGZhbWlseXxlbnwxfHx8fDE3NTY3OTU2MjR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
+  const bannerSrc = 'https://images.unsplash.com/photo-1526363269865-60998e11d82d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZXQlMjBhZG9wdGlvbiUyMGZhbWlseXxlbnwxfHx8fDE3NTY3OTU2MjR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral'
   return (
     <div className="relative h-screen flex items-center justify-center overflow-hidden pt-16">
       <div className="absolute inset-0">

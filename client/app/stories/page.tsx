@@ -1,14 +1,10 @@
 'use client';
-import { Badge, Button, Card, CardBody, Chip, Image } from "@heroui/react";
+import { Badge, Button, Card, CardContent, Chip } from "@heroui/react";
 import { useState } from "react";
 import { successStories } from "../data/stories";
-import { Calendar, MapPin, Star } from "lucide-react";
+import { Calendar, MapPin } from "lucide-react";
 
-interface SuccessStoryProps {
-    onNavigateToAdopt?: () => void;
-}
-
-export default function SuccessStoriesPage({ onNavigateToAdopt }: SuccessStoryProps = {}) {
+export default function SuccessStoriesPage() {
     const [selectedCategory, setSelectedCategory] = useState("all");
 
     const categories = [
@@ -25,11 +21,10 @@ export default function SuccessStoriesPage({ onNavigateToAdopt }: SuccessStoryPr
     const renderImage = (imageSrc: string, text: string) => {
         return (
             <div className="relative">
-                <Image
+                <img
                     src={imageSrc}
-                    classNames={{ 
-                        img: "aspect-square object-cover"
-                    }}
+                    alt={text}
+                    className="aspect-square object-cover"
                 />
                 <Chip
                     className="absolute bottom-2 left-2 z-10"
@@ -49,7 +44,7 @@ export default function SuccessStoriesPage({ onNavigateToAdopt }: SuccessStoryPr
                     <h1 className="mb-6">Happy Tails & New Beginnings</h1>
                     <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
                         Every adoption is a success story waiting to happen. Here are just a few of the thousands of happy endings
-                        we've been privileged to witness. These stories inspire us every day to continue our mission.
+                        we&apos;ve been privileged to witness. These stories inspire us every day to continue our mission.
                     </p>
                 </div>
             </section>
@@ -61,8 +56,7 @@ export default function SuccessStoriesPage({ onNavigateToAdopt }: SuccessStoryPr
                         {categories.map((category) => (
                             <Button
                                 key={category.value}
-                                variant={selectedCategory === category.value ? "solid" : "flat"}
-                                color={selectedCategory === category.value ? "success" : "default"}
+                                variant={selectedCategory === category.value ? "primary" : "secondary"}
                                 onPress={() => setSelectedCategory(category.value)}>
                                 {category.label}
                             </Button>
@@ -74,7 +68,7 @@ export default function SuccessStoriesPage({ onNavigateToAdopt }: SuccessStoryPr
             {/* Success Stories Grid */}
             <section className="px-4 pb-16">
                 <div className="grid gap-8 max-w-6xl mx-auto">
-                    {filteredStories.map((story, index) => (
+                    {filteredStories.map((story) => (
                         <Card
                             key={story.id}
                             className={`overflow-hidden md:flex lg:flex-row lg:aspect-4/1 md:aspect-3/1 sm:aspect-1/1`}
@@ -84,7 +78,7 @@ export default function SuccessStoriesPage({ onNavigateToAdopt }: SuccessStoryPr
                                 {renderImage(story.afterImage, 'After')}
                             </div>
 
-                            <CardBody className="h-full p-4 flex flex-col justify-center">
+                            <CardContent className="h-full p-4 flex flex-col justify-center">
                                 <div className="flex items-center justify-between mb-4">
                                     <div>
                                         <h3 className="mb-1">{story.petName} & {story.familyName}</h3>
@@ -105,12 +99,12 @@ export default function SuccessStoriesPage({ onNavigateToAdopt }: SuccessStoryPr
 
                                 <div className="flex flex-wrap gap-2">
                                     {story.tags.map((tag) => (
-                                        <Chip key={tag} variant="bordered" className="text-xs">
+                                        <Chip key={tag} variant="secondary" className="text-xs">
                                             {tag}
                                         </Chip>
                                     ))}
                                 </div>
-                            </CardBody>
+                            </CardContent>
                         </Card>
                     ))}
                 </div>

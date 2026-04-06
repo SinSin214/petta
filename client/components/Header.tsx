@@ -1,20 +1,13 @@
 'use client';
 import { useState } from 'react';
-// import { useRouter } from 'next/router';
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, Modal, ModalBody, ModalContent } from "@heroui/react";
+import { usePathname, useRouter } from 'next/navigation';
+import { Button, Tabs } from '@heroui/react';
 import { AuthPanel } from '@/components/Auth/AuthPanel';
 import { AUTH_MODE, type AuthMode } from '@/constants/auth';
 
-// interface HeaderProps {
-//     onScrollToAdoption: () => void;
-// }
-
-export function Header(
-    // { onScrollToAdoption }: HeaderProps
-) {
-    // const { asPath } = useRouter();
-    // const [isOpen, setIsOpen] = useState(false);
-
+export function Header() {
+    const pathname = usePathname();
+    const router = useRouter();
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const [authMode, setAuthMode] = useState<AuthMode>(AUTH_MODE.LOGIN);
 
@@ -42,58 +35,68 @@ export function Header(
         { label: "Contact", link: '/contact', action: () => { } },
     ];
 
-    const renderNavItem = (item: NavItem) => {
-        return (
-            <NavbarItem
-                key={item.label}
-            // isActive={asPath === item.link}
-            >
-                <Link color="foreground" href={item.link} >
-                    {item.label}
-                </Link>
-            </NavbarItem>
-        );
+    const selectedTab = navItems.find((item) => item.link === pathname)?.link ?? '/';
+
+    const handleTabChange = (key: React.Key) => {
+        const selectedItem = navItems.find((item) => item.link === key);
+
+        if (!selectedItem) {
+            return;
+        }
+
+        selectedItem.action();
+
+        if (pathname !== selectedItem.link) {
+            router.push(selectedItem.link);
+        }
     };
 
     return (
-        <Navbar className="fixed top-0 left-0 right-0 z-50 bg-white/95 border-b shadow-sm">
-            <NavbarBrand>
-                <p className="font-bold text-inherit">ACME</p>
-            </NavbarBrand>
-            <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                {navItems.map((item) => renderNavItem(item))}
-            </NavbarContent>
-            <NavbarContent justify="end">
-                <NavbarItem className="hidden lg:flex">
-                    <Button variant="light" onPress={() => openAuthDialog(AUTH_MODE.LOGIN)}>
+        <header className="fixed top-0 left-0 right-0 z-50 border-b bg-white">
+            <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-3 lg:flex-row lg:items-center lg:justify-between">
+                <button
+                    type="button"
+                    onClick={() => {
+                        scrollToTop();
+                        if (pathname !== '/') {
+                            router.push('/');
+                        }
+                    }}
+                    className="text-left"
+                >
+                    <p className="text-lg font-semibold tracking-[0.25em] text-slate-900 uppercase">Petta</p>
+                    <p className="text-xs text-slate-500">Find a home for every rescued friend</p>
+                </button>
+
+                <Tabs
+                    aria-label="Primary navigation"
+                    selectedKey={selectedTab}
+                    onSelectionChange={handleTabChange}
+                    className="w-full lg:max-w-3xl"
+                >
+                    <Tabs.ListContainer>
+                        <Tabs.List aria-label="Primary navigation" className="w-full rounded-full p-1">
+                            {navItems.map((item) => (
+                                <Tabs.Tab
+                                    key={item.link}
+                                    id={item.link}
+                                    className="flex-1 rounded-full px-3 py-2 text-sm font-medium text-slate-700 transition"
+                                >
+                                    {item.label}
+                                    <Tabs.Indicator className="rounded-full bg-white shadow-sm" />
+                                </Tabs.Tab>
+                            ))}
+                        </Tabs.List>
+                    </Tabs.ListContainer>
+                </Tabs>
+
+                <div className="flex items-center justify-end gap-2">
+                    <Button variant="primary" onPress={() => openAuthDialog(AUTH_MODE.LOGIN)}>
                         Login
                     </Button>
-                </NavbarItem>
-                <NavbarItem>
-                    <Button color="warning" variant="flat" onPress={() => openAuthDialog(AUTH_MODE.SIGNUP)}>
-                        Sign Up
-                    </Button>
-                </NavbarItem>
-            </NavbarContent>
-
-            <Modal
-                isOpen={isAuthOpen}
-                onOpenChange={setIsAuthOpen}
-                placement="center"
-                size="2xl"
-                backdrop="blur"
-                scrollBehavior="inside"
-                classNames={{
-                    base: 'bg-transparent shadow-none',
-                    body: 'p-0',
-                }}
-            >
-                <ModalContent>
-                    <ModalBody>
-                        <AuthPanel initialMode={authMode} />
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
-        </Navbar>
+                </div>
+            </div>
+            <AuthPanel initialMode={authMode} isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
+        </header>
     );
 }

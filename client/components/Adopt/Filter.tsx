@@ -1,5 +1,5 @@
 'use client';
-import { Select, SelectItem, SharedSelection, Selection, Button, Input } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { useState } from "react";
 import { Bot, Search } from 'lucide-react';
 
@@ -13,14 +13,14 @@ type FilterBox = {
 	label: string;
 	items: FilterItem[];
 	placeholder: string;
-	selectedKeys: Selection;
-	handler: (keys: SharedSelection) => void;
+	selectedKeys: Set<string>;
+	handler: (keys: Set<string>) => void;
 }
 
-export function Filter(props: { getAdoptPet: Function }) {
-	const [typeValues, setTypeValues] = useState<Selection>(new Set([]));
-	const [ageValues, setAgeValues] = useState<Selection>(new Set([]));
-	const [sizeValues, setSizeValues] = useState<Selection>(new Set([]));
+export function Filter(props: { getAdoptPet: (type: Set<string>, age: Set<string>, size: Set<string>) => void }) {
+	const [typeValues, setTypeValues] = useState<Set<string>>(new Set());
+	const [ageValues, setAgeValues] = useState<Set<string>>(new Set());
+	const [sizeValues, setSizeValues] = useState<Set<string>>(new Set());
 
 	const petType = [
 		{ key: 'all', text: 'All' },
@@ -51,22 +51,25 @@ export function Filter(props: { getAdoptPet: Function }) {
 	]
 
 	const renderFilters = (filter: FilterBox) => {
+        const selectedValues = Array.from(filter.selectedKeys);
+
         return (
-			<Select
-				className="col-span-3"
-				key={filter.key}
-				label={filter.label}
-				selectionMode="multiple"
-				size="sm"
-				labelPlacement="outside"
-				placeholder={filter.placeholder}
-				onSelectionChange={filter.handler}
-				selectedKeys={filter.selectedKeys}
+			<label className="col-span-3 flex flex-col gap-2" key={filter.key}>
+				<span className="text-sm font-medium text-slate-700">{filter.label}</span>
+				<select
+					multiple
+					value={selectedValues}
+					onChange={(event) => {
+						const nextValue = new Set(Array.from(event.currentTarget.selectedOptions, (option) => option.value));
+						filter.handler(nextValue);
+					}}
+					className="min-h-28 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm outline-none transition focus:border-amber-400"
 				>
-					{filter.items.map((item: {key: string, text: string}) => (
-						<SelectItem key={item.key}>{item.text}</SelectItem>
+					{filter.items.map((item) => (
+						<option key={item.key} value={item.key}>{item.text}</option>
 					))}
-				</Select>
+				</select>
+			</label>
 		)
 	};
 
@@ -76,24 +79,17 @@ export function Filter(props: { getAdoptPet: Function }) {
 
 	return (
 		<div className="bg-white p-6 rounded-lg shadow-sm border space-y-4">
-			<div className="relative">
-				<Input
-					classNames={{
-						base: "max-w-full h-10",
-						mainWrapper: "h-full",
-						input: "text-small",
-						inputWrapper:
-						"h-full font-normal text-default-500",
-					}}
-					placeholder="Describe and AI finds a suitable friend for you..."
-					size="sm"
-					startContent={<Bot size={24} />}
+			<div className="relative flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-slate-500">
+				<Bot size={20} />
+				<input
 					type="search"
-					/>
+					placeholder="Describe and AI finds a suitable friend for you..."
+					className="w-full bg-transparent text-sm outline-none placeholder:text-slate-400"
+				/>
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-10 gap-4">
 				{filterBoxes.map((filterBox: FilterBox) => renderFilters(filterBox))}
-				<Button className="self-end" size="sm" onPress={e => getAdoptPet()}>
+				<Button className="self-end" size="sm" onPress={() => getAdoptPet()}>
 					<Search size={20} />
 				</Button>
 			</div>

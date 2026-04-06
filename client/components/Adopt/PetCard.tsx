@@ -1,4 +1,6 @@
-import { Badge, Button, Card, CardBody, CardFooter, Chip, Image } from "@heroui/react";
+ 'use client';
+
+import { Button, Card, CardContent, CardFooter, Chip } from "@heroui/react";
 import { Heart, MapPin } from "lucide-react";
 import { Pet } from "../../app/data/pets";
 
@@ -15,36 +17,28 @@ export function PetCard({ pet, onViewDetails, onFavorite, isFavorited }: PetCard
             <Chip
                 key={text}
                 size="sm"
-                variant={isDefault ? "flat" : "bordered"}
-                radius="sm"
-                classNames={{
-                    base: isDefault ? "" : "border",
-                }}
-                >
+                variant={isDefault ? "soft" : "secondary"}
+                className="text-xs"
+            >
                 {text}
             </Chip>
-        )
-    }
+        );
+    };
 
     return (
         <Card
             key={pet.id}
-            isPressable
-            shadow="sm"
-            className="h-full"
-            isHoverable={true}
-            onPress={() => console.log("item pressed")}
+            className="h-full cursor-pointer"
+            onClick={() => onViewDetails(pet)}
         >
 
-            <CardBody className="overflow-visible p-0 pet-card-body">
-                <Image
+            <CardContent className="overflow-visible p-0 pet-card-body">
+                <img
                     alt={pet.name}
-                    className="w-full h-[400px] object-cover"
-                    shadow="sm"
+                    className="h-[400px] w-full object-cover"
                     src={pet.image}
-                    width="100%"
                 />
-            </CardBody>
+            </CardContent>
             <CardFooter className="flex flex-col p-4 h-[40%]">
                 <div className="flex w-full justify-between">
                     <span className="text-xl font-semibold">{pet.name}</span>
@@ -62,6 +56,20 @@ export function PetCard({ pet, onViewDetails, onFavorite, isFavorited }: PetCard
 
                 <div className="flex flex-wrap w-full text-sm text-gray-500 mt-3 gap-1">
                     {pet.personality.map((attr) => renderChip(attr, false))}
+                </div>
+
+                <div className="mt-4 flex w-full items-center justify-between gap-3">
+                    <Button variant="secondary" onPress={() => onViewDetails(pet)}>
+                        View details
+                    </Button>
+                    <Button
+                        isIconOnly
+                        variant={isFavorited ? "primary" : "tertiary"}
+                        aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                        onPress={() => onFavorite(pet.id)}
+                    >
+                        <Heart className={isFavorited ? 'fill-current' : ''} size={18} />
+                    </Button>
                 </div>
             </CardFooter>
         </Card>

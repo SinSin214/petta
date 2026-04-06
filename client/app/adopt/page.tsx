@@ -2,8 +2,7 @@
 import { Filter } from "@/components/Adopt/Filter";
 import { PetCard } from "@/components/Adopt/PetCard";
 import { Pet } from '../data/pets';
-import { getRequest, postRequest } from "@/services/requestAPI";
-import { Button } from "@heroui/react";
+import { postRequest } from "@/services/requestAPI";
 
 export default function Adopt() {
   let pets: Pet[] = [];

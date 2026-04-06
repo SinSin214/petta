@@ -1,6 +1,5 @@
 import "../globals.css";
 import type { Metadata } from "next";
-import {HeroUIProvider} from "@heroui/react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -17,11 +16,9 @@ export default function RootLayout({
   return (
       <html lang="en">
         <body>
-    <HeroUIProvider>
           <Header/>
           {children}
           <Footer/>
-    </HeroUIProvider>
         </body>
       </html>
   );

@@ -6,7 +6,7 @@ export function AboutSection() {
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="mb-8">Why Choose Adoption?</h2>
         <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
-          When you adopt a pet, you're not just gaining a loyal companion—you're saving a life 
+          When you adopt a pet, you&apos;re not just gaining a loyal companion, you&apos;re saving a life 
           and making room for another animal in need. Our rescued pets are health-checked, 
           vaccinated, and ready to become part of your family.
         </p>
