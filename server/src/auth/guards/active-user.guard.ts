@@ -7,7 +7,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { AuthRepository } from '../auth.repository.js';
-import { AuthCode } from '../auth.codes.js';
+import * as messageConst from '../../utils/constants/message.constant.js';
 
 type AuthRequest = Request & {
 	headers: { authorization?: string };
@@ -27,14 +27,14 @@ export class ActiveUserGuard implements CanActivate {
 		const token = this.extractBearerToken(request.headers.authorization);
 
 		if (!token) {
-			throw new UnauthorizedException({ code: AuthCode.InvalidAccessToken });
+			throw new UnauthorizedException({ code: messageConst.INVALID_ACCESS_TOKEN });
 		}
 
 		const payload = await this.verifyToken(token);
 		const user = await this.authRepository.findActiveUserById(payload.userId);
 
 		if (!user) {
-			throw new UnauthorizedException({ code: AuthCode.InvalidAccessToken });
+			throw new UnauthorizedException({ code: messageConst.INVALID_ACCESS_TOKEN });
 		}
 
 		request.user = { userId: user.id, email: user.email, role: user.role };
@@ -59,7 +59,7 @@ export class ActiveUserGuard implements CanActivate {
 			const secret = this.configService.get<string>('JWT_SECRET');
 			return await this.jwtService.verifyAsync<{ userId: string }>(token, { secret });
 		} catch {
-			throw new UnauthorizedException({ code: AuthCode.InvalidAccessToken });
+			throw new UnauthorizedException({ code: messageConst.INVALID_ACCESS_TOKEN });
 		}
 	}
 }

@@ -48,11 +48,6 @@ export type PetPersonality = Prisma.PetPersonalityModel
  */
 export type User = Prisma.UserModel
 /**
- * Model Session
- * 
- */
-export type Session = Prisma.SessionModel
-/**
  * Model Token
  * 
  */

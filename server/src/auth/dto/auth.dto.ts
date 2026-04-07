@@ -1,44 +1,64 @@
-import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
+import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+import * as messageConst from '../../utils/constants/message.constant.js';
 
 export class RegisterDto {
-  @IsEmail()
+  @IsEmail({}, {
+    message: messageConst.INVALID_EMAIL_FORMAT
+  })
   email: string;
 
-  @IsString()
-  @MinLength(8)
+  @MinLength(8, {
+    message: messageConst.PASSWORD_MIN_LENGTH_8
+  })
   password: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: messageConst.FIELD_NAME_REQUIRED,
+  })
   name: string;
 }
 
 export class LoginDto {
-  @IsEmail()
+  @IsEmail({}, {
+    message: messageConst.INVALID_EMAIL_FORMAT
+  })
   email: string;
 
-  @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: messageConst.FIELD_PASSWORD_REQUIRED,
+  })
   password: string;
 }
 
 export class RefreshTokenDto {
-  @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: messageConst.GENERIC_ERROR,
+  })
   refreshToken: string;
 }
 
 export class ForgotPasswordDto {
-  @IsEmail()
+  @IsEmail({}, {
+    message: messageConst.INVALID_EMAIL_FORMAT
+  })
   email: string;
 }
 
 export class ResetPasswordDto {
-  @IsString()
-  @IsNotEmpty()
+  @IsNotEmpty({
+    message: messageConst.GENERIC_ERROR,
+  })
   token: string;
 
-  @IsString()
-  @MinLength(8)
-  newPassword: string;
+  @MinLength(8, {
+    message: messageConst.PASSWORD_MIN_LENGTH_8,
+  })
+  password: string;
+}
+
+export class VerifyEmailDto {
+  @IsNotEmpty({
+    message: messageConst.GENERIC_ERROR,
+  })
+  token: string;
 }

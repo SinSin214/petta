@@ -1,0 +1,20 @@
+export const GENERIC_ERROR = 'GENERIC_ERROR';
+export const INVALID_EMAIL_FORMAT = 'INVALID_EMAIL_FORMAT';
+export const PASSWORD_MIN_LENGTH_8 = 'PASSWORD_MIN_LENGTH_8';
+export const FIELD_NAME_REQUIRED = 'FIELD_NAME_REQUIRED';
+export const FIELD_PASSWORD_REQUIRED = 'FIELD_PASSWORD_REQUIRED';
+
+export const USED_EMAIL = 'UsedEmail';
+export const INVALID_CREDENTIALS = 'InvalidCredentials';
+export const INVALID_ACCESS_TOKEN = 'InvalidAccessToken';
+export const INVALID_REFRESH_TOKEN = 'InvalidRefreshToken';
+export const USER_NOT_FOUND = 'UserNotFound';
+export const RESET_LINK_SENT = 'ResetLinkSent';
+export const INVALID_OR_EXPIRED_RESET_TOKEN = 'InvalidOrExpiredResetToken';
+export const PASSWORD_RESET_SUCCESS = 'PasswordResetSuccess';
+export const LOGGED_OUT_SUCCESS = 'LoggedOutSuccess';
+export const VERIFY_EMAIL_SENT = 'VerifyEmailSent';
+export const INVALID_OR_EXPIRED_VERIFY_EMAIL_TOKEN = 'InvalidOrExpiredVerifyEmailToken';
+export const EMAIL_VERIFIED_SUCCESS = 'EmailVerifiedSuccess';
+export const EMAIL_NOT_VERIFIED = 'EmailNotVerified';
+export const EMAIL_DELIVERY_FAILED = 'EmailDeliveryFailed';

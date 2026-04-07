@@ -16,7 +16,7 @@ export class AuthRepository {
 
     async findActiveUserById(id: string) {
         return this.prisma.user.findFirst({
-            where: { id, isDeleted: false },
+            where: { id, isDeleted: false, isActive: true },
         });
     }
 
@@ -24,30 +24,33 @@ export class AuthRepository {
         return this.prisma.user.create({ data });
     }
 
-    async createSession(data: Prisma.SessionUncheckedCreateInput) {
-        return this.prisma.session.create({ data });
+    async deleteUser(id: string) {
+        return this.prisma.user.delete({ where: { id } });
     }
 
     async createToken(data: Prisma.TokenUncheckedCreateInput) {
         return this.prisma.token.create({ data });
     }
 
-    async findSessionByToken(refreshToken: string) {
-        return this.prisma.session.findUnique({
-            where: { refreshToken },
+    async findRefreshToken(tokenHash: string) {
+        return this.prisma.token.findFirst({
+            where: {
+                tokenHash,
+                type: TokenType.REFRESH,
+            },
         });
     }
 
-    async revokeSession(id: number) {
-        return this.prisma.session.update({
+    async revokeToken(id: number) {
+        return this.prisma.token.update({
             where: { id },
             data: { isRevoked: true },
         });
     }
 
-    async revokeAllUserSessions(userId: string) {
-        return this.prisma.session.updateMany({
-            where: { userId, isRevoked: false },
+    async revokeAllUserRefreshTokens(userId: string) {
+        return this.prisma.token.updateMany({
+            where: { userId, type: TokenType.REFRESH, isRevoked: false },
             data: { isRevoked: true },
         });
     }
@@ -57,6 +60,17 @@ export class AuthRepository {
             where: {
                 tokenHash,
                 type: TokenType.PASSWORD_RESET,
+                isRevoked: false,
+                expiresAt: { gt: new Date() },
+            },
+        });
+    }
+
+    async findValidEmailVerificationToken(tokenHash: string) {
+        return this.prisma.token.findFirst({
+            where: {
+                tokenHash,
+                type: TokenType.EMAIL_VERIFICATION,
                 isRevoked: false,
                 expiresAt: { gt: new Date() },
             },
@@ -77,10 +91,26 @@ export class AuthRepository {
         });
     }
 
+    async revokeEmailVerificationTokens(userId: string) {
+        return this.prisma.token.updateMany({
+            where: { userId, type: TokenType.EMAIL_VERIFICATION, isRevoked: false },
+            data: { isRevoked: true },
+        });
+    }
+
     async updateUserPassword(id: string, password: string) {
         return this.prisma.user.update({
             where: { id },
             data: { password },
+        });
+    }
+
+    async activateUser(id: string) {
+        return this.prisma.user.update({
+            where: { id },
+            data: {
+                isActive: true,
+            },
         });
     }
 }

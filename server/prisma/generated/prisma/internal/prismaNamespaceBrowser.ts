@@ -57,7 +57,6 @@ export const ModelName = {
   PetSize: 'PetSize',
   PetPersonality: 'PetPersonality',
   User: 'User',
-  Session: 'Session',
   Token: 'Token'
 } as const
 
@@ -133,24 +132,13 @@ export const UserScalarFieldEnum = {
   password: 'password',
   name: 'name',
   role: 'role',
+  isActive: 'isActive',
   isDeleted: 'isDeleted',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-export const SessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  refreshToken: 'refreshToken',
-  isRevoked: 'isRevoked',
-  expiresAt: 'expiresAt',
-  createdAt: 'createdAt'
-} as const
-
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
 
 
 export const TokenScalarFieldEnum = {

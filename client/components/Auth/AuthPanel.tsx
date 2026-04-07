@@ -1,15 +1,13 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     Button,
     Modal,
     Label,
     Input,
-    Link,
     TextField,
     Tabs,
-    Chip,
     Spinner,
     ErrorMessage,
 } from '@heroui/react';
@@ -23,19 +21,14 @@ type AuthPanelProps = {
     onOpenChange?: (isOpen: boolean) => void;
 };
 
-type AuthUser = {
-    email: string;
-    fullName?: string;
-};
-
 export function AuthPanel({ initialMode = AUTH_MODE.LOGIN, isOpen, onOpenChange }: AuthPanelProps) {
     const [mode, setMode] = useState<AuthMode>(initialMode);
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
 
     const [loginForm, setLoginForm] = useState({ email: '', password: '' });
-    const [signupForm, setSignupForm] = useState({
-        fullName: '',
+    const [registerForm, setRegisterForm] = useState({
+        name: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -64,23 +57,23 @@ export function AuthPanel({ initialMode = AUTH_MODE.LOGIN, isOpen, onOpenChange 
         }
     };
 
-    const signup = async (event: React.FormEvent<HTMLFormElement>) => {
+    const register = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setIsLoading(true);
         setMessage('');
-        if (signupForm.password !== signupForm.confirmPassword) {
+        if (registerForm.password !== registerForm.confirmPassword) {
             setIsLoading(false);
             return;
         }
 
         try {
-            await postRequest('/auth/signup', {
-                fullName: signupForm.fullName,
-                email: signupForm.email,
-                password: signupForm.password,
+            await postRequest('/auth/register', {
+                name: registerForm.name,
+                email: registerForm.email,
+                password: registerForm.password,
             });
 
-            setSignupForm({ fullName: '', email: '', password: '', confirmPassword: '' });
+            setRegisterForm({ name: '', email: '', password: '', confirmPassword: '' });
             setMode(AUTH_MODE.LOGIN);
         } catch(err) {
             setMessage(err instanceof Error ? err.message : String(err));
@@ -173,16 +166,16 @@ export function AuthPanel({ initialMode = AUTH_MODE.LOGIN, isOpen, onOpenChange 
                                         </form>
                                     </Tabs.Panel>
 
-                                    <Tabs.Panel id={AUTH_MODE.SIGNUP} className="px-0">
-                                        <form className="space-y-4" onSubmit={signup} autoComplete="off">
+                                    <Tabs.Panel id={AUTH_MODE.REGISTER} className="px-0">
+                                        <form className="space-y-4" onSubmit={register} autoComplete="off">
                                             <TextField variant="secondary" isRequired className="w-full">
-                                                <Label>{AUTH_MESSAGES.labels.fullName}</Label>
+                                                <Label>{AUTH_MESSAGES.labels.name}</Label>
                                                 <Input
-                                                    placeholder={AUTH_MESSAGES.placeholders.fullName}
-                                                    value={signupForm.fullName}
+                                                    placeholder={AUTH_MESSAGES.placeholders.name}
+                                                    value={registerForm.name}
                                                     disabled={isLoading}
                                                     onChange={(event) =>
-                                                        setSignupForm((prev) => ({ ...prev, fullName: event.currentTarget.value }))
+                                                        setRegisterForm((prev) => ({ ...prev, name: event.currentTarget.value }))
                                                     }
                                                 />
                                             </TextField>
@@ -191,10 +184,10 @@ export function AuthPanel({ initialMode = AUTH_MODE.LOGIN, isOpen, onOpenChange 
                                                 <Input
                                                     type="email"
                                                     placeholder={AUTH_MESSAGES.placeholders.email}
-                                                    value={signupForm.email}
+                                                    value={registerForm.email}
                                                     disabled={isLoading}
                                                     onChange={(event) =>
-                                                        setSignupForm((prev) => ({ ...prev, email: event.currentTarget.value }))
+                                                        setRegisterForm((prev) => ({ ...prev, email: event.currentTarget.value }))
                                                     }
                                                 />
                                             </TextField>
@@ -204,10 +197,10 @@ export function AuthPanel({ initialMode = AUTH_MODE.LOGIN, isOpen, onOpenChange 
                                                     <Input
                                                         type="password"
                                                         placeholder={AUTH_MESSAGES.placeholders.newPassword}
-                                                        value={signupForm.password}
+                                                        value={registerForm.password}
                                                         disabled={isLoading}
                                                         onChange={(event) =>
-                                                            setSignupForm((prev) => ({ ...prev, password: event.currentTarget.value }))
+                                                            setRegisterForm((prev) => ({ ...prev, password: event.currentTarget.value }))
                                                         }
                                                     />
                                                 </TextField>
@@ -216,17 +209,17 @@ export function AuthPanel({ initialMode = AUTH_MODE.LOGIN, isOpen, onOpenChange 
                                                     <Input
                                                         type="password"
                                                         placeholder={AUTH_MESSAGES.placeholders.confirmPassword}
-                                                        value={signupForm.confirmPassword}
+                                                        value={registerForm.confirmPassword}
                                                         disabled={isLoading}
                                                         onChange={(event) =>
-                                                            setSignupForm((prev) => ({ ...prev, confirmPassword: event.currentTarget.value }))
+                                                            setRegisterForm((prev) => ({ ...prev, confirmPassword: event.currentTarget.value }))
                                                         }
                                                     />
                                                 </TextField>
                                             </div>
                                             <ErrorMessage>{message && <div className="text-sm text-red-500">{message}</div>}</ErrorMessage>
                                             <Button type="submit" variant="primary" isDisabled={isLoading} className="mt-4 w-full">
-                                                {isLoading ? <Spinner color="current" size="sm" /> : AUTH_MESSAGES.labels.signupButton}
+                                                {isLoading ? <Spinner color="current" size="sm" /> : AUTH_MESSAGES.labels.registerButton}
                                             </Button>
                                         </form>
                                     </Tabs.Panel>
