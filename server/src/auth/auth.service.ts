@@ -4,6 +4,7 @@ import {
 	ForbiddenException,
 	InternalServerErrorException,
 	Injectable,
+	Logger,
 	UnauthorizedException,
 } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
@@ -18,6 +19,8 @@ import { MailService } from '../mail/mail.service.js';
 
 @Injectable()
 export class AuthService {
+	private readonly logger = new Logger(AuthService.name);
+
 	constructor(
 		private authRepository: AuthRepository,
 		private jwtService: JwtService,
@@ -46,8 +49,9 @@ export class AuthService {
 				name: user.name,
 				verificationLink,
 			});
-		} catch {
+		} catch (error) {
 			await this.authRepository.deleteUser(user.id);
+			this.logger.error(error);
 			throw new InternalServerErrorException({ code: messageConst.EMAIL_DELIVERY_FAILED });
 		}
 

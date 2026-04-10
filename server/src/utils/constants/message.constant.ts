@@ -18,3 +18,5 @@ export const INVALID_OR_EXPIRED_VERIFY_EMAIL_TOKEN = 'InvalidOrExpiredVerifyEmai
 export const EMAIL_VERIFIED_SUCCESS = 'EmailVerifiedSuccess';
 export const EMAIL_NOT_VERIFIED = 'EmailNotVerified';
 export const EMAIL_DELIVERY_FAILED = 'EmailDeliveryFailed';
+
+export const English = 'EN';
