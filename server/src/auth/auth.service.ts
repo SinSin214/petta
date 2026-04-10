@@ -200,10 +200,9 @@ export class AuthService {
 			expiresAt,
 		});
 
-		const configuredBaseUrl = this.configService.get<string>('VERIFY_EMAIL_URL');
 		const apiBaseUrl = this.configService.get<string>('NEXT_PUBLIC_API_ROUTE')
 			?? `http://localhost:${this.configService.get<number>('PORT_SERVER') ?? 3000}`;
-		const verificationUrl = new URL(configuredBaseUrl ?? `${apiBaseUrl}/auth/verify_email`);
+		const verificationUrl = new URL(`${apiBaseUrl}/auth/verify_email`);
 		verificationUrl.searchParams.set('token', rawToken);
 
 		return verificationUrl.toString();

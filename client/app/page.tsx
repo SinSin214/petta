@@ -1,9 +1,11 @@
 import { AboutSection } from "@/components/Home/AboutSection";
 import { Banner } from "@/components/Home/Banner";
+import { VerificationSuccessModal } from "@/components/Home/VerificationSuccessModal";
 
 export default function Home() {
 	return (
 		<div className="min-h-screen bg-gray-50">
+		<VerificationSuccessModal />
 		<Banner/>
 		<AboutSection/>
 		{/* <AboutSection /> */}

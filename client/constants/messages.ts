@@ -23,6 +23,7 @@ export const AUTH_MESSAGES = {
     logoutSuccess: 'You are now logged out.',
     logoutError: 'Unable to logout. Please try again.',
     passwordMismatch: 'Passwords do not match.',
+    verifyEmailSuccess: 'Your account has been verified successfully. You can now log in to the app.',
   },
   labels: {
     email: 'Email',
@@ -35,6 +36,8 @@ export const AUTH_MESSAGES = {
     registerButton: 'Sign up',
     sendResetButton: 'Send reset email',
     logoutButton: 'Logout',
+    closeButton: 'Close',
+    loginNowButton: 'Log in now',
   },
   placeholders: {
     email: 'you@example.com',

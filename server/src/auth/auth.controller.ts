@@ -1,4 +1,5 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query, Redirect, UseGuards } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service.js';
 import { ActiveUserGuard } from './guards/active-user.guard.js';
 import {
@@ -12,7 +13,10 @@ import {
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private configService: ConfigService,
+  ) {}
 
   @Post('register')
   async register(@Body() dto: RegisterDto) {
@@ -20,8 +24,20 @@ export class AuthController {
   }
 
   @Get('verify_email')
+  @Redirect()
   async verifyEmail(@Query() dto: VerifyEmailDto) {
-    return this.authService.verifyEmail(dto.token);
+    await this.authService.verifyEmail(dto.token);
+
+    const clientBaseUrl =
+      this.configService.get<string>('CLIENT_URL') ??
+      'http://localhost:3000';
+
+    const redirectUrl = new URL('/', clientBaseUrl);
+    redirectUrl.searchParams.set('verified', 'success');
+
+    return {
+      url: redirectUrl.toString(),
+    };
   }
 
   @Post('login')

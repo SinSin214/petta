@@ -1,9 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button, Tabs } from '@heroui/react';
 import { AuthPanel } from '@/components/Auth/AuthPanel';
-import { AUTH_MODE, type AuthMode } from '@/constants/auth';
+import { AUTH_MODE, OPEN_AUTH_MODAL_EVENT, type AuthMode } from '@/constants/auth';
 
 export function Header() {
     const pathname = usePathname();
@@ -19,6 +19,19 @@ export function Header() {
         setAuthMode(mode);
         setIsAuthOpen(true);
     };
+
+    useEffect(() => {
+        const handleOpenAuthModal = (event: Event) => {
+            const customEvent = event as CustomEvent<{ mode?: AuthMode }>;
+            openAuthDialog(customEvent.detail?.mode ?? AUTH_MODE.LOGIN);
+        };
+
+        window.addEventListener(OPEN_AUTH_MODAL_EVENT, handleOpenAuthModal);
+
+        return () => {
+            window.removeEventListener(OPEN_AUTH_MODAL_EVENT, handleOpenAuthModal);
+        };
+    }, []);
 
     type NavItem = {
         label: string;
