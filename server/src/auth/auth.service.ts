@@ -90,7 +90,14 @@ export class AuthService {
 		}
 
 		const tokens = await this.generateTokens(user.id, user.email, user.role);
-		return { user, tokens };
+		return { 
+			user: {
+				id: user.id,
+				email: user.email,
+				name: user.name,
+				role: user.role
+			},
+			tokens };
 	}
 
 	async refreshTokens(refreshToken: string) {
@@ -126,7 +133,7 @@ export class AuthService {
 		const user = await this.authRepository.findUserByEmail(email);
 
 		if (!user) {
-			return { code: messageConst.RESET_LINK_SENT };
+			return { code: messageConst.USER_NOT_FOUND };
 		}
 
 		await this.authRepository.invalidatePasswordResetTokens(user.id);
@@ -142,9 +149,20 @@ export class AuthService {
 			expiresAt,
 		});
 
+		try {
+			const resetPasswordLink = this.createResetPasswordLink(rawToken);
+			await this.mailService.sendResetPasswordEmail({
+				to: user.email,
+				name: user.name,
+				resetPasswordLink,
+			});
+		} catch (error) {
+			this.logger.error(error);
+			throw new InternalServerErrorException({ code: messageConst.EMAIL_DELIVERY_FAILED });
+		}
+
 		return {
 			code: messageConst.RESET_LINK_SENT,
-			resetToken: rawToken,
 		};
 	}
 
@@ -206,5 +224,13 @@ export class AuthService {
 		verificationUrl.searchParams.set('token', rawToken);
 
 		return verificationUrl.toString();
+	}
+
+	private createResetPasswordLink(token: string) {
+		const clientBaseUrl = this.configService.get<string>('CLIENT_URL') ?? 'http://localhost:3000';
+		const resetUrl = new URL('/', clientBaseUrl);
+		resetUrl.searchParams.set('reset_token', token);
+
+		return resetUrl.toString();
 	}
 }

@@ -1,4 +1,3 @@
-import { AUTH_MODE } from '@/constants/auth';
 
 export const AUTH_MESSAGES = {
   titles: {
@@ -20,6 +19,9 @@ export const AUTH_MESSAGES = {
     registerError: 'Unable to sign up. Please try again later.',
     forgotSuccess: 'Password reset email sent if the account exists.',
     forgotError: 'Unable to send reset email right now.',
+    resetSuccess: 'Your password was updated. Please log in with your new password.',
+    resetError: 'Unable to reset your password. Please request a new reset link.',
+    invalidResetLink: 'This reset link is invalid or missing. Please request a new one.',
     logoutSuccess: 'You are now logged out.',
     logoutError: 'Unable to logout. Please try again.',
     passwordMismatch: 'Passwords do not match.',
@@ -35,6 +37,7 @@ export const AUTH_MESSAGES = {
     loginButton: 'Login',
     registerButton: 'Sign up',
     sendResetButton: 'Send reset email',
+    setNewPasswordButton: 'Set new password',
     logoutButton: 'Logout',
     closeButton: 'Close',
     loginNowButton: 'Log in now',

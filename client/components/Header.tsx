@@ -1,37 +1,76 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button, Tabs } from '@heroui/react';
 import { AuthPanel } from '@/components/Auth/AuthPanel';
-import { AUTH_MODE, OPEN_AUTH_MODAL_EVENT, type AuthMode } from '@/constants/auth';
+import { AUTH_MESSAGES } from '@/constants/messages';
+import { AUTH_MODE, AUTH_STORAGE_KEYS, OPEN_AUTH_MODAL_EVENT, type AuthMode } from '@/constants/auth';
+
+type AuthUser = {
+    id: string;
+    email: string;
+    name: string;
+    role: string;
+};
 
 export function Header() {
     const pathname = usePathname();
     const router = useRouter();
+    const searchParams = useSearchParams();
     const [isAuthOpen, setIsAuthOpen] = useState(false);
     const [authMode, setAuthMode] = useState<AuthMode>(AUTH_MODE.LOGIN);
+    const [authUser, setAuthUser] = useState<AuthUser | null>(null);
+    const [resetToken, setResetToken] = useState<string | undefined>(undefined);
+
+    const clearResetQuery = () => {
+        const nextParams = new URLSearchParams(searchParams.toString());
+        nextParams.delete('reset_token');
+        const nextQuery = nextParams.toString();
+        router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
+    };
+
+    const loadAuthUser = () => {
+        const rawUser = localStorage.getItem(AUTH_STORAGE_KEYS.USER);
+
+        if (!rawUser) {
+            setAuthUser(null);
+            return;
+        }
+
+        try {
+            setAuthUser(JSON.parse(rawUser) as AuthUser);
+        } catch {
+            localStorage.removeItem(AUTH_STORAGE_KEYS.USER);
+            setAuthUser(null);
+        }
+    };
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
-    const openAuthDialog = (mode: AuthMode) => {
-        setAuthMode(mode);
+    const openAuthDialog = () => {
+        setAuthMode(AUTH_MODE.LOGIN);
         setIsAuthOpen(true);
     };
 
-    useEffect(() => {
-        const handleOpenAuthModal = (event: Event) => {
-            const customEvent = event as CustomEvent<{ mode?: AuthMode }>;
-            openAuthDialog(customEvent.detail?.mode ?? AUTH_MODE.LOGIN);
-        };
+    const logout = () => {
+        localStorage.removeItem(AUTH_STORAGE_KEYS.ACCESS_TOKEN);
+        localStorage.removeItem(AUTH_STORAGE_KEYS.REFRESH_TOKEN);
+        localStorage.removeItem(AUTH_STORAGE_KEYS.USER);
+        setAuthUser(null);
+        router.refresh();
+    };
 
-        window.addEventListener(OPEN_AUTH_MODAL_EVENT, handleOpenAuthModal);
+    const onLoginSuccess = () => {
+        loadAuthUser();
+        router.refresh();
+    };
 
-        return () => {
-            window.removeEventListener(OPEN_AUTH_MODAL_EVENT, handleOpenAuthModal);
-        };
-    }, []);
+    const onResetPasswordSuccess = () => {
+        setResetToken(undefined);
+        clearResetQuery();
+    };
 
     type NavItem = {
         label: string;
@@ -63,6 +102,35 @@ export function Header() {
             router.push(selectedItem.link);
         }
     };
+
+    useEffect(() => {
+        loadAuthUser();
+
+        const onOpenAuthModal = (event: Event) => {
+            const customEvent = event as CustomEvent<{ mode?: AuthMode }>;
+            setAuthMode(customEvent.detail?.mode ?? AUTH_MODE.LOGIN);
+            setIsAuthOpen(true);
+        };
+
+        // Listen if user verifies email, redirect to page and open modal for login
+        window.addEventListener(OPEN_AUTH_MODAL_EVENT, onOpenAuthModal);
+
+        return () => {
+            window.removeEventListener(OPEN_AUTH_MODAL_EVENT, onOpenAuthModal);
+        };
+    }, []);
+
+    useEffect(() => {
+        const token = searchParams.get('reset_token');
+
+        if (!token) {
+            return;
+        }
+
+        setResetToken(token);
+        setAuthMode(AUTH_MODE.NEW_PASSWORD);
+        setIsAuthOpen(true);
+    }, [searchParams]);
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50 border-b bg-white">
@@ -104,12 +172,28 @@ export function Header() {
                 </Tabs>
 
                 <div className="flex items-center justify-end gap-2">
-                    <Button variant="primary" onPress={() => openAuthDialog(AUTH_MODE.LOGIN)}>
-                        Login
-                    </Button>
+                    {authUser ? (
+                        <>
+                            <span className="text-sm font-medium text-slate-700">Hi {authUser.name}</span>
+                            <Button variant="secondary" onPress={logout}>
+                                {AUTH_MESSAGES.labels.logoutButton}
+                            </Button>
+                        </>
+                    ) : (
+                        <Button variant="primary" onPress={() => openAuthDialog()}>
+                            Login
+                        </Button>
+                    )}
                 </div>
             </div>
-            <AuthPanel initialMode={authMode} isOpen={isAuthOpen} onOpenChange={setIsAuthOpen} />
+            <AuthPanel
+                initialMode={authMode}
+                isOpen={isAuthOpen}
+                onOpenChange={setIsAuthOpen}
+                onLoginSuccess={onLoginSuccess}
+                resetToken={resetToken}
+                onResetPasswordSuccess={onResetPasswordSuccess}
+            />
         </header>
     );
 }
