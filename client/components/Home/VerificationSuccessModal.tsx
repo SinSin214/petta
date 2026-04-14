@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Button, Modal } from '@heroui/react';
+import { Button, Modal, toast } from '@heroui/react';
 import { OPEN_AUTH_MODAL_EVENT, AUTH_MODE } from '@/constants/auth';
 import { AUTH_MESSAGES } from '@/constants/messages';
 
@@ -14,9 +14,21 @@ export function VerificationSuccessModal() {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 	const [isOpen, setIsOpen] = useState(false);
+	const hasShownVerificationToast = useRef(false);
 
 	useEffect(() => {
-		setIsOpen(searchParams.get(VERIFIED_QUERY_PARAM) === VERIFIED_SUCCESS_VALUE);
+		const isVerified = searchParams.get(VERIFIED_QUERY_PARAM) === VERIFIED_SUCCESS_VALUE;
+
+		setIsOpen(isVerified);
+
+		if (isVerified && !hasShownVerificationToast.current) {
+			toast.success(AUTH_MESSAGES.feedback.verifyEmailSuccess);
+			hasShownVerificationToast.current = true;
+		}
+
+		if (!isVerified) {
+			hasShownVerificationToast.current = false;
+		}
 	}, [searchParams]);
 
 	const clearVerificationQuery = () => {

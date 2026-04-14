@@ -10,6 +10,7 @@ import {
     Tabs,
     Spinner,
     ErrorMessage,
+    toast,
 } from '@heroui/react';
 import { AUTH_MODE, AUTH_STORAGE_KEYS, AUTH_TABS, type AuthMode } from '@/constants/auth';
 import { AUTH_MESSAGES } from '@/constants/messages';
@@ -78,6 +79,7 @@ export function AuthPanel({
             localStorage.setItem(AUTH_STORAGE_KEYS.USER, JSON.stringify(response.user));
 
             setLoginForm({ email: '', password: '' });
+            toast.success(AUTH_MESSAGES.feedback.loginSuccess);
             onOpenChange?.(false);
             onLoginSuccess?.();
         } catch(err) {
@@ -104,6 +106,7 @@ export function AuthPanel({
             });
 
             setRegisterForm({ name: '', email: '', password: '', confirmPassword: '' });
+            toast.success(AUTH_MESSAGES.feedback.registerSuccess);
             setMode(AUTH_MODE.LOGIN);
         } catch(err) {
             setMessage(err instanceof Error ? err.message : String(err));
@@ -119,6 +122,7 @@ export function AuthPanel({
         try {
             await postRequest('/auth/forgot_password', { email: forgotForm.email });
             setForgotForm({ email: '' });
+            toast.success(AUTH_MESSAGES.feedback.forgotSuccess);
         } catch(err) {
             setMessage(err instanceof Error ? err.message : String(err));
         } finally {
@@ -150,11 +154,11 @@ export function AuthPanel({
             });
 
             setResetForm({ password: '', confirmPassword: '' });
-            setMessage(AUTH_MESSAGES.feedback.resetSuccess);
+            toast.success(AUTH_MESSAGES.feedback.resetSuccess);
             setMode(AUTH_MODE.LOGIN);
             onResetPasswordSuccess?.();
         } catch(err) {
-            setMessage(err instanceof Error ? err.message : AUTH_MESSAGES.feedback.resetError);
+            setMessage(err instanceof Error ? err.message : String(err));
         } finally {
             setIsLoading(false);
         }
@@ -175,6 +179,7 @@ export function AuthPanel({
                         </Modal.Header>
                         <Modal.Body className="p-1">
                             <div className="flex flex-col gap-5">
+                            {mode !== AUTH_MODE.NEW_PASSWORD ? (
                                 <Tabs
                                     aria-label="Authentication options"
                                     selectedKey={mode}
@@ -306,40 +311,39 @@ export function AuthPanel({
                                             </Button>
                                         </form>
                                     </Tabs.Panel>
-
-                                    <Tabs.Panel id={AUTH_MODE.NEW_PASSWORD} className="px-0">
-                                        <form className="space-y-4" onSubmit={resetPassword} autoComplete="off">
-                                            <TextField variant="secondary" isRequired className="w-full">
-                                                <Label>{AUTH_MESSAGES.labels.password}</Label>
-                                                <Input
-                                                    type="password"
-                                                    placeholder={AUTH_MESSAGES.placeholders.newPassword}
-                                                    value={resetForm.password}
-                                                    disabled={isLoading}
-                                                    onChange={(event) =>
-                                                        setResetForm((prev) => ({ ...prev, password: event.currentTarget.value }))
-                                                    }
-                                                />
-                                            </TextField>
-                                            <TextField variant="secondary" isRequired className="w-full">
-                                                <Label>{AUTH_MESSAGES.labels.confirmPassword}</Label>
-                                                <Input
-                                                    type="password"
-                                                    placeholder={AUTH_MESSAGES.placeholders.confirmPassword}
-                                                    value={resetForm.confirmPassword}
-                                                    disabled={isLoading}
-                                                    onChange={(event) =>
-                                                        setResetForm((prev) => ({ ...prev, confirmPassword: event.currentTarget.value }))
-                                                    }
-                                                />
-                                            </TextField>
-                                            <ErrorMessage>{message && <div className="text-sm text-red-500">{message}</div>}</ErrorMessage>
-                                            <Button type="submit" variant="primary" isDisabled={isLoading} className="mt-4 w-full">
-                                                {isLoading ? <Spinner color="current" size="sm" /> : AUTH_MESSAGES.labels.setNewPasswordButton}
-                                            </Button>
-                                        </form>
-                                    </Tabs.Panel>
                                 </Tabs>
+                            ) : (
+                                <form className="space-y-4" onSubmit={resetPassword} autoComplete="off">
+                                    <TextField variant="secondary" isRequired className="w-full">
+                                        <Label>{AUTH_MESSAGES.labels.password}</Label>
+                                        <Input
+                                            type="password"
+                                            placeholder={AUTH_MESSAGES.placeholders.newPassword}
+                                            value={resetForm.password}
+                                            disabled={isLoading}
+                                            onChange={(event) =>
+                                                setResetForm((prev) => ({ ...prev, password: event.target.value }))
+                                            }
+                                        />
+                                    </TextField>
+                                    <TextField variant="secondary" isRequired className="w-full">
+                                        <Label>{AUTH_MESSAGES.labels.confirmPassword}</Label>
+                                        <Input
+                                            type="password"
+                                            placeholder={AUTH_MESSAGES.placeholders.confirmPassword}
+                                            value={resetForm.confirmPassword}
+                                            disabled={isLoading}
+                                            onChange={(event) =>
+                                                setResetForm((prev) => ({ ...prev, confirmPassword: event.target.value }))
+                                            }
+                                        />
+                                    </TextField>
+                                    <ErrorMessage>{message && <div className="text-sm text-red-500">{message}</div>}</ErrorMessage>
+                                    <Button type="submit" variant="primary" isDisabled={isLoading} className="mt-4 w-full">
+                                        {isLoading ? <Spinner color="current" size="sm" /> : AUTH_MESSAGES.labels.setNewPasswordButton}
+                                    </Button>
+                                </form>
+                            )}
                             </div>
                         </Modal.Body>
                     </Modal.Dialog>

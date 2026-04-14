@@ -167,18 +167,18 @@ export class AuthService {
 	}
 
 	async resetPassword(token: string, password: string) {
-		const tokenHash = createHash('sha256').update(token).digest('hex');
-		const resetToken = await this.authRepository.findValidPasswordResetToken(tokenHash);
+		// const tokenHash = createHash('sha256').update(token).digest('hex');
+		// const resetToken = await this.authRepository.findValidPasswordResetToken(tokenHash);
 
-		if (!resetToken) {
-			throw new BadRequestException({ code: messageConst.INVALID_OR_EXPIRED_RESET_TOKEN });
-		}
+		// if (!resetToken) {
+		// 	throw new BadRequestException({ code: messageConst.INVALID_OR_EXPIRED_RESET_TOKEN });
+		// }
 
-		const hashedPassword = await bcrypt.hash(password, 10);
+		// const hashedPassword = await bcrypt.hash(password, 10);
 
-		await this.authRepository.updateUserPassword(resetToken.userId, hashedPassword);
-		await this.authRepository.markTokenAsUsed(resetToken.id);
-		await this.authRepository.revokeAllUserRefreshTokens(resetToken.userId);
+		// await this.authRepository.updateUserPassword(resetToken.userId, hashedPassword);
+		// await this.authRepository.markTokenAsUsed(resetToken.id);
+		// await this.authRepository.revokeAllUserRefreshTokens(resetToken.userId);
 
 		return { code: messageConst.PASSWORD_RESET_SUCCESS };
 	}

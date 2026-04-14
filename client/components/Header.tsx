@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { Button, Tabs } from '@heroui/react';
+import { Button, Tabs, toast } from '@heroui/react';
 import { AuthPanel } from '@/components/Auth/AuthPanel';
 import { AUTH_MESSAGES } from '@/constants/messages';
 import { AUTH_MODE, AUTH_STORAGE_KEYS, OPEN_AUTH_MODAL_EVENT, type AuthMode } from '@/constants/auth';
@@ -59,6 +59,7 @@ export function Header() {
         localStorage.removeItem(AUTH_STORAGE_KEYS.REFRESH_TOKEN);
         localStorage.removeItem(AUTH_STORAGE_KEYS.USER);
         setAuthUser(null);
+        toast.success(AUTH_MESSAGES.feedback.logoutSuccess);
         router.refresh();
     };
 
@@ -70,6 +71,16 @@ export function Header() {
     const onResetPasswordSuccess = () => {
         setResetToken(undefined);
         clearResetQuery();
+    };
+
+    const onAuthOpenChange = (open: boolean) => {
+        setIsAuthOpen(open);
+
+        if (!open && resetToken) {
+            setResetToken(undefined);
+            setAuthMode(AUTH_MODE.LOGIN);
+            clearResetQuery();
+        }
     };
 
     type NavItem = {
@@ -189,7 +200,7 @@ export function Header() {
             <AuthPanel
                 initialMode={authMode}
                 isOpen={isAuthOpen}
-                onOpenChange={setIsAuthOpen}
+                onOpenChange={onAuthOpenChange}
                 onLoginSuccess={onLoginSuccess}
                 resetToken={resetToken}
                 onResetPasswordSuccess={onResetPasswordSuccess}

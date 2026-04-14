@@ -1,7 +1,9 @@
-import "../globals.css";
+import '../globals.css';
 import type { Metadata } from "next";
+import { Suspense } from 'react';
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Providers } from './providers';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,10 +17,16 @@ export default function RootLayout({
 }>) {
   return (
       <html lang="en">
-        <body>
-          <Header/>
-          {children}
-          <Footer/>
+        <body className="min-h-screen flex flex-col">
+          <Providers>
+            <Suspense fallback={<div className="h-[89px] border-b bg-white" />}>
+              <Header />
+            </Suspense>
+            <main className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </Providers>
         </body>
       </html>
   );

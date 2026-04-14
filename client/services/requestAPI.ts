@@ -18,26 +18,16 @@ const fetchApi = async (path: string, method: RequestMethod, data: Object): Prom
   }
   catch(err: any) {
     console.log(err);
-    throw new Error(err);
+    throw new Error(err.response?.data?.code || err);
   }
 }
 
 export const getRequest = async (path: string): Promise<any> => {
-    try {
-        const result = await fetchApi(path, RequestMethod.GET, {});
-        return result;
-    } catch(err: any) {
-        console.log(err);
-        throw new Error(err);
-    }
+    const result = await fetchApi(path, RequestMethod.GET, {});
+    return result;
 }
 
 export const postRequest = async (path: string, data: Object): Promise<any> => {
-    try {
-        const result = await fetchApi(path, RequestMethod.POST, data);
-        return result;
-    } catch(err: any) {
-        console.log(err);
-        throw new Error(err);
-    }
+    const result = await fetchApi(path, RequestMethod.POST, data);
+    return result;
 }

@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { AboutSection } from "@/components/Home/AboutSection";
 import { Banner } from "@/components/Home/Banner";
 import { VerificationSuccessModal } from "@/components/Home/VerificationSuccessModal";
@@ -5,7 +6,9 @@ import { VerificationSuccessModal } from "@/components/Home/VerificationSuccessM
 export default function Home() {
 	return (
 		<div className="min-h-screen bg-gray-50">
-		<VerificationSuccessModal />
+		<Suspense fallback={null}>
+			<VerificationSuccessModal />
+		</Suspense>
 		<Banner/>
 		<AboutSection/>
 		{/* <AboutSection /> */}
