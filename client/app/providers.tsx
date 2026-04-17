@@ -7,7 +7,10 @@ export function Providers({ children }: { children: ReactNode }) {
     return (
         <>
             {children}
-            <Toast.Provider placement="top end" maxVisibleToasts={4} />
+            <Toast.Provider 
+                placement="top end" 
+                width={300} 
+            />
         </>
     );
 }
