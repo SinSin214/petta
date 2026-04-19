@@ -26,40 +26,28 @@ export type AggregatePetAge = {
 
 export type PetAgeMinAggregateOutputType = {
   id: string | null
-  name: string | null
-  language_id: string | null
 }
 
 export type PetAgeMaxAggregateOutputType = {
   id: string | null
-  name: string | null
-  language_id: string | null
 }
 
 export type PetAgeCountAggregateOutputType = {
   id: number
-  name: number
-  language_id: number
   _all: number
 }
 
 
 export type PetAgeMinAggregateInputType = {
   id?: true
-  name?: true
-  language_id?: true
 }
 
 export type PetAgeMaxAggregateInputType = {
   id?: true
-  name?: true
-  language_id?: true
 }
 
 export type PetAgeCountAggregateInputType = {
   id?: true
-  name?: true
-  language_id?: true
   _all?: true
 }
 
@@ -137,8 +125,6 @@ export type PetAgeGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 
 export type PetAgeGroupByOutputType = {
   id: string
-  name: string
-  language_id: string
   _count: PetAgeCountAggregateOutputType | null
   _min: PetAgeMinAggregateOutputType | null
   _max: PetAgeMaxAggregateOutputType | null
@@ -164,15 +150,11 @@ export type PetAgeWhereInput = {
   OR?: Prisma.PetAgeWhereInput[]
   NOT?: Prisma.PetAgeWhereInput | Prisma.PetAgeWhereInput[]
   id?: Prisma.StringFilter<"PetAge"> | string
-  name?: Prisma.StringFilter<"PetAge"> | string
-  language_id?: Prisma.StringFilter<"PetAge"> | string
   pets?: Prisma.PetListRelationFilter
 }
 
 export type PetAgeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  language_id?: Prisma.SortOrder
   pets?: Prisma.PetOrderByRelationAggregateInput
 }
 
@@ -181,15 +163,11 @@ export type PetAgeWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PetAgeWhereInput | Prisma.PetAgeWhereInput[]
   OR?: Prisma.PetAgeWhereInput[]
   NOT?: Prisma.PetAgeWhereInput | Prisma.PetAgeWhereInput[]
-  name?: Prisma.StringFilter<"PetAge"> | string
-  language_id?: Prisma.StringFilter<"PetAge"> | string
   pets?: Prisma.PetListRelationFilter
 }, "id">
 
 export type PetAgeOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  language_id?: Prisma.SortOrder
   _count?: Prisma.PetAgeCountOrderByAggregateInput
   _max?: Prisma.PetAgeMaxOrderByAggregateInput
   _min?: Prisma.PetAgeMinOrderByAggregateInput
@@ -200,54 +178,38 @@ export type PetAgeScalarWhereWithAggregatesInput = {
   OR?: Prisma.PetAgeScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PetAgeScalarWhereWithAggregatesInput | Prisma.PetAgeScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PetAge"> | string
-  name?: Prisma.StringWithAggregatesFilter<"PetAge"> | string
-  language_id?: Prisma.StringWithAggregatesFilter<"PetAge"> | string
 }
 
 export type PetAgeCreateInput = {
   id: string
-  name: string
-  language_id: string
   pets?: Prisma.PetCreateNestedManyWithoutAge_typeInput
 }
 
 export type PetAgeUncheckedCreateInput = {
   id: string
-  name: string
-  language_id: string
   pets?: Prisma.PetUncheckedCreateNestedManyWithoutAge_typeInput
 }
 
 export type PetAgeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  language_id?: Prisma.StringFieldUpdateOperationsInput | string
   pets?: Prisma.PetUpdateManyWithoutAge_typeNestedInput
 }
 
 export type PetAgeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  language_id?: Prisma.StringFieldUpdateOperationsInput | string
   pets?: Prisma.PetUncheckedUpdateManyWithoutAge_typeNestedInput
 }
 
 export type PetAgeCreateManyInput = {
   id: string
-  name: string
-  language_id: string
 }
 
 export type PetAgeUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  language_id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PetAgeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  language_id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PetAgeScalarRelationFilter = {
@@ -257,20 +219,14 @@ export type PetAgeScalarRelationFilter = {
 
 export type PetAgeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  language_id?: Prisma.SortOrder
 }
 
 export type PetAgeMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  language_id?: Prisma.SortOrder
 }
 
 export type PetAgeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  language_id?: Prisma.SortOrder
 }
 
 export type PetAgeCreateNestedOneWithoutPetsInput = {
@@ -289,14 +245,10 @@ export type PetAgeUpdateOneRequiredWithoutPetsNestedInput = {
 
 export type PetAgeCreateWithoutPetsInput = {
   id: string
-  name: string
-  language_id: string
 }
 
 export type PetAgeUncheckedCreateWithoutPetsInput = {
   id: string
-  name: string
-  language_id: string
 }
 
 export type PetAgeCreateOrConnectWithoutPetsInput = {
@@ -317,14 +269,10 @@ export type PetAgeUpdateToOneWithWhereWithoutPetsInput = {
 
 export type PetAgeUpdateWithoutPetsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  language_id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PetAgeUncheckedUpdateWithoutPetsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  language_id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -360,31 +308,23 @@ export type PetAgeCountOutputTypeCountPetsArgs<ExtArgs extends runtime.Types.Ext
 
 export type PetAgeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  language_id?: boolean
   pets?: boolean | Prisma.PetAge$petsArgs<ExtArgs>
   _count?: boolean | Prisma.PetAgeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["petAge"]>
 
 export type PetAgeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  language_id?: boolean
 }, ExtArgs["result"]["petAge"]>
 
 export type PetAgeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  name?: boolean
-  language_id?: boolean
 }, ExtArgs["result"]["petAge"]>
 
 export type PetAgeSelectScalar = {
   id?: boolean
-  name?: boolean
-  language_id?: boolean
 }
 
-export type PetAgeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "language_id", ExtArgs["result"]["petAge"]>
+export type PetAgeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id", ExtArgs["result"]["petAge"]>
 export type PetAgeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   pets?: boolean | Prisma.PetAge$petsArgs<ExtArgs>
   _count?: boolean | Prisma.PetAgeCountOutputTypeDefaultArgs<ExtArgs>
@@ -399,8 +339,6 @@ export type $PetAgePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    name: string
-    language_id: string
   }, ExtArgs["result"]["petAge"]>
   composites: {}
 }
@@ -826,8 +764,6 @@ export interface Prisma__PetAgeClient<T, Null = never, ExtArgs extends runtime.T
  */
 export interface PetAgeFieldRefs {
   readonly id: Prisma.FieldRef<"PetAge", 'String'>
-  readonly name: Prisma.FieldRef<"PetAge", 'String'>
-  readonly language_id: Prisma.FieldRef<"PetAge", 'String'>
 }
     
 

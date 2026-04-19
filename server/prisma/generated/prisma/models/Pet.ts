@@ -243,7 +243,6 @@ export type PetWhereInput = {
   type?: Prisma.XOR<Prisma.PetTypeScalarRelationFilter, Prisma.PetTypeWhereInput>
   age_type?: Prisma.XOR<Prisma.PetAgeScalarRelationFilter, Prisma.PetAgeWhereInput>
   size_type?: Prisma.XOR<Prisma.PetSizeScalarRelationFilter, Prisma.PetSizeWhereInput>
-  personalities?: Prisma.PetPersonalityListRelationFilter
 }
 
 export type PetOrderByWithRelationInput = {
@@ -258,7 +257,6 @@ export type PetOrderByWithRelationInput = {
   type?: Prisma.PetTypeOrderByWithRelationInput
   age_type?: Prisma.PetAgeOrderByWithRelationInput
   size_type?: Prisma.PetSizeOrderByWithRelationInput
-  personalities?: Prisma.PetPersonalityOrderByRelationAggregateInput
 }
 
 export type PetWhereUniqueInput = Prisma.AtLeast<{
@@ -276,7 +274,6 @@ export type PetWhereUniqueInput = Prisma.AtLeast<{
   type?: Prisma.XOR<Prisma.PetTypeScalarRelationFilter, Prisma.PetTypeWhereInput>
   age_type?: Prisma.XOR<Prisma.PetAgeScalarRelationFilter, Prisma.PetAgeWhereInput>
   size_type?: Prisma.XOR<Prisma.PetSizeScalarRelationFilter, Prisma.PetSizeWhereInput>
-  personalities?: Prisma.PetPersonalityListRelationFilter
 }, "id">
 
 export type PetOrderByWithAggregationInput = {
@@ -318,7 +315,6 @@ export type PetCreateInput = {
   type: Prisma.PetTypeCreateNestedOneWithoutPetsInput
   age_type: Prisma.PetAgeCreateNestedOneWithoutPetsInput
   size_type: Prisma.PetSizeCreateNestedOneWithoutPetsInput
-  personalities?: Prisma.PetPersonalityCreateNestedManyWithoutPetsInput
 }
 
 export type PetUncheckedCreateInput = {
@@ -330,7 +326,6 @@ export type PetUncheckedCreateInput = {
   size_type_id: string
   location: string
   description: string
-  personalities?: Prisma.PetPersonalityUncheckedCreateNestedManyWithoutPetsInput
 }
 
 export type PetUpdateInput = {
@@ -342,7 +337,6 @@ export type PetUpdateInput = {
   type?: Prisma.PetTypeUpdateOneRequiredWithoutPetsNestedInput
   age_type?: Prisma.PetAgeUpdateOneRequiredWithoutPetsNestedInput
   size_type?: Prisma.PetSizeUpdateOneRequiredWithoutPetsNestedInput
-  personalities?: Prisma.PetPersonalityUpdateManyWithoutPetsNestedInput
 }
 
 export type PetUncheckedUpdateInput = {
@@ -354,7 +348,6 @@ export type PetUncheckedUpdateInput = {
   size_type_id?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  personalities?: Prisma.PetPersonalityUncheckedUpdateManyWithoutPetsNestedInput
 }
 
 export type PetCreateManyInput = {
@@ -576,44 +569,6 @@ export type PetUncheckedUpdateManyWithoutSize_typeNestedInput = {
   deleteMany?: Prisma.PetScalarWhereInput | Prisma.PetScalarWhereInput[]
 }
 
-export type PetCreateNestedManyWithoutPersonalitiesInput = {
-  create?: Prisma.XOR<Prisma.PetCreateWithoutPersonalitiesInput, Prisma.PetUncheckedCreateWithoutPersonalitiesInput> | Prisma.PetCreateWithoutPersonalitiesInput[] | Prisma.PetUncheckedCreateWithoutPersonalitiesInput[]
-  connectOrCreate?: Prisma.PetCreateOrConnectWithoutPersonalitiesInput | Prisma.PetCreateOrConnectWithoutPersonalitiesInput[]
-  connect?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-}
-
-export type PetUncheckedCreateNestedManyWithoutPersonalitiesInput = {
-  create?: Prisma.XOR<Prisma.PetCreateWithoutPersonalitiesInput, Prisma.PetUncheckedCreateWithoutPersonalitiesInput> | Prisma.PetCreateWithoutPersonalitiesInput[] | Prisma.PetUncheckedCreateWithoutPersonalitiesInput[]
-  connectOrCreate?: Prisma.PetCreateOrConnectWithoutPersonalitiesInput | Prisma.PetCreateOrConnectWithoutPersonalitiesInput[]
-  connect?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-}
-
-export type PetUpdateManyWithoutPersonalitiesNestedInput = {
-  create?: Prisma.XOR<Prisma.PetCreateWithoutPersonalitiesInput, Prisma.PetUncheckedCreateWithoutPersonalitiesInput> | Prisma.PetCreateWithoutPersonalitiesInput[] | Prisma.PetUncheckedCreateWithoutPersonalitiesInput[]
-  connectOrCreate?: Prisma.PetCreateOrConnectWithoutPersonalitiesInput | Prisma.PetCreateOrConnectWithoutPersonalitiesInput[]
-  upsert?: Prisma.PetUpsertWithWhereUniqueWithoutPersonalitiesInput | Prisma.PetUpsertWithWhereUniqueWithoutPersonalitiesInput[]
-  set?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-  disconnect?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-  delete?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-  connect?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-  update?: Prisma.PetUpdateWithWhereUniqueWithoutPersonalitiesInput | Prisma.PetUpdateWithWhereUniqueWithoutPersonalitiesInput[]
-  updateMany?: Prisma.PetUpdateManyWithWhereWithoutPersonalitiesInput | Prisma.PetUpdateManyWithWhereWithoutPersonalitiesInput[]
-  deleteMany?: Prisma.PetScalarWhereInput | Prisma.PetScalarWhereInput[]
-}
-
-export type PetUncheckedUpdateManyWithoutPersonalitiesNestedInput = {
-  create?: Prisma.XOR<Prisma.PetCreateWithoutPersonalitiesInput, Prisma.PetUncheckedCreateWithoutPersonalitiesInput> | Prisma.PetCreateWithoutPersonalitiesInput[] | Prisma.PetUncheckedCreateWithoutPersonalitiesInput[]
-  connectOrCreate?: Prisma.PetCreateOrConnectWithoutPersonalitiesInput | Prisma.PetCreateOrConnectWithoutPersonalitiesInput[]
-  upsert?: Prisma.PetUpsertWithWhereUniqueWithoutPersonalitiesInput | Prisma.PetUpsertWithWhereUniqueWithoutPersonalitiesInput[]
-  set?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-  disconnect?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-  delete?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-  connect?: Prisma.PetWhereUniqueInput | Prisma.PetWhereUniqueInput[]
-  update?: Prisma.PetUpdateWithWhereUniqueWithoutPersonalitiesInput | Prisma.PetUpdateWithWhereUniqueWithoutPersonalitiesInput[]
-  updateMany?: Prisma.PetUpdateManyWithWhereWithoutPersonalitiesInput | Prisma.PetUpdateManyWithWhereWithoutPersonalitiesInput[]
-  deleteMany?: Prisma.PetScalarWhereInput | Prisma.PetScalarWhereInput[]
-}
-
 export type PetCreateWithoutTypeInput = {
   id?: string
   name: string
@@ -622,7 +577,6 @@ export type PetCreateWithoutTypeInput = {
   description: string
   age_type: Prisma.PetAgeCreateNestedOneWithoutPetsInput
   size_type: Prisma.PetSizeCreateNestedOneWithoutPetsInput
-  personalities?: Prisma.PetPersonalityCreateNestedManyWithoutPetsInput
 }
 
 export type PetUncheckedCreateWithoutTypeInput = {
@@ -633,7 +587,6 @@ export type PetUncheckedCreateWithoutTypeInput = {
   size_type_id: string
   location: string
   description: string
-  personalities?: Prisma.PetPersonalityUncheckedCreateNestedManyWithoutPetsInput
 }
 
 export type PetCreateOrConnectWithoutTypeInput = {
@@ -684,7 +637,6 @@ export type PetCreateWithoutAge_typeInput = {
   description: string
   type: Prisma.PetTypeCreateNestedOneWithoutPetsInput
   size_type: Prisma.PetSizeCreateNestedOneWithoutPetsInput
-  personalities?: Prisma.PetPersonalityCreateNestedManyWithoutPetsInput
 }
 
 export type PetUncheckedCreateWithoutAge_typeInput = {
@@ -695,7 +647,6 @@ export type PetUncheckedCreateWithoutAge_typeInput = {
   size_type_id: string
   location: string
   description: string
-  personalities?: Prisma.PetPersonalityUncheckedCreateNestedManyWithoutPetsInput
 }
 
 export type PetCreateOrConnectWithoutAge_typeInput = {
@@ -732,7 +683,6 @@ export type PetCreateWithoutSize_typeInput = {
   description: string
   type: Prisma.PetTypeCreateNestedOneWithoutPetsInput
   age_type: Prisma.PetAgeCreateNestedOneWithoutPetsInput
-  personalities?: Prisma.PetPersonalityCreateNestedManyWithoutPetsInput
 }
 
 export type PetUncheckedCreateWithoutSize_typeInput = {
@@ -743,7 +693,6 @@ export type PetUncheckedCreateWithoutSize_typeInput = {
   age_type_id: string
   location: string
   description: string
-  personalities?: Prisma.PetPersonalityUncheckedCreateNestedManyWithoutPetsInput
 }
 
 export type PetCreateOrConnectWithoutSize_typeInput = {
@@ -772,49 +721,6 @@ export type PetUpdateManyWithWhereWithoutSize_typeInput = {
   data: Prisma.XOR<Prisma.PetUpdateManyMutationInput, Prisma.PetUncheckedUpdateManyWithoutSize_typeInput>
 }
 
-export type PetCreateWithoutPersonalitiesInput = {
-  id?: string
-  name: string
-  age: number
-  location: string
-  description: string
-  type: Prisma.PetTypeCreateNestedOneWithoutPetsInput
-  age_type: Prisma.PetAgeCreateNestedOneWithoutPetsInput
-  size_type: Prisma.PetSizeCreateNestedOneWithoutPetsInput
-}
-
-export type PetUncheckedCreateWithoutPersonalitiesInput = {
-  id?: string
-  name: string
-  age: number
-  type_id: string
-  age_type_id: string
-  size_type_id: string
-  location: string
-  description: string
-}
-
-export type PetCreateOrConnectWithoutPersonalitiesInput = {
-  where: Prisma.PetWhereUniqueInput
-  create: Prisma.XOR<Prisma.PetCreateWithoutPersonalitiesInput, Prisma.PetUncheckedCreateWithoutPersonalitiesInput>
-}
-
-export type PetUpsertWithWhereUniqueWithoutPersonalitiesInput = {
-  where: Prisma.PetWhereUniqueInput
-  update: Prisma.XOR<Prisma.PetUpdateWithoutPersonalitiesInput, Prisma.PetUncheckedUpdateWithoutPersonalitiesInput>
-  create: Prisma.XOR<Prisma.PetCreateWithoutPersonalitiesInput, Prisma.PetUncheckedCreateWithoutPersonalitiesInput>
-}
-
-export type PetUpdateWithWhereUniqueWithoutPersonalitiesInput = {
-  where: Prisma.PetWhereUniqueInput
-  data: Prisma.XOR<Prisma.PetUpdateWithoutPersonalitiesInput, Prisma.PetUncheckedUpdateWithoutPersonalitiesInput>
-}
-
-export type PetUpdateManyWithWhereWithoutPersonalitiesInput = {
-  where: Prisma.PetScalarWhereInput
-  data: Prisma.XOR<Prisma.PetUpdateManyMutationInput, Prisma.PetUncheckedUpdateManyWithoutPersonalitiesInput>
-}
-
 export type PetCreateManyTypeInput = {
   id?: string
   name: string
@@ -833,7 +739,6 @@ export type PetUpdateWithoutTypeInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   age_type?: Prisma.PetAgeUpdateOneRequiredWithoutPetsNestedInput
   size_type?: Prisma.PetSizeUpdateOneRequiredWithoutPetsNestedInput
-  personalities?: Prisma.PetPersonalityUpdateManyWithoutPetsNestedInput
 }
 
 export type PetUncheckedUpdateWithoutTypeInput = {
@@ -844,7 +749,6 @@ export type PetUncheckedUpdateWithoutTypeInput = {
   size_type_id?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  personalities?: Prisma.PetPersonalityUncheckedUpdateManyWithoutPetsNestedInput
 }
 
 export type PetUncheckedUpdateManyWithoutTypeInput = {
@@ -875,7 +779,6 @@ export type PetUpdateWithoutAge_typeInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.PetTypeUpdateOneRequiredWithoutPetsNestedInput
   size_type?: Prisma.PetSizeUpdateOneRequiredWithoutPetsNestedInput
-  personalities?: Prisma.PetPersonalityUpdateManyWithoutPetsNestedInput
 }
 
 export type PetUncheckedUpdateWithoutAge_typeInput = {
@@ -886,7 +789,6 @@ export type PetUncheckedUpdateWithoutAge_typeInput = {
   size_type_id?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  personalities?: Prisma.PetPersonalityUncheckedUpdateManyWithoutPetsNestedInput
 }
 
 export type PetUncheckedUpdateManyWithoutAge_typeInput = {
@@ -917,7 +819,6 @@ export type PetUpdateWithoutSize_typeInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.PetTypeUpdateOneRequiredWithoutPetsNestedInput
   age_type?: Prisma.PetAgeUpdateOneRequiredWithoutPetsNestedInput
-  personalities?: Prisma.PetPersonalityUpdateManyWithoutPetsNestedInput
 }
 
 export type PetUncheckedUpdateWithoutSize_typeInput = {
@@ -928,7 +829,6 @@ export type PetUncheckedUpdateWithoutSize_typeInput = {
   age_type_id?: Prisma.StringFieldUpdateOperationsInput | string
   location?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
-  personalities?: Prisma.PetPersonalityUncheckedUpdateManyWithoutPetsNestedInput
 }
 
 export type PetUncheckedUpdateManyWithoutSize_typeInput = {
@@ -941,68 +841,6 @@ export type PetUncheckedUpdateManyWithoutSize_typeInput = {
   description?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type PetUpdateWithoutPersonalitiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  age?: Prisma.IntFieldUpdateOperationsInput | number
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-  type?: Prisma.PetTypeUpdateOneRequiredWithoutPetsNestedInput
-  age_type?: Prisma.PetAgeUpdateOneRequiredWithoutPetsNestedInput
-  size_type?: Prisma.PetSizeUpdateOneRequiredWithoutPetsNestedInput
-}
-
-export type PetUncheckedUpdateWithoutPersonalitiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  age?: Prisma.IntFieldUpdateOperationsInput | number
-  type_id?: Prisma.StringFieldUpdateOperationsInput | string
-  age_type_id?: Prisma.StringFieldUpdateOperationsInput | string
-  size_type_id?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type PetUncheckedUpdateManyWithoutPersonalitiesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  age?: Prisma.IntFieldUpdateOperationsInput | number
-  type_id?: Prisma.StringFieldUpdateOperationsInput | string
-  age_type_id?: Prisma.StringFieldUpdateOperationsInput | string
-  size_type_id?: Prisma.StringFieldUpdateOperationsInput | string
-  location?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-
-/**
- * Count Type PetCountOutputType
- */
-
-export type PetCountOutputType = {
-  personalities: number
-}
-
-export type PetCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  personalities?: boolean | PetCountOutputTypeCountPersonalitiesArgs
-}
-
-/**
- * PetCountOutputType without action
- */
-export type PetCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PetCountOutputType
-   */
-  select?: Prisma.PetCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * PetCountOutputType without action
- */
-export type PetCountOutputTypeCountPersonalitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PetPersonalityWhereInput
-}
 
 
 export type PetSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1017,8 +855,6 @@ export type PetSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
   type?: boolean | Prisma.PetTypeDefaultArgs<ExtArgs>
   age_type?: boolean | Prisma.PetAgeDefaultArgs<ExtArgs>
   size_type?: boolean | Prisma.PetSizeDefaultArgs<ExtArgs>
-  personalities?: boolean | Prisma.Pet$personalitiesArgs<ExtArgs>
-  _count?: boolean | Prisma.PetCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["pet"]>
 
 export type PetSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1065,8 +901,6 @@ export type PetInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   type?: boolean | Prisma.PetTypeDefaultArgs<ExtArgs>
   age_type?: boolean | Prisma.PetAgeDefaultArgs<ExtArgs>
   size_type?: boolean | Prisma.PetSizeDefaultArgs<ExtArgs>
-  personalities?: boolean | Prisma.Pet$personalitiesArgs<ExtArgs>
-  _count?: boolean | Prisma.PetCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PetIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   type?: boolean | Prisma.PetTypeDefaultArgs<ExtArgs>
@@ -1085,7 +919,6 @@ export type $PetPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
     type: Prisma.$PetTypePayload<ExtArgs>
     age_type: Prisma.$PetAgePayload<ExtArgs>
     size_type: Prisma.$PetSizePayload<ExtArgs>
-    personalities: Prisma.$PetPersonalityPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1493,7 +1326,6 @@ export interface Prisma__PetClient<T, Null = never, ExtArgs extends runtime.Type
   type<T extends Prisma.PetTypeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PetTypeDefaultArgs<ExtArgs>>): Prisma.Prisma__PetTypeClient<runtime.Types.Result.GetResult<Prisma.$PetTypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   age_type<T extends Prisma.PetAgeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PetAgeDefaultArgs<ExtArgs>>): Prisma.Prisma__PetAgeClient<runtime.Types.Result.GetResult<Prisma.$PetAgePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   size_type<T extends Prisma.PetSizeDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PetSizeDefaultArgs<ExtArgs>>): Prisma.Prisma__PetSizeClient<runtime.Types.Result.GetResult<Prisma.$PetSizePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  personalities<T extends Prisma.Pet$personalitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Pet$personalitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetPersonalityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1929,30 +1761,6 @@ export type PetDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Limit how many Pets to delete.
    */
   limit?: number
-}
-
-/**
- * Pet.personalities
- */
-export type Pet$personalitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PetPersonality
-   */
-  select?: Prisma.PetPersonalitySelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the PetPersonality
-   */
-  omit?: Prisma.PetPersonalityOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetPersonalityInclude<ExtArgs> | null
-  where?: Prisma.PetPersonalityWhereInput
-  orderBy?: Prisma.PetPersonalityOrderByWithRelationInput | Prisma.PetPersonalityOrderByWithRelationInput[]
-  cursor?: Prisma.PetPersonalityWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PetPersonalityScalarFieldEnum | Prisma.PetPersonalityScalarFieldEnum[]
 }
 
 /**

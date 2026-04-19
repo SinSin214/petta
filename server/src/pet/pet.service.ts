@@ -12,4 +12,8 @@ export class PetService {
         const res = await this.petRepository.findManyBySelection(type_ids, age_type_ids, size_type_ids);
         return res;
     }
+
+    async getFilterOptions() {
+        return this.petRepository.findFilterOptions();
+    }
 }

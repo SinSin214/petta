@@ -9,7 +9,6 @@ model Pet {
   size_type     PetSize          @relation(fields: [size_type_id], references: [id])
   size_type_id  String
   location      String
-  personalities PetPersonality[]
   description   String
 
   @@index([type_id, age_type_id, size_type_id])
@@ -17,28 +16,23 @@ model Pet {
 
 model PetType {
   id   String @id
-  name String
-  language_id String
   pets Pet[]
 }
 
 model PetAge {
   id   String @id
-  name String
-  language_id String
   pets Pet[]
 }
 
 model PetSize {
   id   String @id
-  name String
-  language_id String
   pets Pet[]
 }
 
 model PetPersonality {
-  id   String @id
+  id   String
   name String
   language_id String
-  pets Pet[]
+
+  @@id([id, language_id])
 }

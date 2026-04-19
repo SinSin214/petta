@@ -982,27 +982,21 @@ export type PetScalarFieldEnum = (typeof PetScalarFieldEnum)[keyof typeof PetSca
 
 
 export const PetTypeScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  language_id: 'language_id'
+  id: 'id'
 } as const
 
 export type PetTypeScalarFieldEnum = (typeof PetTypeScalarFieldEnum)[keyof typeof PetTypeScalarFieldEnum]
 
 
 export const PetAgeScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  language_id: 'language_id'
+  id: 'id'
 } as const
 
 export type PetAgeScalarFieldEnum = (typeof PetAgeScalarFieldEnum)[keyof typeof PetAgeScalarFieldEnum]
 
 
 export const PetSizeScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  language_id: 'language_id'
+  id: 'id'
 } as const
 
 export type PetSizeScalarFieldEnum = (typeof PetSizeScalarFieldEnum)[keyof typeof PetSizeScalarFieldEnum]

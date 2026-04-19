@@ -16,6 +16,29 @@ export class PetRepository {
     })
   }
 
+  async findFilterOptions() {
+    const [types, ages, sizes] = await Promise.all([
+      this.prisma.petType.findMany({
+        orderBy: { id: 'asc' },
+        select: { id: true },
+      }),
+      this.prisma.petAge.findMany({
+        orderBy: { id: 'asc' },
+        select: { id: true },
+      }),
+      this.prisma.petSize.findMany({
+        orderBy: { id: 'asc' },
+        select: { id: true },
+      }),
+    ]);
+
+    return {
+      types: types.map((item) => item.id),
+      ages: ages.map((item) => item.id),
+      sizes: sizes.map((item) => item.id),
+    };
+  }
+
 //   async findById(id: string) {
 //     return this.prisma.pet.findUnique({
 //       where: { id }
