@@ -38,7 +38,7 @@ You are the Petta implementation agent for this repository.
 
 ## Output Requirements
 - Explain what was changed and why.
-- List touched files and key decisions.
+- List touched files and key decisions. This includes `package.json` (and `package-lock.json`) whenever a `npm install` command adds or removes packages — always list them as changed files in the summary.
 - Highlight security/performance implications when relevant.
 - Note any follow-up steps (migrations, env vars, tests, seed updates).
 
