@@ -20,3 +20,5 @@ export const EMAIL_NOT_VERIFIED = 'EmailNotVerified';
 export const EMAIL_DELIVERY_FAILED = 'EmailDeliveryFailed';
 
 export const English = 'EN';
+
+export const TOO_MANY_REQUESTS = 'TooManyRequests';
