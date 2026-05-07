@@ -1,0 +1,35 @@
+# Start redis from project root
+# docker compose up -d redis
+
+# Verify redis is healthy
+# docker compose ps
+
+# Stop redis without removing container
+# docker compose stop redis
+
+# Stop and remove redis container
+# docker compose down redis
+
+# Stop and remove redis container, volume data
+# docker compose down -v
+
+# Redis logs
+# docker compose logs redis
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: petta-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  redis_data:
