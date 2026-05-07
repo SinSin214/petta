@@ -3,15 +3,13 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { ThrottlerGuard } from '@nestjs/throttler';
-import type { Request, Response } from 'express';
+import type { Request } from 'express';
 
 /**
- * Global distributed rate-limiting guard backed by Redis (sliding window).
+ * Global distributed rate-limiting guard backed by Redis (sliding window counter).
  *
  * - Extracts the real client IP from X-Forwarded-For when behind a proxy,
  *   falling back to the direct socket address.
- * - Writes standard rate-limit headers (RateLimit-Limit, RateLimit-Remaining,
- *   RateLimit-Reset, Retry-After) on every response.
  */
 @Injectable()
 export class RateLimitGuard extends ThrottlerGuard {
@@ -25,30 +23,5 @@ export class RateLimitGuard extends ThrottlerGuard {
       'unknown';
 
     return Promise.resolve(ip);
-  }
-
-  protected override async throwThrottlingException(
-    context: ExecutionContext,
-    throttlerLimitDetail: {
-      limit: number;
-      ttl: number;
-      key: string;
-      tracker: string;
-      totalHits: number;
-      timeToExpire: number;
-      isBlocked: boolean;
-      timeToBlockExpire: number;
-    },
-  ): Promise<void> {
-    const response = context.switchToHttp().getResponse<Response>();
-    const retryAfter = Math.ceil(throttlerLimitDetail.timeToExpire / 1000);
-    const resetAt = Math.floor(Date.now() / 1000) + retryAfter;
-
-    response.setHeader('Retry-After', retryAfter);
-    response.setHeader('RateLimit-Limit', throttlerLimitDetail.limit);
-    response.setHeader('RateLimit-Remaining', 0);
-    response.setHeader('RateLimit-Reset', resetAt);
-
-    await super.throwThrottlingException(context, throttlerLimitDetail);
   }
 }

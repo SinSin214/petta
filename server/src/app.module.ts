@@ -19,15 +19,17 @@ import { RateLimitGuard } from './common/guards/rate-limit.guard.js';
       isGlobal: true,
     }),
     RedisModule,
+    // Inject redis into throttler as rate limitting storage
+    // Throttler is now use the same storage for all instances, so limits are shared across all endpoints and app instances.
     ThrottlerModule.forRootAsync({
       inject: [ConfigService, REDIS_CLIENT],
       useFactory: (_configService: ConfigService, redisClient: Redis) => ({
         throttlers: [
           {
-            // Default: 60 requests per minute (covers all public/pet endpoints)
+            // Default: 20 requests per minute (covers all public/pet endpoints)
             name: 'default',
             ttl: 60_000,
-            limit: 60,
+            limit: 10,
           },
         ],
         storage: new ThrottlerStorageRedisService(redisClient),

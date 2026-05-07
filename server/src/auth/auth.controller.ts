@@ -12,6 +12,8 @@ import {
   VerifyEmailDto,
 } from './dto/auth.dto.js';
 
+// 10 requests per hour per IP for all auth endpoints
+@Throttle({ default: { ttl: 3_600_000, limit: 10 } })
 @Controller('auth')
 export class AuthController {
   constructor(
@@ -19,15 +21,11 @@ export class AuthController {
     private configService: ConfigService,
   ) {}
 
-  // 5 registration attempts per hour per IP — prevents account farming
-  @Throttle({ default: { ttl: 3_600_000, limit: 5 } })
   @Post('register')
   async register(@Body() dto: RegisterDto) {
     return this.authService.register(dto);
   }
 
-  // Email verification is a one-click link — skip rate limiting
-  @SkipThrottle()
   @Get('verify_email')
   @Redirect()
   async verifyEmail(@Query() dto: VerifyEmailDto) {
@@ -45,15 +43,12 @@ export class AuthController {
     };
   }
 
-  // 10 login attempts per 15 minutes per IP — brute force protection
-  @Throttle({ default: { ttl: 900_000, limit: 10 } })
   @Post('login')
   @HttpCode(HttpStatus.OK)
   async login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
   }
 
-  // 30 refresh calls per 15 minutes per IP — prevents token refresh flooding
   @Throttle({ default: { ttl: 900_000, limit: 30 } })
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
@@ -61,7 +56,6 @@ export class AuthController {
     return this.authService.refreshTokens(dto.refreshToken);
   }
 
-  // Logout is a low-risk action, inherits the global default limit
   @Post('logout')
   @UseGuards(ActiveUserGuard)
   @HttpCode(HttpStatus.OK)
@@ -69,16 +63,12 @@ export class AuthController {
     return this.authService.logout(dto.refreshToken);
   }
 
-  // 3 forgot-password requests per hour per IP — prevents email bombing
-  @Throttle({ default: { ttl: 3_600_000, limit: 3 } })
   @Post('forgot_password')
   @HttpCode(HttpStatus.OK)
   async forgotPassword(@Body() dto: ForgotPasswordDto) {
     return this.authService.forgotPassword(dto.email);
   }
 
-  // 5 reset attempts per hour per IP — prevents token brute force
-  @Throttle({ default: { ttl: 3_600_000, limit: 5 } })
   @Post('reset_password')
   @HttpCode(HttpStatus.OK)
   async resetPassword(@Body() dto: ResetPasswordDto) {
