@@ -43,6 +43,11 @@ export type PetSize = Prisma.PetSizeModel
  */
 export type PetPersonality = Prisma.PetPersonalityModel
 /**
+ * Model PetLocation
+ * 
+ */
+export type PetLocation = Prisma.PetLocationModel
+/**
  * Model User
  * 
  */

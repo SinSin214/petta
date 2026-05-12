@@ -19,6 +19,9 @@ model User {
   isActive Boolean @default(false)
   tokens       Token[]
   isDeleted Boolean @default(false)
+  
+  petsCreated  Pet[]    @relation("PetCreatedBy")
+  petsUpdated  Pet[]    @relation("PetUpdatedBy")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt()
