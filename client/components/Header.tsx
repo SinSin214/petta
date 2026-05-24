@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button, Tabs, toast } from '@heroui/react';
 import { AuthPanel } from '@/components/Auth/AuthPanel';
-import { AUTH_MESSAGES } from '@/constants/messages';
 import { AUTH_MODE, AUTH_STORAGE_KEYS, OPEN_AUTH_MODAL_EVENT, type AuthMode } from '@/constants/auth';
+import { useI18n } from '@/i18n/I18nProvider';
 
 type AuthUser = {
     id: string;
@@ -14,6 +14,7 @@ type AuthUser = {
 };
 
 export function Header() {
+    const { locale, setLocale, t } = useI18n();
     const pathname = usePathname();
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -59,7 +60,7 @@ export function Header() {
         localStorage.removeItem(AUTH_STORAGE_KEYS.REFRESH_TOKEN);
         localStorage.removeItem(AUTH_STORAGE_KEYS.USER);
         setAuthUser(null);
-        toast.success(AUTH_MESSAGES.feedback.logoutSuccess);
+        toast.success(t('messages.codes.LoggedOutSuccess'));
         router.refresh();
     };
 
@@ -90,12 +91,12 @@ export function Header() {
     };
 
     const navItems: NavItem[] = [
-        { label: "Home", link: '/', action: scrollToTop },
-        { label: "Adopt", link: '/adopt', action: () => {} },
-        { label: "Stories", link: '/stories', action: () => { } },
-        { label: "Volunteer", link: '/volunteer', action: () => { } },
-        { label: "About", link: '/about', action: () => { } },
-        { label: "Contact", link: '/contact', action: () => { } },
+        { label: t('common.nav.home'), link: '/', action: scrollToTop },
+        { label: t('common.nav.adopt'), link: '/adopt', action: () => {} },
+        { label: t('common.nav.stories'), link: '/stories', action: () => { } },
+        { label: t('common.nav.volunteer'), link: '/volunteer', action: () => { } },
+        { label: t('common.nav.about'), link: '/about', action: () => { } },
+        { label: t('common.nav.contact'), link: '/contact', action: () => { } },
     ];
 
     const selectedTab = navItems.find((item) => item.link === pathname)?.link ?? '/';
@@ -157,7 +158,7 @@ export function Header() {
                     className="text-left"
                 >
                     <p className="text-lg font-semibold tracking-[0.25em] text-slate-900 uppercase">Petta</p>
-                    <p className="text-xs text-slate-500">Find a home for every rescued friend</p>
+                    <p className="text-xs text-slate-500">{t('header.tagline')}</p>
                 </button>
 
                 <Tabs
@@ -183,16 +184,34 @@ export function Header() {
                 </Tabs>
 
                 <div className="flex items-center justify-end gap-2">
+                    <div className="flex items-center gap-1 rounded-lg border border-slate-200 p-1">
+                        <Button
+                            size="sm"
+                            variant={locale === 'en' ? 'primary' : 'tertiary'}
+                            onPress={() => setLocale('en')}
+                            aria-label={t('common.language.en')}
+                        >
+                            {t('common.language.en')}
+                        </Button>
+                        <Button
+                            size="sm"
+                            variant={locale === 'vn' ? 'primary' : 'tertiary'}
+                            onPress={() => setLocale('vn')}
+                            aria-label={t('common.language.vn')}
+                        >
+                            {t('common.language.vn')}
+                        </Button>
+                    </div>
                     {authUser ? (
                         <>
-                            <span className="text-sm font-medium text-slate-700">Hi {authUser.name}</span>
+                            <span className="text-sm font-medium text-slate-700">{t('common.auth.hiName', { name: authUser.name })}</span>
                             <Button variant="secondary" onPress={logout}>
-                                {AUTH_MESSAGES.labels.logoutButton}
+                                {t('auth.labels.logoutButton')}
                             </Button>
                         </>
                     ) : (
                         <Button variant="primary" onPress={() => openAuthDialog()}>
-                            Login
+                            {t('common.auth.login')}
                         </Button>
                     )}
                 </div>

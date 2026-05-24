@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Button, Modal, toast } from '@heroui/react';
 import { OPEN_AUTH_MODAL_EVENT, AUTH_MODE } from '@/constants/auth';
-import { AUTH_MESSAGES } from '@/constants/messages';
+import { useI18n } from '@/i18n/I18nProvider';
 
 const VERIFIED_QUERY_PARAM = 'verified';
 const VERIFIED_SUCCESS_VALUE = 'success';
 
 export function VerificationSuccessModal() {
+	const { t } = useI18n();
 	const router = useRouter();
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
@@ -22,14 +23,14 @@ export function VerificationSuccessModal() {
 		setIsOpen(isVerified);
 
 		if (isVerified && !hasShownVerificationToast.current) {
-			toast.success(AUTH_MESSAGES.feedback.verifyEmailSuccess);
+			toast.success(t('auth.feedback.verifyEmailSuccess'));
 			hasShownVerificationToast.current = true;
 		}
 
 		if (!isVerified) {
 			hasShownVerificationToast.current = false;
 		}
-	}, [searchParams]);
+	}, [searchParams, t]);
 
 	const clearVerificationQuery = () => {
 		const nextParams = new URLSearchParams(searchParams.toString());
@@ -63,19 +64,19 @@ export function VerificationSuccessModal() {
 				<Modal.Container placement="center" className="px-4">
 					<Modal.Dialog className="w-full max-w-md">
 						<Modal.Header>
-							<Modal.Heading>Account verified</Modal.Heading>
+							<Modal.Heading>{t('auth.modal.verifiedHeading')}</Modal.Heading>
 						</Modal.Header>
 						<Modal.Body>
 							<p className="text-sm leading-6 text-slate-600">
-								{AUTH_MESSAGES.feedback.verifyEmailSuccess}
+								{t('auth.feedback.verifyEmailSuccess')}
 							</p>
 						</Modal.Body>
 						<Modal.Footer className="flex justify-end gap-3">
 							<Button variant="secondary" onPress={() => handleOpenChange(false)}>
-								{AUTH_MESSAGES.labels.closeButton}
+								{t('auth.labels.closeButton')}
 							</Button>
 							<Button variant="primary" onPress={handleLoginNow}>
-								{AUTH_MESSAGES.labels.loginNowButton}
+								{t('auth.labels.loginNowButton')}
 							</Button>
 						</Modal.Footer>
 					</Modal.Dialog>

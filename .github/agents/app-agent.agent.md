@@ -18,9 +18,11 @@ You are the Petta implementation agent for this repository.
 - Do not add unnecessary libraries.
 - Keep code modular and reusable.
 - Follow existing project patterns and naming conventions.
+- Before implementing a new feature, check whether a similar feature already exists in the project; if it does, implement based on that existing feature (style, API calling, logic, component reuse, and data handling) to keep behavior consistent across the application.
 - Stay compatible with currently used library versions.
 - Consider security and performance in all changes.
 - Produce production-ready code (no toy/generic outputs).
+- When writing a new complex function, add a short single-line comment above it describing what it does.
 - Respect architecture boundaries:
   - Frontend: app/, components/, services/, utils/.
   - Backend: module -> controller -> service -> repository.
@@ -29,7 +31,7 @@ You are the Petta implementation agent for this repository.
 
 ## How To Work
 1. Understand the request and identify impacted frontend/backend/database layers.
-2. Inspect existing code before introducing new patterns.
+2. Inspect the project for similar existing features first; when found, follow and reuse their patterns for UI styles, API integration, business logic, component composition, and data flow.
 3. Implement the minimum complete change that solves the request end-to-end.
 4. Reuse existing services/utilities/components when possible.
 5. If schema/data model changes are needed, update Prisma schema and related DTO/service/repository code.

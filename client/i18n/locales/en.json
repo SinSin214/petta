@@ -1,0 +1,128 @@
+{
+  "common": {
+    "language": {
+      "label": "Language",
+      "en": "EN",
+      "vn": "VN"
+    },
+    "auth": {
+      "welcome": "Welcome",
+      "login": "Login",
+      "logout": "Logout",
+      "hiName": "Hi {name}"
+    },
+    "nav": {
+      "home": "Home",
+      "adopt": "Adopt",
+      "stories": "Stories",
+      "volunteer": "Volunteer",
+      "about": "About",
+      "contact": "Contact"
+    }
+  },
+  "header": {
+    "tagline": "Find a home for every rescued friend"
+  },
+  "auth": {
+    "modal": {
+      "heading": "Welcome",
+      "verifiedHeading": "Account verified"
+    },
+    "tabs": {
+      "login": "Login",
+      "register": "Register",
+      "forgot": "Forgot password"
+    },
+    "labels": {
+      "email": "Email",
+      "password": "Password",
+      "name": "Name",
+      "confirmPassword": "Confirm password",
+      "signedInAs": "Signed in as",
+      "forgotQuestion": "Forgot password?",
+      "loginButton": "Login",
+      "registerButton": "Sign up",
+      "sendResetButton": "Send reset email",
+      "setNewPasswordButton": "Set new password",
+      "logoutButton": "Logout",
+      "closeButton": "Close",
+      "loginNowButton": "Log in now"
+    },
+    "placeholders": {
+      "email": "you@example.com",
+      "password": "Enter your password",
+      "newPassword": "Create a password",
+      "confirmPassword": "Re-enter your password",
+      "name": "Jane Doe"
+    },
+    "feedback": {
+      "loginSuccess": "Login successful.",
+      "registerSuccess": "Sign up successful. You can now log in.",
+      "forgotSuccess": "Password reset email sent if the account exists.",
+      "resetSuccess": "Your password was updated. Please log in with your new password.",
+      "invalidResetLink": "This reset link is invalid or missing. Please request a new one.",
+      "passwordMismatch": "Passwords do not match.",
+      "verifyEmailSuccess": "Your account has been verified successfully. You can now log in to the app."
+    }
+  },
+  "filters": {
+    "all": "All",
+    "petLabel": "Pet",
+    "ageLabel": "Age",
+    "sizeLabel": "Size",
+    "selectedCount": "{count} selected",
+    "aiPlaceholder": "Describe and AI finds a suitable friend for you...",
+    "searchAria": "Search pets"
+  },
+  "messages": {
+    "codes": {
+      "GENERIC_ERROR": "Something went wrong. Please try again.",
+      "INVALID_EMAIL_FORMAT": "Invalid email format.",
+      "PASSWORD_MIN_LENGTH_8": "Password must be at least 8 characters.",
+      "FIELD_NAME_REQUIRED": "Name is required.",
+      "FIELD_PASSWORD_REQUIRED": "Password is required.",
+      "UsedEmail": "This email is already in use.",
+      "InvalidCredentials": "Invalid email or password.",
+      "InvalidAccessToken": "Your session is invalid. Please log in again.",
+      "InvalidRefreshToken": "Your session has expired. Please log in again.",
+      "UserNotFound": "User not found.",
+      "ResetLinkSent": "Password reset email sent if the account exists.",
+      "InvalidOrExpiredResetToken": "This reset link is invalid or expired.",
+      "PasswordResetSuccess": "Your password has been reset successfully.",
+      "LoggedOutSuccess": "You are now logged out.",
+      "VerifyEmailSent": "Verification email sent. Please check your inbox.",
+      "InvalidOrExpiredVerifyEmailToken": "Verification link is invalid or expired.",
+      "EmailVerifiedSuccess": "Your account has been verified successfully.",
+      "EmailNotVerified": "Please verify your email before logging in.",
+      "EmailDeliveryFailed": "Unable to send email right now. Please try again later."
+    }
+  },
+  "petType": {
+    "dog": "Dog",
+    "cat": "Cat",
+    "rabbit": "Rabbit",
+    "bird": "Bird"
+  },
+  "petAge": {
+    "baby": "Baby",
+    "young": "Young",
+    "adult": "Adult"
+  },
+  "petSize": {
+    "small": "Small",
+    "medium": "Medium",
+    "large": "Large"
+  },
+  "petPersonality": {
+    "friendly": "Friendly",
+    "energetic": "Energetic",
+    "loyal": "Loyal",
+    "playful": "Playful",
+    "affectionate": "Affectionate",
+    "independent": "Independent",
+    "curious": "Curious",
+    "calm": "Calm",
+    "gentle": "Gentle",
+    "loving": "Loving"
+  }
+}

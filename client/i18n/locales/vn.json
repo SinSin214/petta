@@ -1,0 +1,128 @@
+{
+  "common": {
+    "language": {
+      "label": "Ngon ngu",
+      "en": "EN",
+      "vn": "VN"
+    },
+    "auth": {
+      "welcome": "Chao mung",
+      "login": "Dang nhap",
+      "logout": "Dang xuat",
+      "hiName": "Xin chao {name}"
+    },
+    "nav": {
+      "home": "Trang chu",
+      "adopt": "Nhan nuoi",
+      "stories": "Cau chuyen",
+      "volunteer": "Tinh nguyen",
+      "about": "Gioi thieu",
+      "contact": "Lien he"
+    }
+  },
+  "header": {
+    "tagline": "Mang mai am den cho moi ban thu duoc cuu ho"
+  },
+  "auth": {
+    "modal": {
+      "heading": "Chao mung",
+      "verifiedHeading": "Tai khoan da xac minh"
+    },
+    "tabs": {
+      "login": "Dang nhap",
+      "register": "Dang ky",
+      "forgot": "Quen mat khau"
+    },
+    "labels": {
+      "email": "Email",
+      "password": "Mat khau",
+      "name": "Ten",
+      "confirmPassword": "Xac nhan mat khau",
+      "signedInAs": "Dang nhap voi",
+      "forgotQuestion": "Quen mat khau?",
+      "loginButton": "Dang nhap",
+      "registerButton": "Dang ky",
+      "sendResetButton": "Gui email dat lai",
+      "setNewPasswordButton": "Dat mat khau moi",
+      "logoutButton": "Dang xuat",
+      "closeButton": "Dong",
+      "loginNowButton": "Dang nhap ngay"
+    },
+    "placeholders": {
+      "email": "ban@example.com",
+      "password": "Nhap mat khau",
+      "newPassword": "Tao mat khau",
+      "confirmPassword": "Nhap lai mat khau",
+      "name": "Nguyen Van A"
+    },
+    "feedback": {
+      "loginSuccess": "Dang nhap thanh cong.",
+      "registerSuccess": "Dang ky thanh cong. Ban co the dang nhap ngay.",
+      "forgotSuccess": "Da gui email dat lai mat khau neu tai khoan ton tai.",
+      "resetSuccess": "Mat khau da duoc cap nhat. Vui long dang nhap lai.",
+      "invalidResetLink": "Lien ket dat lai khong hop le hoac thieu. Vui long yeu cau lien ket moi.",
+      "passwordMismatch": "Mat khau khong khop.",
+      "verifyEmailSuccess": "Tai khoan cua ban da duoc xac minh thanh cong. Ban co the dang nhap vao ung dung."
+    }
+  },
+  "filters": {
+    "all": "Tat ca",
+    "petLabel": "Thu cung",
+    "ageLabel": "Do tuoi",
+    "sizeLabel": "Kich thuoc",
+    "selectedCount": "Da chon {count}",
+    "aiPlaceholder": "Mo ta nhu cau de AI tim nguoi ban phu hop cho ban...",
+    "searchAria": "Tim thu cung"
+  },
+  "messages": {
+    "codes": {
+      "GENERIC_ERROR": "Da xay ra loi. Vui long thu lai.",
+      "INVALID_EMAIL_FORMAT": "Dinh dang email khong hop le.",
+      "PASSWORD_MIN_LENGTH_8": "Mat khau phai co it nhat 8 ky tu.",
+      "FIELD_NAME_REQUIRED": "Ten la bat buoc.",
+      "FIELD_PASSWORD_REQUIRED": "Mat khau la bat buoc.",
+      "UsedEmail": "Email nay da duoc su dung.",
+      "InvalidCredentials": "Email hoac mat khau khong dung.",
+      "InvalidAccessToken": "Phien dang nhap khong hop le. Vui long dang nhap lai.",
+      "InvalidRefreshToken": "Phien dang nhap da het han. Vui long dang nhap lai.",
+      "UserNotFound": "Khong tim thay nguoi dung.",
+      "ResetLinkSent": "Da gui email dat lai mat khau neu tai khoan ton tai.",
+      "InvalidOrExpiredResetToken": "Lien ket dat lai khong hop le hoac da het han.",
+      "PasswordResetSuccess": "Dat lai mat khau thanh cong.",
+      "LoggedOutSuccess": "Ban da dang xuat.",
+      "VerifyEmailSent": "Da gui email xac minh. Vui long kiem tra hop thu.",
+      "InvalidOrExpiredVerifyEmailToken": "Lien ket xac minh khong hop le hoac da het han.",
+      "EmailVerifiedSuccess": "Tai khoan da duoc xac minh thanh cong.",
+      "EmailNotVerified": "Vui long xac minh email truoc khi dang nhap.",
+      "EmailDeliveryFailed": "Khong the gui email luc nay. Vui long thu lai sau."
+    }
+  },
+  "petType": {
+    "dog": "Cho",
+    "cat": "Meo",
+    "rabbit": "Tho",
+    "bird": "Chim"
+  },
+  "petAge": {
+    "baby": "Con nho",
+    "young": "Dang lon",
+    "adult": "Truong thanh"
+  },
+  "petSize": {
+    "small": "Nho",
+    "medium": "Vua",
+    "large": "Lon"
+  },
+  "petPersonality": {
+    "friendly": "Than thien",
+    "energetic": "Nang dong",
+    "loyal": "Trung thanh",
+    "playful": "Nghich ngom",
+    "affectionate": "Tinh cam",
+    "independent": "Doc lap",
+    "curious": "To mo",
+    "calm": "Diem tinh",
+    "gentle": "Nhe nhang",
+    "loving": "Am ap"
+  }
+}

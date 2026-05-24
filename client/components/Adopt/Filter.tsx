@@ -3,6 +3,7 @@ import { Button, Label, ListBox, Select } from "@heroui/react";
 import { useEffect, useMemo, useState } from "react";
 import { Bot, Search } from 'lucide-react';
 import { getRequest } from "@/services/requestAPI";
+import { useI18n } from "@/i18n/I18nProvider";
 
 type FilterItem = {
   	key: string;
@@ -26,34 +27,20 @@ type FilterOptionsResponse = {
 };
 
 const ALL_KEY = 'all';
-const ALL_ITEM: FilterItem = { key: ALL_KEY, text: 'All' };
-const LANGUAGE = 'EN' as const;
+type LookupGroup = 'petType' | 'petAge' | 'petSize' | 'petPersonality';
 
-const petTypeTextByLanguage: Record<string, Record<string, string>> = {
-	EN: { dog: 'Dog', cat: 'Cat', rabbit: 'Rabbit', bird: 'Bird' },
-	VN: { dog: 'Chó', cat: 'Mèo', rabbit: 'Thỏ', bird: 'Chim' },
-};
-
-const petAgeTextByLanguage: Record<string, Record<string, string>> = {
-	EN: { baby: 'Baby', young: 'Young', adult: 'Adult' },
-	VN: { baby: 'Còn nhỏ', young: 'Đang lớn', adult: 'Trưởng thành' },
-};
-
-const petSizeTextByLanguage: Record<string, Record<string, string>> = {
-	EN: { small: 'Small', medium: 'Medium', large: 'Large' },
-	VN: { small: 'Nhỏ', medium: 'Vừa', large: 'Lớn' },
-};
-
-const mapIdsToFilterItems = (ids: string[], dictionary: Record<string, Record<string, string>>, language = LANGUAGE): FilterItem[] => {
-	const languageDictionary = dictionary[language] ?? dictionary.EN;
-
+const mapIdsToFilterItems = (ids: string[], group: LookupGroup, t: (key: string, params?: Record<string, string | number>) => string): FilterItem[] => {
 	return ids.map((id) => ({
 		key: id,
-		text: languageDictionary?.[id] ?? id,
+		text: (() => {
+			const key = `${group}.${id}`;
+			const translated = t(key);
+			return translated === key ? id : translated;
+		})(),
 	}));
 };
 
-const withAllOption = (items: FilterItem[]): FilterItem[] => [ALL_ITEM, ...items];
+const withAllOption = (items: FilterItem[], allText: string): FilterItem[] => [{ key: ALL_KEY, text: allText }, ...items];
 
 const normalizeSelection = (selected: Set<string>, items: FilterItem[]) => {
 	const optionKeys = items.filter((item) => item.key !== ALL_KEY).map((item) => item.key);
@@ -65,9 +52,9 @@ const normalizeSelection = (selected: Set<string>, items: FilterItem[]) => {
 	return new Set(Array.from(selected).filter((key) => key !== ALL_KEY));
 };
 
-const selectionLabel = (selected: Set<string>, items: FilterItem[]) => {
+const selectionLabel = (selected: Set<string>, items: FilterItem[], allText: string, selectedCountText: string) => {
 	if (selected.has(ALL_KEY) || selected.size === 0) {
-		return 'All';
+		return allText;
 	}
 
 	const selectedLabels = items
@@ -75,14 +62,14 @@ const selectionLabel = (selected: Set<string>, items: FilterItem[]) => {
 		.map((item) => item.text);
 
 	if (selectedLabels.length === 0) {
-		return 'All';
+		return allText;
 	}
 
 	if (selectedLabels.length <= 2) {
 		return selectedLabels.join(', ');
 	}
 
-	return `${selectedLabels.length} selected`;
+	return selectedCountText.replace('{count}', String(selectedLabels.length));
 };
 
 const nextSelection = (keys: Set<string>) => {
@@ -94,34 +81,37 @@ const nextSelection = (keys: Set<string>) => {
 };
 
 export function Filter(props: { getAdoptPet: (type: Set<string>, age: Set<string>, size: Set<string>) => void }) {
+	const { t } = useI18n();
+	const allText = t('filters.all');
+	const selectedCountText = t('filters.selectedCount');
 	const [typeValues, setTypeValues] = useState<Set<string>>(new Set([ALL_KEY]));
 	const [ageValues, setAgeValues] = useState<Set<string>>(new Set([ALL_KEY]));
 	const [sizeValues, setSizeValues] = useState<Set<string>>(new Set([ALL_KEY]));
-	const [petType, setPetType] = useState<FilterItem[]>([ALL_ITEM]);
-	const [petAge, setPetAge] = useState<FilterItem[]>([ALL_ITEM]);
-	const [petSize, setPetSize] = useState<FilterItem[]>([ALL_ITEM]);
+	const [petType, setPetType] = useState<FilterItem[]>([{ key: ALL_KEY, text: allText }]);
+	const [petAge, setPetAge] = useState<FilterItem[]>([{ key: ALL_KEY, text: allText }]);
+	const [petSize, setPetSize] = useState<FilterItem[]>([{ key: ALL_KEY, text: allText }]);
 
 	useEffect(() => {
 		const loadFilterOptions = async () => {
 			const response = await getRequest('/pet/filter-options') as FilterOptionsResponse;
 			const data = response?.data;
 
-			setPetType(withAllOption(mapIdsToFilterItems(data?.types ?? [], petTypeTextByLanguage)));
-			setPetAge(withAllOption(mapIdsToFilterItems(data?.ages ?? [], petAgeTextByLanguage)));
-			setPetSize(withAllOption(mapIdsToFilterItems(data?.sizes ?? [], petSizeTextByLanguage)));
+			setPetType(withAllOption(mapIdsToFilterItems(data?.types ?? [], 'petType', t), allText));
+			setPetAge(withAllOption(mapIdsToFilterItems(data?.ages ?? [], 'petAge', t), allText));
+			setPetSize(withAllOption(mapIdsToFilterItems(data?.sizes ?? [], 'petSize', t), allText));
 		};
 
 		void loadFilterOptions();
 	}, []);
 
 	const filterBoxes: FilterBox[] = useMemo(() => [
-		{key: 'type_ids', label: 'Pet', items: petType, selectedKeys: typeValues, handler: setTypeValues},
-		{key: 'age_ids', label: 'Age', items: petAge, selectedKeys: ageValues, handler: setAgeValues},
-		{key: 'size_ids', label: 'Size', items: petSize, selectedKeys: sizeValues, handler: setSizeValues}
-	], [petType, typeValues, petAge, ageValues, petSize, sizeValues]);
+		{key: 'type_ids', label: t('filters.petLabel'), items: petType, selectedKeys: typeValues, handler: setTypeValues},
+		{key: 'age_ids', label: t('filters.ageLabel'), items: petAge, selectedKeys: ageValues, handler: setAgeValues},
+		{key: 'size_ids', label: t('filters.sizeLabel'), items: petSize, selectedKeys: sizeValues, handler: setSizeValues}
+	], [petType, typeValues, petAge, ageValues, petSize, sizeValues, t]);
 
 	const renderFilters = (filter: FilterBox) => {
-		const selectedValueLabel = selectionLabel(filter.selectedKeys, filter.items);
+		const selectedValueLabel = selectionLabel(filter.selectedKeys, filter.items, allText, selectedCountText);
 
 		return (
 			<Select
@@ -173,13 +163,13 @@ export function Filter(props: { getAdoptPet: (type: Set<string>, age: Set<string
 				<Bot size={20} />
 				<input
 					type="search"
-					placeholder="Describe and AI finds a suitable friend for you..."
+					placeholder={t('filters.aiPlaceholder')}
 					className="w-full bg-transparent text-sm outline-none placeholder:text-slate-400"
 				/>
 			</div>
 			<div className="grid grid-cols-1 md:grid-cols-10 gap-4">
 				{filterBoxes.map((filterBox: FilterBox) => renderFilters(filterBox))}
-				<Button className="self-end" size="sm" onPress={() => getAdoptPet()}>
+				<Button className="self-end" size="sm" onPress={() => getAdoptPet()} aria-label={t('filters.searchAria')}>
 					<Search size={20} />
 				</Button>
 			</div>

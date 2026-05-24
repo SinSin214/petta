@@ -13,8 +13,9 @@ import {
     toast,
 } from '@heroui/react';
 import { AUTH_MODE, AUTH_STORAGE_KEYS, AUTH_TABS, type AuthMode } from '@/constants/auth';
-import { AUTH_MESSAGES } from '@/constants/messages';
 import { postRequest } from '@/services/requestAPI';
+import { useI18n } from '@/i18n/I18nProvider';
+import { toErrorCode } from '@/i18n';
 
 type AuthPanelProps = {
     initialMode?: AuthMode;
@@ -46,6 +47,7 @@ export function AuthPanel({
     resetToken,
     onResetPasswordSuccess,
 }: AuthPanelProps) {
+    const { t, tCode } = useI18n();
     const [mode, setMode] = useState<AuthMode>(initialMode);
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
@@ -79,11 +81,11 @@ export function AuthPanel({
             localStorage.setItem(AUTH_STORAGE_KEYS.USER, JSON.stringify(response.user));
 
             setLoginForm({ email: '', password: '' });
-            toast.success(AUTH_MESSAGES.feedback.loginSuccess);
+            toast.success(t('auth.feedback.loginSuccess'));
             onOpenChange?.(false);
             onLoginSuccess?.();
         } catch(err) {
-            setMessage(err instanceof Error ? err.message : String(err));
+            setMessage(tCode(toErrorCode(err)));
         } finally {
             setIsLoading(false);
         }
@@ -99,17 +101,17 @@ export function AuthPanel({
         }
 
         try {
-            await postRequest('/auth/register', {
+            const response = await postRequest('/auth/register', {
                 name: registerForm.name,
                 email: registerForm.email,
                 password: registerForm.password,
-            });
+            }) as { code?: string };
 
             setRegisterForm({ name: '', email: '', password: '', confirmPassword: '' });
-            toast.success(AUTH_MESSAGES.feedback.registerSuccess);
+            toast.success(tCode(response?.code));
             setMode(AUTH_MODE.LOGIN);
         } catch(err) {
-            setMessage(err instanceof Error ? err.message : String(err));
+            setMessage(tCode(toErrorCode(err)));
         } finally {
             setIsLoading(false);
         }
@@ -120,11 +122,11 @@ export function AuthPanel({
         setIsLoading(true);
         setMessage('');
         try {
-            await postRequest('/auth/forgot_password', { email: forgotForm.email });
+            const response = await postRequest('/auth/forgot_password', { email: forgotForm.email }) as { code?: string };
             setForgotForm({ email: '' });
-            toast.success(AUTH_MESSAGES.feedback.forgotSuccess);
+            toast.success(tCode(response?.code));
         } catch(err) {
-            setMessage(err instanceof Error ? err.message : String(err));
+            setMessage(tCode(toErrorCode(err)));
         } finally {
             setIsLoading(false);
         }
@@ -136,29 +138,29 @@ export function AuthPanel({
         setMessage('');
 
         if (!resetToken) {
-            setMessage(AUTH_MESSAGES.feedback.invalidResetLink);
+            setMessage(t('auth.feedback.invalidResetLink'));
             setIsLoading(false);
             return;
         }
 
         if (resetForm.password !== resetForm.confirmPassword) {
-            setMessage(AUTH_MESSAGES.feedback.passwordMismatch);
+            setMessage(t('auth.feedback.passwordMismatch'));
             setIsLoading(false);
             return;
         }
 
         try {
-            await postRequest('/auth/reset_password', {
+            const response = await postRequest('/auth/reset_password', {
                 token: resetToken,
                 password: resetForm.password,
-            });
+            }) as { code?: string };
 
             setResetForm({ password: '', confirmPassword: '' });
-            toast.success(AUTH_MESSAGES.feedback.resetSuccess);
+            toast.success(tCode(response?.code));
             setMode(AUTH_MODE.LOGIN);
             onResetPasswordSuccess?.();
         } catch(err) {
-            setMessage(err instanceof Error ? err.message : String(err));
+            setMessage(tCode(toErrorCode(err)));
         } finally {
             setIsLoading(false);
         }
@@ -175,7 +177,7 @@ export function AuthPanel({
                 <Modal.Container placement="top" className="px-4 mt-100">
                     <Modal.Dialog className="w-full max-w-xl">
                         <Modal.Header className="pb-2">
-                            <Modal.Heading className="uppercase">Welcome</Modal.Heading>
+                            <Modal.Heading className="uppercase">{t('auth.modal.heading')}</Modal.Heading>
                         </Modal.Header>
                         <Modal.Body className="p-1">
                             <div className="flex flex-col gap-5">
@@ -195,7 +197,7 @@ export function AuthPanel({
                                                     id={tab.key}
                                                     isDisabled={isLoading}
                                                 >
-                                                    {tab.label}
+                                                    {t(tab.labelKey)}
                                                     <Tabs.Indicator />
                                                 </Tabs.Tab>
                                             ))}
@@ -205,10 +207,10 @@ export function AuthPanel({
                                     <Tabs.Panel id={AUTH_MODE.LOGIN} className="px-0">
                                         <form className="space-y-4" onSubmit={login}>
                                             <TextField variant="secondary" isRequired className="w-full">
-                                                <Label>{AUTH_MESSAGES.labels.email}</Label>
+                                                <Label>{t('auth.labels.email')}</Label>
                                                 <Input
                                                     type="email"
-                                                    placeholder={AUTH_MESSAGES.placeholders.email}
+                                                    placeholder={t('auth.placeholders.email')}
                                                     value={loginForm.email}
                                                     disabled={isLoading}
                                                     onChange={(event) =>
@@ -217,10 +219,10 @@ export function AuthPanel({
                                                 />
                                             </TextField>
                                             <TextField variant="secondary" isRequired className="w-full">
-                                                <Label>{AUTH_MESSAGES.labels.password}</Label>
+                                                <Label>{t('auth.labels.password')}</Label>
                                                 <Input
                                                     type="password"
-                                                    placeholder={AUTH_MESSAGES.placeholders.password}
+                                                    placeholder={t('auth.placeholders.password')}
                                                     value={loginForm.password}
                                                     disabled={isLoading}
                                                     onChange={(event) =>
@@ -230,7 +232,7 @@ export function AuthPanel({
                                             </TextField>
                                             <ErrorMessage>{message && <div className="text-sm text-red-500">{message}</div>}</ErrorMessage>
                                             <Button type="submit" variant="primary" isDisabled={isLoading} className="mt-4 w-full">
-                                                {isLoading ? <Spinner color="current" size="sm" /> : AUTH_MESSAGES.labels.loginButton}
+                                                {isLoading ? <Spinner color="current" size="sm" /> : t('auth.labels.loginButton')}
                                             </Button>
                                         </form>
                                     </Tabs.Panel>
@@ -238,9 +240,9 @@ export function AuthPanel({
                                     <Tabs.Panel id={AUTH_MODE.REGISTER} className="px-0">
                                         <form className="space-y-4" onSubmit={register} autoComplete="off">
                                             <TextField variant="secondary" isRequired className="w-full">
-                                                <Label>{AUTH_MESSAGES.labels.name}</Label>
+                                                <Label>{t('auth.labels.name')}</Label>
                                                 <Input
-                                                    placeholder={AUTH_MESSAGES.placeholders.name}
+                                                    placeholder={t('auth.placeholders.name')}
                                                     value={registerForm.name}
                                                     disabled={isLoading}
                                                     onChange={(event) =>
@@ -249,10 +251,10 @@ export function AuthPanel({
                                                 />
                                             </TextField>
                                             <TextField variant="secondary" isRequired className="w-full">
-                                                <Label>{AUTH_MESSAGES.labels.email}</Label>
+                                                <Label>{t('auth.labels.email')}</Label>
                                                 <Input
                                                     type="email"
-                                                    placeholder={AUTH_MESSAGES.placeholders.email}
+                                                    placeholder={t('auth.placeholders.email')}
                                                     value={registerForm.email}
                                                     disabled={isLoading}
                                                     onChange={(event) =>
@@ -262,10 +264,10 @@ export function AuthPanel({
                                             </TextField>
                                             <div className="grid gap-4 sm:grid-cols-2">
                                                 <TextField variant="secondary" isRequired className="w-full">
-                                                    <Label>{AUTH_MESSAGES.labels.password}</Label>
+                                                    <Label>{t('auth.labels.password')}</Label>
                                                     <Input
                                                         type="password"
-                                                        placeholder={AUTH_MESSAGES.placeholders.newPassword}
+                                                        placeholder={t('auth.placeholders.newPassword')}
                                                         value={registerForm.password}
                                                         disabled={isLoading}
                                                         onChange={(event) =>
@@ -274,10 +276,10 @@ export function AuthPanel({
                                                     />
                                                 </TextField>
                                                 <TextField variant="secondary" isRequired className="w-full">
-                                                    <Label>{AUTH_MESSAGES.labels.confirmPassword}</Label>
+                                                    <Label>{t('auth.labels.confirmPassword')}</Label>
                                                     <Input
                                                         type="password"
-                                                        placeholder={AUTH_MESSAGES.placeholders.confirmPassword}
+                                                        placeholder={t('auth.placeholders.confirmPassword')}
                                                         value={registerForm.confirmPassword}
                                                         disabled={isLoading}
                                                         onChange={(event) =>
@@ -288,7 +290,7 @@ export function AuthPanel({
                                             </div>
                                             <ErrorMessage>{message && <div className="text-sm text-red-500">{message}</div>}</ErrorMessage>
                                             <Button type="submit" variant="primary" isDisabled={isLoading} className="mt-4 w-full">
-                                                {isLoading ? <Spinner color="current" size="sm" /> : AUTH_MESSAGES.labels.registerButton}
+                                                {isLoading ? <Spinner color="current" size="sm" /> : t('auth.labels.registerButton')}
                                             </Button>
                                         </form>
                                     </Tabs.Panel>
@@ -296,10 +298,10 @@ export function AuthPanel({
                                     <Tabs.Panel id={AUTH_MODE.FORGOT} className="px-0">
                                         <form className="space-y-4" onSubmit={forgotPassword}>
                                             <TextField variant="secondary" isRequired className="w-full">
-                                                <Label>{AUTH_MESSAGES.labels.email}</Label>
+                                                <Label>{t('auth.labels.email')}</Label>
                                                 <Input
                                                     type="email"
-                                                    placeholder={AUTH_MESSAGES.placeholders.email}
+                                                    placeholder={t('auth.placeholders.email')}
                                                     value={forgotForm.email}
                                                     disabled={isLoading}
                                                     onChange={(event) => setForgotForm({ email: event.currentTarget.value })}
@@ -307,7 +309,7 @@ export function AuthPanel({
                                             </TextField>
                                             <ErrorMessage>{message && <div className="text-sm text-red-500">{message}</div>}</ErrorMessage>
                                             <Button type="submit" variant="primary" isDisabled={isLoading} className="mt-4 w-full">
-                                                {isLoading ? <Spinner color="current" size="sm" /> : AUTH_MESSAGES.labels.sendResetButton}
+                                                {isLoading ? <Spinner color="current" size="sm" /> : t('auth.labels.sendResetButton')}
                                             </Button>
                                         </form>
                                     </Tabs.Panel>
@@ -315,10 +317,10 @@ export function AuthPanel({
                             ) : (
                                 <form className="space-y-4" onSubmit={resetPassword} autoComplete="off">
                                     <TextField variant="secondary" isRequired className="w-full">
-                                        <Label>{AUTH_MESSAGES.labels.password}</Label>
+                                        <Label>{t('auth.labels.password')}</Label>
                                         <Input
                                             type="password"
-                                            placeholder={AUTH_MESSAGES.placeholders.newPassword}
+                                            placeholder={t('auth.placeholders.newPassword')}
                                             value={resetForm.password}
                                             disabled={isLoading}
                                             onChange={(event) =>
@@ -327,10 +329,10 @@ export function AuthPanel({
                                         />
                                     </TextField>
                                     <TextField variant="secondary" isRequired className="w-full">
-                                        <Label>{AUTH_MESSAGES.labels.confirmPassword}</Label>
+                                        <Label>{t('auth.labels.confirmPassword')}</Label>
                                         <Input
                                             type="password"
-                                            placeholder={AUTH_MESSAGES.placeholders.confirmPassword}
+                                            placeholder={t('auth.placeholders.confirmPassword')}
                                             value={resetForm.confirmPassword}
                                             disabled={isLoading}
                                             onChange={(event) =>
@@ -340,7 +342,7 @@ export function AuthPanel({
                                     </TextField>
                                     <ErrorMessage>{message && <div className="text-sm text-red-500">{message}</div>}</ErrorMessage>
                                     <Button type="submit" variant="primary" isDisabled={isLoading} className="mt-4 w-full">
-                                        {isLoading ? <Spinner color="current" size="sm" /> : AUTH_MESSAGES.labels.setNewPasswordButton}
+                                        {isLoading ? <Spinner color="current" size="sm" /> : t('auth.labels.setNewPasswordButton')}
                                     </Button>
                                 </form>
                             )}

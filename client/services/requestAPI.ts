@@ -18,7 +18,8 @@ const fetchApi = async (path: string, method: RequestMethod, data: Object): Prom
   }
   catch(err: any) {
     console.log(err);
-    throw new Error(err.response?.data?.code || err);
+    const code = err?.response?.data?.code;
+    throw new Error(typeof code === 'string' ? code : 'GENERIC_ERROR');
   }
 }
 

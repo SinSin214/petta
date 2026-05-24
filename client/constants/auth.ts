@@ -15,8 +15,8 @@ export const AUTH_STORAGE_KEYS = {
 
 export type AuthMode = (typeof AUTH_MODE)[keyof typeof AUTH_MODE];
 
-export const AUTH_TABS: Array<{ key: AuthMode; label: string }> = [
-  { key: AUTH_MODE.LOGIN, label: 'Login' },
-  { key: AUTH_MODE.REGISTER, label: 'Register' },
-  { key: AUTH_MODE.FORGOT, label: 'Forgot password' }
+export const AUTH_TABS: Array<{ key: AuthMode; labelKey: string }> = [
+  { key: AUTH_MODE.LOGIN, labelKey: 'auth.tabs.login' },
+  { key: AUTH_MODE.REGISTER, labelKey: 'auth.tabs.register' },
+  { key: AUTH_MODE.FORGOT, labelKey: 'auth.tabs.forgot' }
 ];
