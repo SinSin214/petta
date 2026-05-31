@@ -4,7 +4,7 @@
     "description": "",
     "scripts": {
       "start:server": "npm --prefix server start",
-      "start:serverdebug": "npm --prefix server start debug",
+      "start:serverdebug": "npm --prefix server run start:serverdebug",
       "start:client": "npm --prefix client start",
       "install-deps": "npm --prefix server install && npm --prefix client install"
     },
