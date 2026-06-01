@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "scripts": {
-      "start:server": "npm --prefix server start",
-      "start:serverdebug": "npm --prefix server run start:serverdebug",
-      "start:client": "npm --prefix client start",
+      "start-server-prod": "npm --prefix server start",
+      "start-server-debug": "npm --prefix server run start:serverdebug",
+      "start-client": "npm --prefix client start",
       "install-deps": "npm --prefix server install && npm --prefix client install"
     },
     "keywords": [],
