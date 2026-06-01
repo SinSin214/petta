@@ -5,7 +5,7 @@
       "name": "Client",
       "type": "node-terminal",
       "request": "launch",
-      "command": "npm run start-client",
+      "command": "npm run start-client-dev",
       "cwd": "${workspaceFolder}",
       // Open browser automatically and allow debugging with VS Code
       "serverReadyAction": {
