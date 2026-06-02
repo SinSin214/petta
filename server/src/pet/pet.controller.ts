@@ -19,7 +19,6 @@ export class PetController {
 
     @Post('selection')
     async getBySelection(@Body() petSelectionDto: PetSelectionDto) {
-        console.log(petSelectionDto);
         const result = await this.petService.getBySelection(petSelectionDto);
         return {
             data: result

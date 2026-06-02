@@ -23,6 +23,21 @@ export * from './enums.js';
  */
 export type Pet = Prisma.PetModel
 /**
+ * Model PetLocation
+ * 
+ */
+export type PetLocation = Prisma.PetLocationModel
+/**
+ * Model Province
+ * 
+ */
+export type Province = Prisma.ProvinceModel
+/**
+ * Model District
+ * 
+ */
+export type District = Prisma.DistrictModel
+/**
  * Model PetType
  * 
  */
@@ -42,11 +57,6 @@ export type PetSize = Prisma.PetSizeModel
  * 
  */
 export type PetPersonality = Prisma.PetPersonalityModel
-/**
- * Model PetLocation
- * 
- */
-export type PetLocation = Prisma.PetLocationModel
 /**
  * Model User
  * 

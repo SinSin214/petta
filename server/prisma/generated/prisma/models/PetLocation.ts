@@ -26,52 +26,52 @@ export type AggregatePetLocation = {
 
 export type PetLocationMinAggregateOutputType = {
   id: string | null
-  location_id: string | null
+  petId: string | null
   address: string | null
-  ward: string | null
-  province: string | null
+  districtId: string | null
+  provinceId: string | null
 }
 
 export type PetLocationMaxAggregateOutputType = {
   id: string | null
-  location_id: string | null
+  petId: string | null
   address: string | null
-  ward: string | null
-  province: string | null
+  districtId: string | null
+  provinceId: string | null
 }
 
 export type PetLocationCountAggregateOutputType = {
   id: number
-  location_id: number
+  petId: number
   address: number
-  ward: number
-  province: number
+  districtId: number
+  provinceId: number
   _all: number
 }
 
 
 export type PetLocationMinAggregateInputType = {
   id?: true
-  location_id?: true
+  petId?: true
   address?: true
-  ward?: true
-  province?: true
+  districtId?: true
+  provinceId?: true
 }
 
 export type PetLocationMaxAggregateInputType = {
   id?: true
-  location_id?: true
+  petId?: true
   address?: true
-  ward?: true
-  province?: true
+  districtId?: true
+  provinceId?: true
 }
 
 export type PetLocationCountAggregateInputType = {
   id?: true
-  location_id?: true
+  petId?: true
   address?: true
-  ward?: true
-  province?: true
+  districtId?: true
+  provinceId?: true
   _all?: true
 }
 
@@ -149,10 +149,10 @@ export type PetLocationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 
 export type PetLocationGroupByOutputType = {
   id: string
-  location_id: string
+  petId: string
   address: string
-  ward: string
-  province: string
+  districtId: string
+  provinceId: string
   _count: PetLocationCountAggregateOutputType | null
   _min: PetLocationMinAggregateOutputType | null
   _max: PetLocationMaxAggregateOutputType | null
@@ -178,40 +178,40 @@ export type PetLocationWhereInput = {
   OR?: Prisma.PetLocationWhereInput[]
   NOT?: Prisma.PetLocationWhereInput | Prisma.PetLocationWhereInput[]
   id?: Prisma.StringFilter<"PetLocation"> | string
-  location_id?: Prisma.StringFilter<"PetLocation"> | string
+  petId?: Prisma.StringFilter<"PetLocation"> | string
   address?: Prisma.StringFilter<"PetLocation"> | string
-  ward?: Prisma.StringFilter<"PetLocation"> | string
-  province?: Prisma.StringFilter<"PetLocation"> | string
-  petLocation?: Prisma.XOR<Prisma.PetScalarRelationFilter, Prisma.PetWhereInput>
+  districtId?: Prisma.StringFilter<"PetLocation"> | string
+  provinceId?: Prisma.StringFilter<"PetLocation"> | string
+  pet?: Prisma.XOR<Prisma.PetNullableScalarRelationFilter, Prisma.PetWhereInput> | null
 }
 
 export type PetLocationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  location_id?: Prisma.SortOrder
+  petId?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  ward?: Prisma.SortOrder
-  province?: Prisma.SortOrder
-  petLocation?: Prisma.PetOrderByWithRelationInput
+  districtId?: Prisma.SortOrder
+  provinceId?: Prisma.SortOrder
+  pet?: Prisma.PetOrderByWithRelationInput
 }
 
 export type PetLocationWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  location_id?: string
+  petId?: string
   AND?: Prisma.PetLocationWhereInput | Prisma.PetLocationWhereInput[]
   OR?: Prisma.PetLocationWhereInput[]
   NOT?: Prisma.PetLocationWhereInput | Prisma.PetLocationWhereInput[]
   address?: Prisma.StringFilter<"PetLocation"> | string
-  ward?: Prisma.StringFilter<"PetLocation"> | string
-  province?: Prisma.StringFilter<"PetLocation"> | string
-  petLocation?: Prisma.XOR<Prisma.PetScalarRelationFilter, Prisma.PetWhereInput>
-}, "id" | "location_id">
+  districtId?: Prisma.StringFilter<"PetLocation"> | string
+  provinceId?: Prisma.StringFilter<"PetLocation"> | string
+  pet?: Prisma.XOR<Prisma.PetNullableScalarRelationFilter, Prisma.PetWhereInput> | null
+}, "id" | "petId">
 
 export type PetLocationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  location_id?: Prisma.SortOrder
+  petId?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  ward?: Prisma.SortOrder
-  province?: Prisma.SortOrder
+  districtId?: Prisma.SortOrder
+  provinceId?: Prisma.SortOrder
   _count?: Prisma.PetLocationCountOrderByAggregateInput
   _max?: Prisma.PetLocationMaxOrderByAggregateInput
   _min?: Prisma.PetLocationMinOrderByAggregateInput
@@ -222,65 +222,65 @@ export type PetLocationScalarWhereWithAggregatesInput = {
   OR?: Prisma.PetLocationScalarWhereWithAggregatesInput[]
   NOT?: Prisma.PetLocationScalarWhereWithAggregatesInput | Prisma.PetLocationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"PetLocation"> | string
-  location_id?: Prisma.StringWithAggregatesFilter<"PetLocation"> | string
+  petId?: Prisma.StringWithAggregatesFilter<"PetLocation"> | string
   address?: Prisma.StringWithAggregatesFilter<"PetLocation"> | string
-  ward?: Prisma.StringWithAggregatesFilter<"PetLocation"> | string
-  province?: Prisma.StringWithAggregatesFilter<"PetLocation"> | string
+  districtId?: Prisma.StringWithAggregatesFilter<"PetLocation"> | string
+  provinceId?: Prisma.StringWithAggregatesFilter<"PetLocation"> | string
 }
 
 export type PetLocationCreateInput = {
   id?: string
   address: string
-  ward: string
-  province: string
-  petLocation: Prisma.PetCreateNestedOneWithoutLocationInput
+  districtId: string
+  provinceId: string
+  pet?: Prisma.PetCreateNestedOneWithoutLocationInput
 }
 
 export type PetLocationUncheckedCreateInput = {
   id?: string
-  location_id: string
+  petId: string
   address: string
-  ward: string
-  province: string
+  districtId: string
+  provinceId: string
 }
 
 export type PetLocationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  ward?: Prisma.StringFieldUpdateOperationsInput | string
-  province?: Prisma.StringFieldUpdateOperationsInput | string
-  petLocation?: Prisma.PetUpdateOneRequiredWithoutLocationNestedInput
+  districtId?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
+  pet?: Prisma.PetUpdateOneWithoutLocationNestedInput
 }
 
 export type PetLocationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  location_id?: Prisma.StringFieldUpdateOperationsInput | string
+  petId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  ward?: Prisma.StringFieldUpdateOperationsInput | string
-  province?: Prisma.StringFieldUpdateOperationsInput | string
+  districtId?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PetLocationCreateManyInput = {
   id?: string
-  location_id: string
+  petId: string
   address: string
-  ward: string
-  province: string
+  districtId: string
+  provinceId: string
 }
 
 export type PetLocationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  ward?: Prisma.StringFieldUpdateOperationsInput | string
-  province?: Prisma.StringFieldUpdateOperationsInput | string
+  districtId?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PetLocationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  location_id?: Prisma.StringFieldUpdateOperationsInput | string
+  petId?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  ward?: Prisma.StringFieldUpdateOperationsInput | string
-  province?: Prisma.StringFieldUpdateOperationsInput | string
+  districtId?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type PetLocationNullableScalarRelationFilter = {
@@ -290,163 +290,163 @@ export type PetLocationNullableScalarRelationFilter = {
 
 export type PetLocationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  location_id?: Prisma.SortOrder
+  petId?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  ward?: Prisma.SortOrder
-  province?: Prisma.SortOrder
+  districtId?: Prisma.SortOrder
+  provinceId?: Prisma.SortOrder
 }
 
 export type PetLocationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  location_id?: Prisma.SortOrder
+  petId?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  ward?: Prisma.SortOrder
-  province?: Prisma.SortOrder
+  districtId?: Prisma.SortOrder
+  provinceId?: Prisma.SortOrder
 }
 
 export type PetLocationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  location_id?: Prisma.SortOrder
+  petId?: Prisma.SortOrder
   address?: Prisma.SortOrder
-  ward?: Prisma.SortOrder
-  province?: Prisma.SortOrder
+  districtId?: Prisma.SortOrder
+  provinceId?: Prisma.SortOrder
 }
 
-export type PetLocationCreateNestedOneWithoutPetLocationInput = {
-  create?: Prisma.XOR<Prisma.PetLocationCreateWithoutPetLocationInput, Prisma.PetLocationUncheckedCreateWithoutPetLocationInput>
-  connectOrCreate?: Prisma.PetLocationCreateOrConnectWithoutPetLocationInput
+export type PetLocationCreateNestedOneWithoutPetInput = {
+  create?: Prisma.XOR<Prisma.PetLocationCreateWithoutPetInput, Prisma.PetLocationUncheckedCreateWithoutPetInput>
+  connectOrCreate?: Prisma.PetLocationCreateOrConnectWithoutPetInput
   connect?: Prisma.PetLocationWhereUniqueInput
 }
 
-export type PetLocationUncheckedCreateNestedOneWithoutPetLocationInput = {
-  create?: Prisma.XOR<Prisma.PetLocationCreateWithoutPetLocationInput, Prisma.PetLocationUncheckedCreateWithoutPetLocationInput>
-  connectOrCreate?: Prisma.PetLocationCreateOrConnectWithoutPetLocationInput
+export type PetLocationUncheckedCreateNestedOneWithoutPetInput = {
+  create?: Prisma.XOR<Prisma.PetLocationCreateWithoutPetInput, Prisma.PetLocationUncheckedCreateWithoutPetInput>
+  connectOrCreate?: Prisma.PetLocationCreateOrConnectWithoutPetInput
   connect?: Prisma.PetLocationWhereUniqueInput
 }
 
-export type PetLocationUpdateOneWithoutPetLocationNestedInput = {
-  create?: Prisma.XOR<Prisma.PetLocationCreateWithoutPetLocationInput, Prisma.PetLocationUncheckedCreateWithoutPetLocationInput>
-  connectOrCreate?: Prisma.PetLocationCreateOrConnectWithoutPetLocationInput
-  upsert?: Prisma.PetLocationUpsertWithoutPetLocationInput
+export type PetLocationUpdateOneWithoutPetNestedInput = {
+  create?: Prisma.XOR<Prisma.PetLocationCreateWithoutPetInput, Prisma.PetLocationUncheckedCreateWithoutPetInput>
+  connectOrCreate?: Prisma.PetLocationCreateOrConnectWithoutPetInput
+  upsert?: Prisma.PetLocationUpsertWithoutPetInput
   disconnect?: Prisma.PetLocationWhereInput | boolean
   delete?: Prisma.PetLocationWhereInput | boolean
   connect?: Prisma.PetLocationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PetLocationUpdateToOneWithWhereWithoutPetLocationInput, Prisma.PetLocationUpdateWithoutPetLocationInput>, Prisma.PetLocationUncheckedUpdateWithoutPetLocationInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PetLocationUpdateToOneWithWhereWithoutPetInput, Prisma.PetLocationUpdateWithoutPetInput>, Prisma.PetLocationUncheckedUpdateWithoutPetInput>
 }
 
-export type PetLocationUncheckedUpdateOneWithoutPetLocationNestedInput = {
-  create?: Prisma.XOR<Prisma.PetLocationCreateWithoutPetLocationInput, Prisma.PetLocationUncheckedCreateWithoutPetLocationInput>
-  connectOrCreate?: Prisma.PetLocationCreateOrConnectWithoutPetLocationInput
-  upsert?: Prisma.PetLocationUpsertWithoutPetLocationInput
+export type PetLocationUncheckedUpdateOneWithoutPetNestedInput = {
+  create?: Prisma.XOR<Prisma.PetLocationCreateWithoutPetInput, Prisma.PetLocationUncheckedCreateWithoutPetInput>
+  connectOrCreate?: Prisma.PetLocationCreateOrConnectWithoutPetInput
+  upsert?: Prisma.PetLocationUpsertWithoutPetInput
   disconnect?: Prisma.PetLocationWhereInput | boolean
   delete?: Prisma.PetLocationWhereInput | boolean
   connect?: Prisma.PetLocationWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PetLocationUpdateToOneWithWhereWithoutPetLocationInput, Prisma.PetLocationUpdateWithoutPetLocationInput>, Prisma.PetLocationUncheckedUpdateWithoutPetLocationInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PetLocationUpdateToOneWithWhereWithoutPetInput, Prisma.PetLocationUpdateWithoutPetInput>, Prisma.PetLocationUncheckedUpdateWithoutPetInput>
 }
 
-export type PetLocationCreateWithoutPetLocationInput = {
+export type PetLocationCreateWithoutPetInput = {
   id?: string
   address: string
-  ward: string
-  province: string
+  districtId: string
+  provinceId: string
 }
 
-export type PetLocationUncheckedCreateWithoutPetLocationInput = {
+export type PetLocationUncheckedCreateWithoutPetInput = {
   id?: string
   address: string
-  ward: string
-  province: string
+  districtId: string
+  provinceId: string
 }
 
-export type PetLocationCreateOrConnectWithoutPetLocationInput = {
+export type PetLocationCreateOrConnectWithoutPetInput = {
   where: Prisma.PetLocationWhereUniqueInput
-  create: Prisma.XOR<Prisma.PetLocationCreateWithoutPetLocationInput, Prisma.PetLocationUncheckedCreateWithoutPetLocationInput>
+  create: Prisma.XOR<Prisma.PetLocationCreateWithoutPetInput, Prisma.PetLocationUncheckedCreateWithoutPetInput>
 }
 
-export type PetLocationUpsertWithoutPetLocationInput = {
-  update: Prisma.XOR<Prisma.PetLocationUpdateWithoutPetLocationInput, Prisma.PetLocationUncheckedUpdateWithoutPetLocationInput>
-  create: Prisma.XOR<Prisma.PetLocationCreateWithoutPetLocationInput, Prisma.PetLocationUncheckedCreateWithoutPetLocationInput>
+export type PetLocationUpsertWithoutPetInput = {
+  update: Prisma.XOR<Prisma.PetLocationUpdateWithoutPetInput, Prisma.PetLocationUncheckedUpdateWithoutPetInput>
+  create: Prisma.XOR<Prisma.PetLocationCreateWithoutPetInput, Prisma.PetLocationUncheckedCreateWithoutPetInput>
   where?: Prisma.PetLocationWhereInput
 }
 
-export type PetLocationUpdateToOneWithWhereWithoutPetLocationInput = {
+export type PetLocationUpdateToOneWithWhereWithoutPetInput = {
   where?: Prisma.PetLocationWhereInput
-  data: Prisma.XOR<Prisma.PetLocationUpdateWithoutPetLocationInput, Prisma.PetLocationUncheckedUpdateWithoutPetLocationInput>
+  data: Prisma.XOR<Prisma.PetLocationUpdateWithoutPetInput, Prisma.PetLocationUncheckedUpdateWithoutPetInput>
 }
 
-export type PetLocationUpdateWithoutPetLocationInput = {
+export type PetLocationUpdateWithoutPetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  ward?: Prisma.StringFieldUpdateOperationsInput | string
-  province?: Prisma.StringFieldUpdateOperationsInput | string
+  districtId?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type PetLocationUncheckedUpdateWithoutPetLocationInput = {
+export type PetLocationUncheckedUpdateWithoutPetInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   address?: Prisma.StringFieldUpdateOperationsInput | string
-  ward?: Prisma.StringFieldUpdateOperationsInput | string
-  province?: Prisma.StringFieldUpdateOperationsInput | string
+  districtId?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
 
 export type PetLocationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  location_id?: boolean
+  petId?: boolean
   address?: boolean
-  ward?: boolean
-  province?: boolean
-  petLocation?: boolean | Prisma.PetDefaultArgs<ExtArgs>
+  districtId?: boolean
+  provinceId?: boolean
+  pet?: boolean | Prisma.PetLocation$petArgs<ExtArgs>
 }, ExtArgs["result"]["petLocation"]>
 
 export type PetLocationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  location_id?: boolean
+  petId?: boolean
   address?: boolean
-  ward?: boolean
-  province?: boolean
-  petLocation?: boolean | Prisma.PetDefaultArgs<ExtArgs>
+  districtId?: boolean
+  provinceId?: boolean
+  pet?: boolean | Prisma.PetLocation$petArgs<ExtArgs>
 }, ExtArgs["result"]["petLocation"]>
 
 export type PetLocationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  location_id?: boolean
+  petId?: boolean
   address?: boolean
-  ward?: boolean
-  province?: boolean
-  petLocation?: boolean | Prisma.PetDefaultArgs<ExtArgs>
+  districtId?: boolean
+  provinceId?: boolean
+  pet?: boolean | Prisma.PetLocation$petArgs<ExtArgs>
 }, ExtArgs["result"]["petLocation"]>
 
 export type PetLocationSelectScalar = {
   id?: boolean
-  location_id?: boolean
+  petId?: boolean
   address?: boolean
-  ward?: boolean
-  province?: boolean
+  districtId?: boolean
+  provinceId?: boolean
 }
 
-export type PetLocationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "location_id" | "address" | "ward" | "province", ExtArgs["result"]["petLocation"]>
+export type PetLocationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "petId" | "address" | "districtId" | "provinceId", ExtArgs["result"]["petLocation"]>
 export type PetLocationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  petLocation?: boolean | Prisma.PetDefaultArgs<ExtArgs>
+  pet?: boolean | Prisma.PetLocation$petArgs<ExtArgs>
 }
 export type PetLocationIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  petLocation?: boolean | Prisma.PetDefaultArgs<ExtArgs>
+  pet?: boolean | Prisma.PetLocation$petArgs<ExtArgs>
 }
 export type PetLocationIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  petLocation?: boolean | Prisma.PetDefaultArgs<ExtArgs>
+  pet?: boolean | Prisma.PetLocation$petArgs<ExtArgs>
 }
 
 export type $PetLocationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PetLocation"
   objects: {
-    petLocation: Prisma.$PetPayload<ExtArgs>
+    pet: Prisma.$PetPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    location_id: string
+    petId: string
     address: string
-    ward: string
-    province: string
+    districtId: string
+    provinceId: string
   }, ExtArgs["result"]["petLocation"]>
   composites: {}
 }
@@ -841,7 +841,7 @@ readonly fields: PetLocationFieldRefs;
  */
 export interface Prisma__PetLocationClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  petLocation<T extends Prisma.PetDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PetDefaultArgs<ExtArgs>>): Prisma.Prisma__PetClient<runtime.Types.Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  pet<T extends Prisma.PetLocation$petArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PetLocation$petArgs<ExtArgs>>): Prisma.Prisma__PetClient<runtime.Types.Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -872,10 +872,10 @@ export interface Prisma__PetLocationClient<T, Null = never, ExtArgs extends runt
  */
 export interface PetLocationFieldRefs {
   readonly id: Prisma.FieldRef<"PetLocation", 'String'>
-  readonly location_id: Prisma.FieldRef<"PetLocation", 'String'>
+  readonly petId: Prisma.FieldRef<"PetLocation", 'String'>
   readonly address: Prisma.FieldRef<"PetLocation", 'String'>
-  readonly ward: Prisma.FieldRef<"PetLocation", 'String'>
-  readonly province: Prisma.FieldRef<"PetLocation", 'String'>
+  readonly districtId: Prisma.FieldRef<"PetLocation", 'String'>
+  readonly provinceId: Prisma.FieldRef<"PetLocation", 'String'>
 }
     
 
@@ -1274,6 +1274,25 @@ export type PetLocationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Limit how many PetLocations to delete.
    */
   limit?: number
+}
+
+/**
+ * PetLocation.pet
+ */
+export type PetLocation$petArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Pet
+   */
+  select?: Prisma.PetSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Pet
+   */
+  omit?: Prisma.PetOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PetInclude<ExtArgs> | null
+  where?: Prisma.PetWhereInput
 }
 
 /**

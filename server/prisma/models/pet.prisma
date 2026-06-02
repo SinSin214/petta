@@ -2,14 +2,12 @@ model Pet {
   id            String           @id @default(uuid())
   name          String
   age           Int
-  type          PetType          @relation("PetType", fields: [type_id], references: [id])
-  type_id       String
-  age_type      PetAge           @relation("PetAge", fields: [age_type_id], references: [id])
-  age_type_id   String
-  size_type     PetSize          @relation("PetSize", fields: [size_type_id], references: [id])
-  size_type_id  String
-  location      PetLocation?      @relation("PetLocation")
-  personalities PetPersonality[]  @relation("PetPersonality")
+  typeId        String
+  ageTypeId     String
+  sizeTypeId    String
+
+  location    PetLocation?      @relation("PetLocation")
+  personalities String[]
   description   String
   imageUrl      String[]
   isAdopted     Boolean           @default(false)
@@ -21,34 +19,16 @@ model Pet {
   updatedBy     String
   updatedByUser User              @relation("PetUpdatedBy", fields: [updatedBy], references: [id])
 
-  @@index([type_id, age_type_id, size_type_id])
-}
-
-model PetType {
-  id   String @id
-  pets Pet[]  @relation("PetType")
-}
-
-model PetAge {
-  id   String @id
-  pets Pet[]  @relation("PetAge")
-}
-
-model PetSize {
-  id   String @id
-  pets Pet[]  @relation("PetSize")
-}
-
-model PetPersonality {
-  id   String @id
-  pets Pet[]  @relation("PetPersonality")
+  @@index([typeId, ageTypeId, sizeTypeId])
 }
 
 model PetLocation {
   id   String @id @default(uuid())
-  petLocation Pet @relation("PetLocation", fields: [location_id], references: [id])
-  location_id String @unique
+  
+  pet Pet? @relation("PetLocation", fields: [petId], references: [id])
+  petId String @unique
+
   address String
-  ward String
-  province String
+  districtId String
+  provinceId String
 }

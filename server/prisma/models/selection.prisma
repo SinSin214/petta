@@ -1,0 +1,27 @@
+model Province {
+  id   String @id
+  districts District[] @relation("DistrictProvince")
+}
+
+model District {
+  id   String @id
+  provinceId String
+  province Province @relation("DistrictProvince", fields: [provinceId], references: [id])
+}
+
+
+model PetType {
+  id   String @id
+}
+
+model PetAge {
+  id   String @id
+}
+
+model PetSize {
+  id   String @id
+}
+
+model PetPersonality {
+  id   String @id
+}

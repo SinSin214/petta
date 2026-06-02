@@ -9,10 +9,13 @@ export class PetRepository {
   async findManyBySelection(type_ids: string[], age_type_ids: string[], size_type_ids: string[]) {
     return this.prisma.pet.findMany({
         where: {
-            type_id: { in: type_ids },
-            age_type_id: { in: age_type_ids },
-            size_type_id: { in: size_type_ids }
-        }
+            typeId: { in: type_ids },
+            ageTypeId: { in: age_type_ids },
+            sizeTypeId: { in: size_type_ids }
+        },
+        include: {
+            location: true
+        },
     })
   }
 

@@ -47,7 +47,7 @@ export function PetCard({ pet, onViewDetails, onFavorite, isFavorited }: PetCard
 
                 <div className="flex w-full text-sm text-gray-500 mt-2">
                     <MapPin className="h-3 w-3 mr-2 mt-1" />
-                    {pet.location}
+                    {pet.location.address} - {pet.location.districtId}, {pet.location.provinceId}
                 </div>
 
                 <div className="flex w-full text-sm text-gray-500 mt-3 gap-1">
@@ -55,7 +55,7 @@ export function PetCard({ pet, onViewDetails, onFavorite, isFavorited }: PetCard
                 </div>
 
                 <div className="flex flex-wrap w-full text-sm text-gray-500 mt-3 gap-1">
-                    {pet.personality.map((attr) => renderChip(attr, false))}
+                    {pet.personalities.map((attr) => renderChip(attr, false))}
                 </div>
 
                 <div className="mt-4 flex w-full items-center justify-between gap-3">
