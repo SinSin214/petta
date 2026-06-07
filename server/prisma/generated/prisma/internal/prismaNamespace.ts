@@ -385,11 +385,13 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Pet: 'Pet',
+  PetLocation: 'PetLocation',
+  Province: 'Province',
+  District: 'District',
   PetType: 'PetType',
   PetAge: 'PetAge',
   PetSize: 'PetSize',
   PetPersonality: 'PetPersonality',
-  PetLocation: 'PetLocation',
   User: 'User',
   Token: 'Token'
 } as const
@@ -407,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "pet" | "petType" | "petAge" | "petSize" | "petPersonality" | "petLocation" | "user" | "token"
+    modelProps: "pet" | "petLocation" | "province" | "district" | "petType" | "petAge" | "petSize" | "petPersonality" | "user" | "token"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -482,6 +484,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.PetCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.PetCountAggregateOutputType> | number
+        }
+      }
+    }
+    PetLocation: {
+      payload: Prisma.$PetLocationPayload<ExtArgs>
+      fields: Prisma.PetLocationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PetLocationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PetLocationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
+        }
+        findFirst: {
+          args: Prisma.PetLocationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PetLocationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
+        }
+        findMany: {
+          args: Prisma.PetLocationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>[]
+        }
+        create: {
+          args: Prisma.PetLocationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
+        }
+        createMany: {
+          args: Prisma.PetLocationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PetLocationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>[]
+        }
+        delete: {
+          args: Prisma.PetLocationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
+        }
+        update: {
+          args: Prisma.PetLocationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
+        }
+        deleteMany: {
+          args: Prisma.PetLocationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PetLocationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PetLocationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>[]
+        }
+        upsert: {
+          args: Prisma.PetLocationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
+        }
+        aggregate: {
+          args: Prisma.PetLocationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePetLocation>
+        }
+        groupBy: {
+          args: Prisma.PetLocationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PetLocationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PetLocationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PetLocationCountAggregateOutputType> | number
+        }
+      }
+    }
+    Province: {
+      payload: Prisma.$ProvincePayload<ExtArgs>
+      fields: Prisma.ProvinceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProvinceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProvinceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload>
+        }
+        findFirst: {
+          args: Prisma.ProvinceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProvinceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload>
+        }
+        findMany: {
+          args: Prisma.ProvinceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload>[]
+        }
+        create: {
+          args: Prisma.ProvinceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload>
+        }
+        createMany: {
+          args: Prisma.ProvinceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProvinceCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload>[]
+        }
+        delete: {
+          args: Prisma.ProvinceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload>
+        }
+        update: {
+          args: Prisma.ProvinceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload>
+        }
+        deleteMany: {
+          args: Prisma.ProvinceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProvinceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProvinceUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload>[]
+        }
+        upsert: {
+          args: Prisma.ProvinceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProvincePayload>
+        }
+        aggregate: {
+          args: Prisma.ProvinceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProvince>
+        }
+        groupBy: {
+          args: Prisma.ProvinceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProvinceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProvinceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProvinceCountAggregateOutputType> | number
+        }
+      }
+    }
+    District: {
+      payload: Prisma.$DistrictPayload<ExtArgs>
+      fields: Prisma.DistrictFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DistrictFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DistrictFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload>
+        }
+        findFirst: {
+          args: Prisma.DistrictFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DistrictFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload>
+        }
+        findMany: {
+          args: Prisma.DistrictFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload>[]
+        }
+        create: {
+          args: Prisma.DistrictCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload>
+        }
+        createMany: {
+          args: Prisma.DistrictCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DistrictCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload>[]
+        }
+        delete: {
+          args: Prisma.DistrictDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload>
+        }
+        update: {
+          args: Prisma.DistrictUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload>
+        }
+        deleteMany: {
+          args: Prisma.DistrictDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DistrictUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DistrictUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload>[]
+        }
+        upsert: {
+          args: Prisma.DistrictUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DistrictPayload>
+        }
+        aggregate: {
+          args: Prisma.DistrictAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDistrict>
+        }
+        groupBy: {
+          args: Prisma.DistrictGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DistrictGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DistrictCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DistrictCountAggregateOutputType> | number
         }
       }
     }
@@ -781,80 +1005,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    PetLocation: {
-      payload: Prisma.$PetLocationPayload<ExtArgs>
-      fields: Prisma.PetLocationFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.PetLocationFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.PetLocationFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
-        }
-        findFirst: {
-          args: Prisma.PetLocationFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.PetLocationFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
-        }
-        findMany: {
-          args: Prisma.PetLocationFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>[]
-        }
-        create: {
-          args: Prisma.PetLocationCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
-        }
-        createMany: {
-          args: Prisma.PetLocationCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.PetLocationCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>[]
-        }
-        delete: {
-          args: Prisma.PetLocationDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
-        }
-        update: {
-          args: Prisma.PetLocationUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
-        }
-        deleteMany: {
-          args: Prisma.PetLocationDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.PetLocationUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.PetLocationUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>[]
-        }
-        upsert: {
-          args: Prisma.PetLocationUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PetLocationPayload>
-        }
-        aggregate: {
-          args: Prisma.PetLocationAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregatePetLocation>
-        }
-        groupBy: {
-          args: Prisma.PetLocationGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PetLocationGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.PetLocationCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PetLocationCountAggregateOutputType> | number
-        }
-      }
-    }
     User: {
       payload: Prisma.$UserPayload<ExtArgs>
       fields: Prisma.UserFieldRefs
@@ -1046,9 +1196,10 @@ export const PetScalarFieldEnum = {
   id: 'id',
   name: 'name',
   age: 'age',
-  type_id: 'type_id',
-  age_type_id: 'age_type_id',
-  size_type_id: 'size_type_id',
+  typeId: 'typeId',
+  ageTypeId: 'ageTypeId',
+  sizeTypeId: 'sizeTypeId',
+  personalities: 'personalities',
   description: 'description',
   imageUrl: 'imageUrl',
   isAdopted: 'isAdopted',
@@ -1059,6 +1210,32 @@ export const PetScalarFieldEnum = {
 } as const
 
 export type PetScalarFieldEnum = (typeof PetScalarFieldEnum)[keyof typeof PetScalarFieldEnum]
+
+
+export const PetLocationScalarFieldEnum = {
+  id: 'id',
+  petId: 'petId',
+  address: 'address',
+  districtId: 'districtId',
+  provinceId: 'provinceId'
+} as const
+
+export type PetLocationScalarFieldEnum = (typeof PetLocationScalarFieldEnum)[keyof typeof PetLocationScalarFieldEnum]
+
+
+export const ProvinceScalarFieldEnum = {
+  id: 'id'
+} as const
+
+export type ProvinceScalarFieldEnum = (typeof ProvinceScalarFieldEnum)[keyof typeof ProvinceScalarFieldEnum]
+
+
+export const DistrictScalarFieldEnum = {
+  id: 'id',
+  provinceId: 'provinceId'
+} as const
+
+export type DistrictScalarFieldEnum = (typeof DistrictScalarFieldEnum)[keyof typeof DistrictScalarFieldEnum]
 
 
 export const PetTypeScalarFieldEnum = {
@@ -1087,17 +1264,6 @@ export const PetPersonalityScalarFieldEnum = {
 } as const
 
 export type PetPersonalityScalarFieldEnum = (typeof PetPersonalityScalarFieldEnum)[keyof typeof PetPersonalityScalarFieldEnum]
-
-
-export const PetLocationScalarFieldEnum = {
-  id: 'id',
-  location_id: 'location_id',
-  address: 'address',
-  ward: 'ward',
-  province: 'province'
-} as const
-
-export type PetLocationScalarFieldEnum = (typeof PetLocationScalarFieldEnum)[keyof typeof PetLocationScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -1336,11 +1502,13 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   pet?: Prisma.PetOmit
+  petLocation?: Prisma.PetLocationOmit
+  province?: Prisma.ProvinceOmit
+  district?: Prisma.DistrictOmit
   petType?: Prisma.PetTypeOmit
   petAge?: Prisma.PetAgeOmit
   petSize?: Prisma.PetSizeOmit
   petPersonality?: Prisma.PetPersonalityOmit
-  petLocation?: Prisma.PetLocationOmit
   user?: Prisma.UserOmit
   token?: Prisma.TokenOmit
 }

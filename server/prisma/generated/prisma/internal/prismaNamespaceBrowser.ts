@@ -52,11 +52,13 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Pet: 'Pet',
+  PetLocation: 'PetLocation',
+  Province: 'Province',
+  District: 'District',
   PetType: 'PetType',
   PetAge: 'PetAge',
   PetSize: 'PetSize',
   PetPersonality: 'PetPersonality',
-  PetLocation: 'PetLocation',
   User: 'User',
   Token: 'Token'
 } as const
@@ -81,9 +83,10 @@ export const PetScalarFieldEnum = {
   id: 'id',
   name: 'name',
   age: 'age',
-  type_id: 'type_id',
-  age_type_id: 'age_type_id',
-  size_type_id: 'size_type_id',
+  typeId: 'typeId',
+  ageTypeId: 'ageTypeId',
+  sizeTypeId: 'sizeTypeId',
+  personalities: 'personalities',
   description: 'description',
   imageUrl: 'imageUrl',
   isAdopted: 'isAdopted',
@@ -94,6 +97,32 @@ export const PetScalarFieldEnum = {
 } as const
 
 export type PetScalarFieldEnum = (typeof PetScalarFieldEnum)[keyof typeof PetScalarFieldEnum]
+
+
+export const PetLocationScalarFieldEnum = {
+  id: 'id',
+  petId: 'petId',
+  address: 'address',
+  districtId: 'districtId',
+  provinceId: 'provinceId'
+} as const
+
+export type PetLocationScalarFieldEnum = (typeof PetLocationScalarFieldEnum)[keyof typeof PetLocationScalarFieldEnum]
+
+
+export const ProvinceScalarFieldEnum = {
+  id: 'id'
+} as const
+
+export type ProvinceScalarFieldEnum = (typeof ProvinceScalarFieldEnum)[keyof typeof ProvinceScalarFieldEnum]
+
+
+export const DistrictScalarFieldEnum = {
+  id: 'id',
+  provinceId: 'provinceId'
+} as const
+
+export type DistrictScalarFieldEnum = (typeof DistrictScalarFieldEnum)[keyof typeof DistrictScalarFieldEnum]
 
 
 export const PetTypeScalarFieldEnum = {
@@ -122,17 +151,6 @@ export const PetPersonalityScalarFieldEnum = {
 } as const
 
 export type PetPersonalityScalarFieldEnum = (typeof PetPersonalityScalarFieldEnum)[keyof typeof PetPersonalityScalarFieldEnum]
-
-
-export const PetLocationScalarFieldEnum = {
-  id: 'id',
-  location_id: 'location_id',
-  address: 'address',
-  ward: 'ward',
-  province: 'province'
-} as const
-
-export type PetLocationScalarFieldEnum = (typeof PetLocationScalarFieldEnum)[keyof typeof PetLocationScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

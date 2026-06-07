@@ -150,12 +150,10 @@ export type PetAgeWhereInput = {
   OR?: Prisma.PetAgeWhereInput[]
   NOT?: Prisma.PetAgeWhereInput | Prisma.PetAgeWhereInput[]
   id?: Prisma.StringFilter<"PetAge"> | string
-  pets?: Prisma.PetListRelationFilter
 }
 
 export type PetAgeOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  pets?: Prisma.PetOrderByRelationAggregateInput
 }
 
 export type PetAgeWhereUniqueInput = Prisma.AtLeast<{
@@ -163,7 +161,6 @@ export type PetAgeWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.PetAgeWhereInput | Prisma.PetAgeWhereInput[]
   OR?: Prisma.PetAgeWhereInput[]
   NOT?: Prisma.PetAgeWhereInput | Prisma.PetAgeWhereInput[]
-  pets?: Prisma.PetListRelationFilter
 }, "id">
 
 export type PetAgeOrderByWithAggregationInput = {
@@ -182,22 +179,18 @@ export type PetAgeScalarWhereWithAggregatesInput = {
 
 export type PetAgeCreateInput = {
   id: string
-  pets?: Prisma.PetCreateNestedManyWithoutAge_typeInput
 }
 
 export type PetAgeUncheckedCreateInput = {
   id: string
-  pets?: Prisma.PetUncheckedCreateNestedManyWithoutAge_typeInput
 }
 
 export type PetAgeUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  pets?: Prisma.PetUpdateManyWithoutAge_typeNestedInput
 }
 
 export type PetAgeUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  pets?: Prisma.PetUncheckedUpdateManyWithoutAge_typeNestedInput
 }
 
 export type PetAgeCreateManyInput = {
@@ -212,11 +205,6 @@ export type PetAgeUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
-export type PetAgeScalarRelationFilter = {
-  is?: Prisma.PetAgeWhereInput
-  isNot?: Prisma.PetAgeWhereInput
-}
-
 export type PetAgeCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
@@ -229,87 +217,10 @@ export type PetAgeMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type PetAgeCreateNestedOneWithoutPetsInput = {
-  create?: Prisma.XOR<Prisma.PetAgeCreateWithoutPetsInput, Prisma.PetAgeUncheckedCreateWithoutPetsInput>
-  connectOrCreate?: Prisma.PetAgeCreateOrConnectWithoutPetsInput
-  connect?: Prisma.PetAgeWhereUniqueInput
-}
-
-export type PetAgeUpdateOneRequiredWithoutPetsNestedInput = {
-  create?: Prisma.XOR<Prisma.PetAgeCreateWithoutPetsInput, Prisma.PetAgeUncheckedCreateWithoutPetsInput>
-  connectOrCreate?: Prisma.PetAgeCreateOrConnectWithoutPetsInput
-  upsert?: Prisma.PetAgeUpsertWithoutPetsInput
-  connect?: Prisma.PetAgeWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.PetAgeUpdateToOneWithWhereWithoutPetsInput, Prisma.PetAgeUpdateWithoutPetsInput>, Prisma.PetAgeUncheckedUpdateWithoutPetsInput>
-}
-
-export type PetAgeCreateWithoutPetsInput = {
-  id: string
-}
-
-export type PetAgeUncheckedCreateWithoutPetsInput = {
-  id: string
-}
-
-export type PetAgeCreateOrConnectWithoutPetsInput = {
-  where: Prisma.PetAgeWhereUniqueInput
-  create: Prisma.XOR<Prisma.PetAgeCreateWithoutPetsInput, Prisma.PetAgeUncheckedCreateWithoutPetsInput>
-}
-
-export type PetAgeUpsertWithoutPetsInput = {
-  update: Prisma.XOR<Prisma.PetAgeUpdateWithoutPetsInput, Prisma.PetAgeUncheckedUpdateWithoutPetsInput>
-  create: Prisma.XOR<Prisma.PetAgeCreateWithoutPetsInput, Prisma.PetAgeUncheckedCreateWithoutPetsInput>
-  where?: Prisma.PetAgeWhereInput
-}
-
-export type PetAgeUpdateToOneWithWhereWithoutPetsInput = {
-  where?: Prisma.PetAgeWhereInput
-  data: Prisma.XOR<Prisma.PetAgeUpdateWithoutPetsInput, Prisma.PetAgeUncheckedUpdateWithoutPetsInput>
-}
-
-export type PetAgeUpdateWithoutPetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-export type PetAgeUncheckedUpdateWithoutPetsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-}
-
-
-/**
- * Count Type PetAgeCountOutputType
- */
-
-export type PetAgeCountOutputType = {
-  pets: number
-}
-
-export type PetAgeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  pets?: boolean | PetAgeCountOutputTypeCountPetsArgs
-}
-
-/**
- * PetAgeCountOutputType without action
- */
-export type PetAgeCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the PetAgeCountOutputType
-   */
-  select?: Prisma.PetAgeCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * PetAgeCountOutputType without action
- */
-export type PetAgeCountOutputTypeCountPetsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PetWhereInput
-}
 
 
 export type PetAgeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  pets?: boolean | Prisma.PetAge$petsArgs<ExtArgs>
-  _count?: boolean | Prisma.PetAgeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["petAge"]>
 
 export type PetAgeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -325,18 +236,10 @@ export type PetAgeSelectScalar = {
 }
 
 export type PetAgeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id", ExtArgs["result"]["petAge"]>
-export type PetAgeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  pets?: boolean | Prisma.PetAge$petsArgs<ExtArgs>
-  _count?: boolean | Prisma.PetAgeCountOutputTypeDefaultArgs<ExtArgs>
-}
-export type PetAgeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
-export type PetAgeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
 
 export type $PetAgePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "PetAge"
-  objects: {
-    pets: Prisma.$PetPayload<ExtArgs>[]
-  }
+  objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
   }, ExtArgs["result"]["petAge"]>
@@ -733,7 +636,6 @@ readonly fields: PetAgeFieldRefs;
  */
 export interface Prisma__PetAgeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  pets<T extends Prisma.PetAge$petsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PetAge$petsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -781,10 +683,6 @@ export type PetAgeFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
-  /**
    * Filter, which PetAge to fetch.
    */
   where: Prisma.PetAgeWhereUniqueInput
@@ -803,10 +701,6 @@ export type PetAgeFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
-  /**
    * Filter, which PetAge to fetch.
    */
   where: Prisma.PetAgeWhereUniqueInput
@@ -824,10 +718,6 @@ export type PetAgeFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the PetAge
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
   /**
    * Filter, which PetAge to fetch.
    */
@@ -877,10 +767,6 @@ export type PetAgeFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
-  /**
    * Filter, which PetAge to fetch.
    */
   where?: Prisma.PetAgeWhereInput
@@ -928,10 +814,6 @@ export type PetAgeFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Omit specific fields from the PetAge
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
   /**
    * Filter, which PetAges to fetch.
    */
@@ -981,10 +863,6 @@ export type PetAgeCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
-  /**
    * The data needed to create a PetAge.
    */
   data: Prisma.XOR<Prisma.PetAgeCreateInput, Prisma.PetAgeUncheckedCreateInput>
@@ -1032,10 +910,6 @@ export type PetAgeUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the PetAge
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
   /**
    * The data needed to update a PetAge.
    */
@@ -1103,10 +977,6 @@ export type PetAgeUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
-  /**
    * The filter to search for the PetAge to update in case it exists.
    */
   where: Prisma.PetAgeWhereUniqueInput
@@ -1133,10 +1003,6 @@ export type PetAgeDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
   /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
-  /**
    * Filter which PetAge to delete.
    */
   where: Prisma.PetAgeWhereUniqueInput
@@ -1157,30 +1023,6 @@ export type PetAgeDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * PetAge.pets
- */
-export type PetAge$petsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Pet
-   */
-  select?: Prisma.PetSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Pet
-   */
-  omit?: Prisma.PetOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetInclude<ExtArgs> | null
-  where?: Prisma.PetWhereInput
-  orderBy?: Prisma.PetOrderByWithRelationInput | Prisma.PetOrderByWithRelationInput[]
-  cursor?: Prisma.PetWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.PetScalarFieldEnum | Prisma.PetScalarFieldEnum[]
-}
-
-/**
  * PetAge without action
  */
 export type PetAgeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1192,8 +1034,4 @@ export type PetAgeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the PetAge
    */
   omit?: Prisma.PetAgeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.PetAgeInclude<ExtArgs> | null
 }

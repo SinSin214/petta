@@ -13,7 +13,8 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:serverdebug": "nest start --debug --watch",
-    "start:prod": "node dist/main"
+    "start:prod": "node dist/main",
+    "prisma:seed": "npx primsa db seed"
   },
   "engines": {
     "npm": ">=10.0.0",

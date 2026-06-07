@@ -7,7 +7,6 @@ export enum RequestMethod {
 
 const fetchApi = async (path: string, method: RequestMethod, data: Object): Promise<Object> => {
   try{
-      console.log(`${process.env.NEXT_PUBLIC_API_ROUTE}`);
       const axiosRes = await axios({
         method: method,
         url: `${process.env.NEXT_PUBLIC_API_ROUTE}${path}`,
