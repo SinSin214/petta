@@ -157,9 +157,9 @@ export function Header() {
                     }}
                     className="text-left"
                 >
-                    <p className="text-lg font-semibold tracking-[0.25em] text-slate-900 uppercase">Petta</p>
-                    <p className="text-xs text-slate-500">{t('header.tagline')}</p>
+                    Petta
                 </button>
+                <p className="text-xs text-slate-500">{t('header.tagline')}</p>
 
                 <Tabs
                     aria-label="Primary navigation"
