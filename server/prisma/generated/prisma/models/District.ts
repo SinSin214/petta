@@ -159,12 +159,16 @@ export type DistrictWhereInput = {
   id?: Prisma.StringFilter<"District"> | string
   provinceId?: Prisma.StringFilter<"District"> | string
   province?: Prisma.XOR<Prisma.ProvinceScalarRelationFilter, Prisma.ProvinceWhereInput>
+  petLocations?: Prisma.PetLocationListRelationFilter
+  translations?: Prisma.DistrictTranslationListRelationFilter
 }
 
 export type DistrictOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   provinceId?: Prisma.SortOrder
   province?: Prisma.ProvinceOrderByWithRelationInput
+  petLocations?: Prisma.PetLocationOrderByRelationAggregateInput
+  translations?: Prisma.DistrictTranslationOrderByRelationAggregateInput
 }
 
 export type DistrictWhereUniqueInput = Prisma.AtLeast<{
@@ -174,6 +178,8 @@ export type DistrictWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.DistrictWhereInput | Prisma.DistrictWhereInput[]
   provinceId?: Prisma.StringFilter<"District"> | string
   province?: Prisma.XOR<Prisma.ProvinceScalarRelationFilter, Prisma.ProvinceWhereInput>
+  petLocations?: Prisma.PetLocationListRelationFilter
+  translations?: Prisma.DistrictTranslationListRelationFilter
 }, "id">
 
 export type DistrictOrderByWithAggregationInput = {
@@ -195,21 +201,29 @@ export type DistrictScalarWhereWithAggregatesInput = {
 export type DistrictCreateInput = {
   id: string
   province: Prisma.ProvinceCreateNestedOneWithoutDistrictsInput
+  petLocations?: Prisma.PetLocationCreateNestedManyWithoutDistrictInput
+  translations?: Prisma.DistrictTranslationCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictUncheckedCreateInput = {
   id: string
   provinceId: string
+  petLocations?: Prisma.PetLocationUncheckedCreateNestedManyWithoutDistrictInput
+  translations?: Prisma.DistrictTranslationUncheckedCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   province?: Prisma.ProvinceUpdateOneRequiredWithoutDistrictsNestedInput
+  petLocations?: Prisma.PetLocationUpdateManyWithoutDistrictNestedInput
+  translations?: Prisma.DistrictTranslationUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   provinceId?: Prisma.StringFieldUpdateOperationsInput | string
+  petLocations?: Prisma.PetLocationUncheckedUpdateManyWithoutDistrictNestedInput
+  translations?: Prisma.DistrictTranslationUncheckedUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictCreateManyInput = {
@@ -224,6 +238,11 @@ export type DistrictUpdateManyMutationInput = {
 export type DistrictUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   provinceId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type DistrictScalarRelationFilter = {
+  is?: Prisma.DistrictWhereInput
+  isNot?: Prisma.DistrictWhereInput
 }
 
 export type DistrictListRelationFilter = {
@@ -249,6 +268,20 @@ export type DistrictMaxOrderByAggregateInput = {
 export type DistrictMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   provinceId?: Prisma.SortOrder
+}
+
+export type DistrictCreateNestedOneWithoutPetLocationsInput = {
+  create?: Prisma.XOR<Prisma.DistrictCreateWithoutPetLocationsInput, Prisma.DistrictUncheckedCreateWithoutPetLocationsInput>
+  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutPetLocationsInput
+  connect?: Prisma.DistrictWhereUniqueInput
+}
+
+export type DistrictUpdateOneRequiredWithoutPetLocationsNestedInput = {
+  create?: Prisma.XOR<Prisma.DistrictCreateWithoutPetLocationsInput, Prisma.DistrictUncheckedCreateWithoutPetLocationsInput>
+  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutPetLocationsInput
+  upsert?: Prisma.DistrictUpsertWithoutPetLocationsInput
+  connect?: Prisma.DistrictWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DistrictUpdateToOneWithWhereWithoutPetLocationsInput, Prisma.DistrictUpdateWithoutPetLocationsInput>, Prisma.DistrictUncheckedUpdateWithoutPetLocationsInput>
 }
 
 export type DistrictCreateNestedManyWithoutProvinceInput = {
@@ -293,12 +326,70 @@ export type DistrictUncheckedUpdateManyWithoutProvinceNestedInput = {
   deleteMany?: Prisma.DistrictScalarWhereInput | Prisma.DistrictScalarWhereInput[]
 }
 
+export type DistrictCreateNestedOneWithoutTranslationsInput = {
+  create?: Prisma.XOR<Prisma.DistrictCreateWithoutTranslationsInput, Prisma.DistrictUncheckedCreateWithoutTranslationsInput>
+  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutTranslationsInput
+  connect?: Prisma.DistrictWhereUniqueInput
+}
+
+export type DistrictUpdateOneRequiredWithoutTranslationsNestedInput = {
+  create?: Prisma.XOR<Prisma.DistrictCreateWithoutTranslationsInput, Prisma.DistrictUncheckedCreateWithoutTranslationsInput>
+  connectOrCreate?: Prisma.DistrictCreateOrConnectWithoutTranslationsInput
+  upsert?: Prisma.DistrictUpsertWithoutTranslationsInput
+  connect?: Prisma.DistrictWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DistrictUpdateToOneWithWhereWithoutTranslationsInput, Prisma.DistrictUpdateWithoutTranslationsInput>, Prisma.DistrictUncheckedUpdateWithoutTranslationsInput>
+}
+
+export type DistrictCreateWithoutPetLocationsInput = {
+  id: string
+  province: Prisma.ProvinceCreateNestedOneWithoutDistrictsInput
+  translations?: Prisma.DistrictTranslationCreateNestedManyWithoutDistrictInput
+}
+
+export type DistrictUncheckedCreateWithoutPetLocationsInput = {
+  id: string
+  provinceId: string
+  translations?: Prisma.DistrictTranslationUncheckedCreateNestedManyWithoutDistrictInput
+}
+
+export type DistrictCreateOrConnectWithoutPetLocationsInput = {
+  where: Prisma.DistrictWhereUniqueInput
+  create: Prisma.XOR<Prisma.DistrictCreateWithoutPetLocationsInput, Prisma.DistrictUncheckedCreateWithoutPetLocationsInput>
+}
+
+export type DistrictUpsertWithoutPetLocationsInput = {
+  update: Prisma.XOR<Prisma.DistrictUpdateWithoutPetLocationsInput, Prisma.DistrictUncheckedUpdateWithoutPetLocationsInput>
+  create: Prisma.XOR<Prisma.DistrictCreateWithoutPetLocationsInput, Prisma.DistrictUncheckedCreateWithoutPetLocationsInput>
+  where?: Prisma.DistrictWhereInput
+}
+
+export type DistrictUpdateToOneWithWhereWithoutPetLocationsInput = {
+  where?: Prisma.DistrictWhereInput
+  data: Prisma.XOR<Prisma.DistrictUpdateWithoutPetLocationsInput, Prisma.DistrictUncheckedUpdateWithoutPetLocationsInput>
+}
+
+export type DistrictUpdateWithoutPetLocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  province?: Prisma.ProvinceUpdateOneRequiredWithoutDistrictsNestedInput
+  translations?: Prisma.DistrictTranslationUpdateManyWithoutDistrictNestedInput
+}
+
+export type DistrictUncheckedUpdateWithoutPetLocationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
+  translations?: Prisma.DistrictTranslationUncheckedUpdateManyWithoutDistrictNestedInput
+}
+
 export type DistrictCreateWithoutProvinceInput = {
   id: string
+  petLocations?: Prisma.PetLocationCreateNestedManyWithoutDistrictInput
+  translations?: Prisma.DistrictTranslationCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictUncheckedCreateWithoutProvinceInput = {
   id: string
+  petLocations?: Prisma.PetLocationUncheckedCreateNestedManyWithoutDistrictInput
+  translations?: Prisma.DistrictTranslationUncheckedCreateNestedManyWithoutDistrictInput
 }
 
 export type DistrictCreateOrConnectWithoutProvinceInput = {
@@ -335,16 +426,60 @@ export type DistrictScalarWhereInput = {
   provinceId?: Prisma.StringFilter<"District"> | string
 }
 
+export type DistrictCreateWithoutTranslationsInput = {
+  id: string
+  province: Prisma.ProvinceCreateNestedOneWithoutDistrictsInput
+  petLocations?: Prisma.PetLocationCreateNestedManyWithoutDistrictInput
+}
+
+export type DistrictUncheckedCreateWithoutTranslationsInput = {
+  id: string
+  provinceId: string
+  petLocations?: Prisma.PetLocationUncheckedCreateNestedManyWithoutDistrictInput
+}
+
+export type DistrictCreateOrConnectWithoutTranslationsInput = {
+  where: Prisma.DistrictWhereUniqueInput
+  create: Prisma.XOR<Prisma.DistrictCreateWithoutTranslationsInput, Prisma.DistrictUncheckedCreateWithoutTranslationsInput>
+}
+
+export type DistrictUpsertWithoutTranslationsInput = {
+  update: Prisma.XOR<Prisma.DistrictUpdateWithoutTranslationsInput, Prisma.DistrictUncheckedUpdateWithoutTranslationsInput>
+  create: Prisma.XOR<Prisma.DistrictCreateWithoutTranslationsInput, Prisma.DistrictUncheckedCreateWithoutTranslationsInput>
+  where?: Prisma.DistrictWhereInput
+}
+
+export type DistrictUpdateToOneWithWhereWithoutTranslationsInput = {
+  where?: Prisma.DistrictWhereInput
+  data: Prisma.XOR<Prisma.DistrictUpdateWithoutTranslationsInput, Prisma.DistrictUncheckedUpdateWithoutTranslationsInput>
+}
+
+export type DistrictUpdateWithoutTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  province?: Prisma.ProvinceUpdateOneRequiredWithoutDistrictsNestedInput
+  petLocations?: Prisma.PetLocationUpdateManyWithoutDistrictNestedInput
+}
+
+export type DistrictUncheckedUpdateWithoutTranslationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  provinceId?: Prisma.StringFieldUpdateOperationsInput | string
+  petLocations?: Prisma.PetLocationUncheckedUpdateManyWithoutDistrictNestedInput
+}
+
 export type DistrictCreateManyProvinceInput = {
   id: string
 }
 
 export type DistrictUpdateWithoutProvinceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  petLocations?: Prisma.PetLocationUpdateManyWithoutDistrictNestedInput
+  translations?: Prisma.DistrictTranslationUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictUncheckedUpdateWithoutProvinceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  petLocations?: Prisma.PetLocationUncheckedUpdateManyWithoutDistrictNestedInput
+  translations?: Prisma.DistrictTranslationUncheckedUpdateManyWithoutDistrictNestedInput
 }
 
 export type DistrictUncheckedUpdateManyWithoutProvinceInput = {
@@ -352,11 +487,52 @@ export type DistrictUncheckedUpdateManyWithoutProvinceInput = {
 }
 
 
+/**
+ * Count Type DistrictCountOutputType
+ */
+
+export type DistrictCountOutputType = {
+  petLocations: number
+  translations: number
+}
+
+export type DistrictCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  petLocations?: boolean | DistrictCountOutputTypeCountPetLocationsArgs
+  translations?: boolean | DistrictCountOutputTypeCountTranslationsArgs
+}
+
+/**
+ * DistrictCountOutputType without action
+ */
+export type DistrictCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DistrictCountOutputType
+   */
+  select?: Prisma.DistrictCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * DistrictCountOutputType without action
+ */
+export type DistrictCountOutputTypeCountPetLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PetLocationWhereInput
+}
+
+/**
+ * DistrictCountOutputType without action
+ */
+export type DistrictCountOutputTypeCountTranslationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DistrictTranslationWhereInput
+}
+
 
 export type DistrictSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   provinceId?: boolean
   province?: boolean | Prisma.ProvinceDefaultArgs<ExtArgs>
+  petLocations?: boolean | Prisma.District$petLocationsArgs<ExtArgs>
+  translations?: boolean | Prisma.District$translationsArgs<ExtArgs>
+  _count?: boolean | Prisma.DistrictCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["district"]>
 
 export type DistrictSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -379,6 +555,9 @@ export type DistrictSelectScalar = {
 export type DistrictOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "provinceId", ExtArgs["result"]["district"]>
 export type DistrictInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   province?: boolean | Prisma.ProvinceDefaultArgs<ExtArgs>
+  petLocations?: boolean | Prisma.District$petLocationsArgs<ExtArgs>
+  translations?: boolean | Prisma.District$translationsArgs<ExtArgs>
+  _count?: boolean | Prisma.DistrictCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type DistrictIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   province?: boolean | Prisma.ProvinceDefaultArgs<ExtArgs>
@@ -391,6 +570,8 @@ export type $DistrictPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   name: "District"
   objects: {
     province: Prisma.$ProvincePayload<ExtArgs>
+    petLocations: Prisma.$PetLocationPayload<ExtArgs>[]
+    translations: Prisma.$DistrictTranslationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -790,6 +971,8 @@ readonly fields: DistrictFieldRefs;
 export interface Prisma__DistrictClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   province<T extends Prisma.ProvinceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProvinceDefaultArgs<ExtArgs>>): Prisma.Prisma__ProvinceClient<runtime.Types.Result.GetResult<Prisma.$ProvincePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  petLocations<T extends Prisma.District$petLocationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.District$petLocationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetLocationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  translations<T extends Prisma.District$translationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.District$translationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DistrictTranslationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1219,6 +1402,54 @@ export type DistrictDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Limit how many Districts to delete.
    */
   limit?: number
+}
+
+/**
+ * District.petLocations
+ */
+export type District$petLocationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the PetLocation
+   */
+  select?: Prisma.PetLocationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the PetLocation
+   */
+  omit?: Prisma.PetLocationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PetLocationInclude<ExtArgs> | null
+  where?: Prisma.PetLocationWhereInput
+  orderBy?: Prisma.PetLocationOrderByWithRelationInput | Prisma.PetLocationOrderByWithRelationInput[]
+  cursor?: Prisma.PetLocationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PetLocationScalarFieldEnum | Prisma.PetLocationScalarFieldEnum[]
+}
+
+/**
+ * District.translations
+ */
+export type District$translationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DistrictTranslation
+   */
+  select?: Prisma.DistrictTranslationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DistrictTranslation
+   */
+  omit?: Prisma.DistrictTranslationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DistrictTranslationInclude<ExtArgs> | null
+  where?: Prisma.DistrictTranslationWhereInput
+  orderBy?: Prisma.DistrictTranslationOrderByWithRelationInput | Prisma.DistrictTranslationOrderByWithRelationInput[]
+  cursor?: Prisma.DistrictTranslationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DistrictTranslationScalarFieldEnum | Prisma.DistrictTranslationScalarFieldEnum[]
 }
 
 /**

@@ -33,7 +33,6 @@ export type UserMinAggregateOutputType = {
   isActive: boolean | null
   isDeleted: boolean | null
   createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -45,7 +44,6 @@ export type UserMaxAggregateOutputType = {
   isActive: boolean | null
   isDeleted: boolean | null
   createdAt: Date | null
-  updatedAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -57,7 +55,6 @@ export type UserCountAggregateOutputType = {
   isActive: number
   isDeleted: number
   createdAt: number
-  updatedAt: number
   _all: number
 }
 
@@ -71,7 +68,6 @@ export type UserMinAggregateInputType = {
   isActive?: true
   isDeleted?: true
   createdAt?: true
-  updatedAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -83,7 +79,6 @@ export type UserMaxAggregateInputType = {
   isActive?: true
   isDeleted?: true
   createdAt?: true
-  updatedAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -95,7 +90,6 @@ export type UserCountAggregateInputType = {
   isActive?: true
   isDeleted?: true
   createdAt?: true
-  updatedAt?: true
   _all?: true
 }
 
@@ -180,7 +174,6 @@ export type UserGroupByOutputType = {
   isActive: boolean
   isDeleted: boolean
   createdAt: Date
-  updatedAt: Date
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -213,10 +206,11 @@ export type UserWhereInput = {
   isActive?: Prisma.BoolFilter<"User"> | boolean
   isDeleted?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   tokens?: Prisma.TokenListRelationFilter
   petsCreated?: Prisma.PetListRelationFilter
-  petsUpdated?: Prisma.PetListRelationFilter
+  storiesCreated?: Prisma.StoryListRelationFilter
+  storyUpvotes?: Prisma.StoryUpvoteListRelationFilter
+  storyComments?: Prisma.StoryCommentListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -228,10 +222,11 @@ export type UserOrderByWithRelationInput = {
   isActive?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   tokens?: Prisma.TokenOrderByRelationAggregateInput
   petsCreated?: Prisma.PetOrderByRelationAggregateInput
-  petsUpdated?: Prisma.PetOrderByRelationAggregateInput
+  storiesCreated?: Prisma.StoryOrderByRelationAggregateInput
+  storyUpvotes?: Prisma.StoryUpvoteOrderByRelationAggregateInput
+  storyComments?: Prisma.StoryCommentOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -246,10 +241,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isActive?: Prisma.BoolFilter<"User"> | boolean
   isDeleted?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   tokens?: Prisma.TokenListRelationFilter
   petsCreated?: Prisma.PetListRelationFilter
-  petsUpdated?: Prisma.PetListRelationFilter
+  storiesCreated?: Prisma.StoryListRelationFilter
+  storyUpvotes?: Prisma.StoryUpvoteListRelationFilter
+  storyComments?: Prisma.StoryCommentListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -261,7 +257,6 @@ export type UserOrderByWithAggregationInput = {
   isActive?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -279,7 +274,6 @@ export type UserScalarWhereWithAggregatesInput = {
   isActive?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   isDeleted?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
 
 export type UserCreateInput = {
@@ -291,10 +285,11 @@ export type UserCreateInput = {
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: Date | string
-  updatedAt?: Date | string
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
   petsCreated?: Prisma.PetCreateNestedManyWithoutCreatedByUserInput
-  petsUpdated?: Prisma.PetCreateNestedManyWithoutUpdatedByUserInput
+  storiesCreated?: Prisma.StoryCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteCreateNestedManyWithoutUserInput
+  storyComments?: Prisma.StoryCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -306,10 +301,11 @@ export type UserUncheckedCreateInput = {
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: Date | string
-  updatedAt?: Date | string
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
   petsCreated?: Prisma.PetUncheckedCreateNestedManyWithoutCreatedByUserInput
-  petsUpdated?: Prisma.PetUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storiesCreated?: Prisma.StoryUncheckedCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedCreateNestedManyWithoutUserInput
+  storyComments?: Prisma.StoryCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -321,10 +317,11 @@ export type UserUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
   petsCreated?: Prisma.PetUpdateManyWithoutCreatedByUserNestedInput
-  petsUpdated?: Prisma.PetUpdateManyWithoutUpdatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUpdateManyWithoutUserNestedInput
+  storyComments?: Prisma.StoryCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -336,10 +333,11 @@ export type UserUncheckedUpdateInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
   petsCreated?: Prisma.PetUncheckedUpdateManyWithoutCreatedByUserNestedInput
-  petsUpdated?: Prisma.PetUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedUpdateManyWithoutUserNestedInput
+  storyComments?: Prisma.StoryCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -351,7 +349,6 @@ export type UserCreateManyInput = {
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: Date | string
-  updatedAt?: Date | string
 }
 
 export type UserUpdateManyMutationInput = {
@@ -363,7 +360,6 @@ export type UserUpdateManyMutationInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -375,7 +371,6 @@ export type UserUncheckedUpdateManyInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type UserScalarRelationFilter = {
@@ -392,7 +387,6 @@ export type UserCountOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -404,7 +398,6 @@ export type UserMaxOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -416,18 +409,11 @@ export type UserMinOrderByAggregateInput = {
   isActive?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  updatedAt?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutPetsCreatedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPetsCreatedInput, Prisma.UserUncheckedCreateWithoutPetsCreatedInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPetsCreatedInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserCreateNestedOneWithoutPetsUpdatedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPetsUpdatedInput, Prisma.UserUncheckedCreateWithoutPetsUpdatedInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPetsUpdatedInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
@@ -439,12 +425,46 @@ export type UserUpdateOneRequiredWithoutPetsCreatedNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPetsCreatedInput, Prisma.UserUpdateWithoutPetsCreatedInput>, Prisma.UserUncheckedUpdateWithoutPetsCreatedInput>
 }
 
-export type UserUpdateOneRequiredWithoutPetsUpdatedNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutPetsUpdatedInput, Prisma.UserUncheckedCreateWithoutPetsUpdatedInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutPetsUpdatedInput
-  upsert?: Prisma.UserUpsertWithoutPetsUpdatedInput
+export type UserCreateNestedOneWithoutStoriesCreatedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoriesCreatedInput, Prisma.UserUncheckedCreateWithoutStoriesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoriesCreatedInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPetsUpdatedInput, Prisma.UserUpdateWithoutPetsUpdatedInput>, Prisma.UserUncheckedUpdateWithoutPetsUpdatedInput>
+}
+
+export type UserUpdateOneRequiredWithoutStoriesCreatedNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoriesCreatedInput, Prisma.UserUncheckedCreateWithoutStoriesCreatedInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoriesCreatedInput
+  upsert?: Prisma.UserUpsertWithoutStoriesCreatedInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoriesCreatedInput, Prisma.UserUpdateWithoutStoriesCreatedInput>, Prisma.UserUncheckedUpdateWithoutStoriesCreatedInput>
+}
+
+export type UserCreateNestedOneWithoutStoryUpvotesInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoryUpvotesInput, Prisma.UserUncheckedCreateWithoutStoryUpvotesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoryUpvotesInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStoryUpvotesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoryUpvotesInput, Prisma.UserUncheckedCreateWithoutStoryUpvotesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoryUpvotesInput
+  upsert?: Prisma.UserUpsertWithoutStoryUpvotesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoryUpvotesInput, Prisma.UserUpdateWithoutStoryUpvotesInput>, Prisma.UserUncheckedUpdateWithoutStoryUpvotesInput>
+}
+
+export type UserCreateNestedOneWithoutStoryCommentsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoryCommentsInput, Prisma.UserUncheckedCreateWithoutStoryCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoryCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStoryCommentsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStoryCommentsInput, Prisma.UserUncheckedCreateWithoutStoryCommentsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStoryCommentsInput
+  upsert?: Prisma.UserUpsertWithoutStoryCommentsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStoryCommentsInput, Prisma.UserUpdateWithoutStoryCommentsInput>, Prisma.UserUncheckedUpdateWithoutStoryCommentsInput>
 }
 
 export type EnumRoleFieldUpdateOperationsInput = {
@@ -474,9 +494,10 @@ export type UserCreateWithoutPetsCreatedInput = {
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: Date | string
-  updatedAt?: Date | string
   tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  petsUpdated?: Prisma.PetCreateNestedManyWithoutUpdatedByUserInput
+  storiesCreated?: Prisma.StoryCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteCreateNestedManyWithoutUserInput
+  storyComments?: Prisma.StoryCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPetsCreatedInput = {
@@ -488,47 +509,15 @@ export type UserUncheckedCreateWithoutPetsCreatedInput = {
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: Date | string
-  updatedAt?: Date | string
   tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  petsUpdated?: Prisma.PetUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storiesCreated?: Prisma.StoryUncheckedCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedCreateNestedManyWithoutUserInput
+  storyComments?: Prisma.StoryCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPetsCreatedInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutPetsCreatedInput, Prisma.UserUncheckedCreateWithoutPetsCreatedInput>
-}
-
-export type UserCreateWithoutPetsUpdatedInput = {
-  id?: string
-  email: string
-  password: string
-  name: string
-  role?: $Enums.Role
-  isActive?: boolean
-  isDeleted?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
-  petsCreated?: Prisma.PetCreateNestedManyWithoutCreatedByUserInput
-}
-
-export type UserUncheckedCreateWithoutPetsUpdatedInput = {
-  id?: string
-  email: string
-  password: string
-  name: string
-  role?: $Enums.Role
-  isActive?: boolean
-  isDeleted?: boolean
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
-  petsCreated?: Prisma.PetUncheckedCreateNestedManyWithoutCreatedByUserInput
-}
-
-export type UserCreateOrConnectWithoutPetsUpdatedInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutPetsUpdatedInput, Prisma.UserUncheckedCreateWithoutPetsUpdatedInput>
 }
 
 export type UserUpsertWithoutPetsCreatedInput = {
@@ -551,9 +540,10 @@ export type UserUpdateWithoutPetsCreatedInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
-  petsUpdated?: Prisma.PetUpdateManyWithoutUpdatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUpdateManyWithoutUserNestedInput
+  storyComments?: Prisma.StoryCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPetsCreatedInput = {
@@ -565,23 +555,59 @@ export type UserUncheckedUpdateWithoutPetsCreatedInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
-  petsUpdated?: Prisma.PetUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedUpdateManyWithoutUserNestedInput
+  storyComments?: Prisma.StoryCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
-export type UserUpsertWithoutPetsUpdatedInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutPetsUpdatedInput, Prisma.UserUncheckedUpdateWithoutPetsUpdatedInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutPetsUpdatedInput, Prisma.UserUncheckedCreateWithoutPetsUpdatedInput>
+export type UserCreateWithoutStoriesCreatedInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: $Enums.Role
+  isActive?: boolean
+  isDeleted?: boolean
+  createdAt?: Date | string
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  petsCreated?: Prisma.PetCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteCreateNestedManyWithoutUserInput
+  storyComments?: Prisma.StoryCommentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStoriesCreatedInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: $Enums.Role
+  isActive?: boolean
+  isDeleted?: boolean
+  createdAt?: Date | string
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  petsCreated?: Prisma.PetUncheckedCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedCreateNestedManyWithoutUserInput
+  storyComments?: Prisma.StoryCommentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStoriesCreatedInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoriesCreatedInput, Prisma.UserUncheckedCreateWithoutStoriesCreatedInput>
+}
+
+export type UserUpsertWithoutStoriesCreatedInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStoriesCreatedInput, Prisma.UserUncheckedUpdateWithoutStoriesCreatedInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoriesCreatedInput, Prisma.UserUncheckedCreateWithoutStoriesCreatedInput>
   where?: Prisma.UserWhereInput
 }
 
-export type UserUpdateToOneWithWhereWithoutPetsUpdatedInput = {
+export type UserUpdateToOneWithWhereWithoutStoriesCreatedInput = {
   where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutPetsUpdatedInput, Prisma.UserUncheckedUpdateWithoutPetsUpdatedInput>
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStoriesCreatedInput, Prisma.UserUncheckedUpdateWithoutStoriesCreatedInput>
 }
 
-export type UserUpdateWithoutPetsUpdatedInput = {
+export type UserUpdateWithoutStoriesCreatedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -590,12 +616,13 @@ export type UserUpdateWithoutPetsUpdatedInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
   petsCreated?: Prisma.PetUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUpdateManyWithoutUserNestedInput
+  storyComments?: Prisma.StoryCommentUpdateManyWithoutUserNestedInput
 }
 
-export type UserUncheckedUpdateWithoutPetsUpdatedInput = {
+export type UserUncheckedUpdateWithoutStoriesCreatedInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
@@ -604,9 +631,162 @@ export type UserUncheckedUpdateWithoutPetsUpdatedInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
   petsCreated?: Prisma.PetUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedUpdateManyWithoutUserNestedInput
+  storyComments?: Prisma.StoryCommentUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStoryUpvotesInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: $Enums.Role
+  isActive?: boolean
+  isDeleted?: boolean
+  createdAt?: Date | string
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  petsCreated?: Prisma.PetCreateNestedManyWithoutCreatedByUserInput
+  storiesCreated?: Prisma.StoryCreateNestedManyWithoutCreatedByUserInput
+  storyComments?: Prisma.StoryCommentCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStoryUpvotesInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: $Enums.Role
+  isActive?: boolean
+  isDeleted?: boolean
+  createdAt?: Date | string
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  petsCreated?: Prisma.PetUncheckedCreateNestedManyWithoutCreatedByUserInput
+  storiesCreated?: Prisma.StoryUncheckedCreateNestedManyWithoutCreatedByUserInput
+  storyComments?: Prisma.StoryCommentUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStoryUpvotesInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoryUpvotesInput, Prisma.UserUncheckedCreateWithoutStoryUpvotesInput>
+}
+
+export type UserUpsertWithoutStoryUpvotesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStoryUpvotesInput, Prisma.UserUncheckedUpdateWithoutStoryUpvotesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoryUpvotesInput, Prisma.UserUncheckedCreateWithoutStoryUpvotesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStoryUpvotesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStoryUpvotesInput, Prisma.UserUncheckedUpdateWithoutStoryUpvotesInput>
+}
+
+export type UserUpdateWithoutStoryUpvotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  petsCreated?: Prisma.PetUpdateManyWithoutCreatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUpdateManyWithoutCreatedByUserNestedInput
+  storyComments?: Prisma.StoryCommentUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStoryUpvotesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  petsCreated?: Prisma.PetUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  storyComments?: Prisma.StoryCommentUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStoryCommentsInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: $Enums.Role
+  isActive?: boolean
+  isDeleted?: boolean
+  createdAt?: Date | string
+  tokens?: Prisma.TokenCreateNestedManyWithoutUserInput
+  petsCreated?: Prisma.PetCreateNestedManyWithoutCreatedByUserInput
+  storiesCreated?: Prisma.StoryCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStoryCommentsInput = {
+  id?: string
+  email: string
+  password: string
+  name: string
+  role?: $Enums.Role
+  isActive?: boolean
+  isDeleted?: boolean
+  createdAt?: Date | string
+  tokens?: Prisma.TokenUncheckedCreateNestedManyWithoutUserInput
+  petsCreated?: Prisma.PetUncheckedCreateNestedManyWithoutCreatedByUserInput
+  storiesCreated?: Prisma.StoryUncheckedCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStoryCommentsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoryCommentsInput, Prisma.UserUncheckedCreateWithoutStoryCommentsInput>
+}
+
+export type UserUpsertWithoutStoryCommentsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStoryCommentsInput, Prisma.UserUncheckedUpdateWithoutStoryCommentsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStoryCommentsInput, Prisma.UserUncheckedCreateWithoutStoryCommentsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStoryCommentsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStoryCommentsInput, Prisma.UserUncheckedUpdateWithoutStoryCommentsInput>
+}
+
+export type UserUpdateWithoutStoryCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokens?: Prisma.TokenUpdateManyWithoutUserNestedInput
+  petsCreated?: Prisma.PetUpdateManyWithoutCreatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStoryCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tokens?: Prisma.TokenUncheckedUpdateManyWithoutUserNestedInput
+  petsCreated?: Prisma.PetUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTokensInput = {
@@ -618,9 +798,10 @@ export type UserCreateWithoutTokensInput = {
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: Date | string
-  updatedAt?: Date | string
   petsCreated?: Prisma.PetCreateNestedManyWithoutCreatedByUserInput
-  petsUpdated?: Prisma.PetCreateNestedManyWithoutUpdatedByUserInput
+  storiesCreated?: Prisma.StoryCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteCreateNestedManyWithoutUserInput
+  storyComments?: Prisma.StoryCommentCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTokensInput = {
@@ -632,9 +813,10 @@ export type UserUncheckedCreateWithoutTokensInput = {
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: Date | string
-  updatedAt?: Date | string
   petsCreated?: Prisma.PetUncheckedCreateNestedManyWithoutCreatedByUserInput
-  petsUpdated?: Prisma.PetUncheckedCreateNestedManyWithoutUpdatedByUserInput
+  storiesCreated?: Prisma.StoryUncheckedCreateNestedManyWithoutCreatedByUserInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedCreateNestedManyWithoutUserInput
+  storyComments?: Prisma.StoryCommentUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTokensInput = {
@@ -662,9 +844,10 @@ export type UserUpdateWithoutTokensInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   petsCreated?: Prisma.PetUpdateManyWithoutCreatedByUserNestedInput
-  petsUpdated?: Prisma.PetUpdateManyWithoutUpdatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUpdateManyWithoutUserNestedInput
+  storyComments?: Prisma.StoryCommentUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTokensInput = {
@@ -676,9 +859,10 @@ export type UserUncheckedUpdateWithoutTokensInput = {
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   petsCreated?: Prisma.PetUncheckedUpdateManyWithoutCreatedByUserNestedInput
-  petsUpdated?: Prisma.PetUncheckedUpdateManyWithoutUpdatedByUserNestedInput
+  storiesCreated?: Prisma.StoryUncheckedUpdateManyWithoutCreatedByUserNestedInput
+  storyUpvotes?: Prisma.StoryUpvoteUncheckedUpdateManyWithoutUserNestedInput
+  storyComments?: Prisma.StoryCommentUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -689,13 +873,17 @@ export type UserUncheckedUpdateWithoutTokensInput = {
 export type UserCountOutputType = {
   tokens: number
   petsCreated: number
-  petsUpdated: number
+  storiesCreated: number
+  storyUpvotes: number
+  storyComments: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tokens?: boolean | UserCountOutputTypeCountTokensArgs
   petsCreated?: boolean | UserCountOutputTypeCountPetsCreatedArgs
-  petsUpdated?: boolean | UserCountOutputTypeCountPetsUpdatedArgs
+  storiesCreated?: boolean | UserCountOutputTypeCountStoriesCreatedArgs
+  storyUpvotes?: boolean | UserCountOutputTypeCountStoryUpvotesArgs
+  storyComments?: boolean | UserCountOutputTypeCountStoryCommentsArgs
 }
 
 /**
@@ -725,8 +913,22 @@ export type UserCountOutputTypeCountPetsCreatedArgs<ExtArgs extends runtime.Type
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountPetsUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PetWhereInput
+export type UserCountOutputTypeCountStoriesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StoryWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStoryUpvotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StoryUpvoteWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStoryCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StoryCommentWhereInput
 }
 
 
@@ -739,10 +941,11 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: boolean
-  updatedAt?: boolean
   tokens?: boolean | Prisma.User$tokensArgs<ExtArgs>
   petsCreated?: boolean | Prisma.User$petsCreatedArgs<ExtArgs>
-  petsUpdated?: boolean | Prisma.User$petsUpdatedArgs<ExtArgs>
+  storiesCreated?: boolean | Prisma.User$storiesCreatedArgs<ExtArgs>
+  storyUpvotes?: boolean | Prisma.User$storyUpvotesArgs<ExtArgs>
+  storyComments?: boolean | Prisma.User$storyCommentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -755,7 +958,6 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -767,7 +969,6 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: boolean
-  updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -779,14 +980,15 @@ export type UserSelectScalar = {
   isActive?: boolean
   isDeleted?: boolean
   createdAt?: boolean
-  updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "name" | "role" | "isActive" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "password" | "name" | "role" | "isActive" | "isDeleted" | "createdAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   tokens?: boolean | Prisma.User$tokensArgs<ExtArgs>
   petsCreated?: boolean | Prisma.User$petsCreatedArgs<ExtArgs>
-  petsUpdated?: boolean | Prisma.User$petsUpdatedArgs<ExtArgs>
+  storiesCreated?: boolean | Prisma.User$storiesCreatedArgs<ExtArgs>
+  storyUpvotes?: boolean | Prisma.User$storyUpvotesArgs<ExtArgs>
+  storyComments?: boolean | Prisma.User$storyCommentsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -797,7 +999,9 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     tokens: Prisma.$TokenPayload<ExtArgs>[]
     petsCreated: Prisma.$PetPayload<ExtArgs>[]
-    petsUpdated: Prisma.$PetPayload<ExtArgs>[]
+    storiesCreated: Prisma.$StoryPayload<ExtArgs>[]
+    storyUpvotes: Prisma.$StoryUpvotePayload<ExtArgs>[]
+    storyComments: Prisma.$StoryCommentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -808,7 +1012,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     isActive: boolean
     isDeleted: boolean
     createdAt: Date
-    updatedAt: Date
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1205,7 +1408,9 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   tokens<T extends Prisma.User$tokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   petsCreated<T extends Prisma.User$petsCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$petsCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  petsUpdated<T extends Prisma.User$petsUpdatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$petsUpdatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PetPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  storiesCreated<T extends Prisma.User$storiesCreatedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storiesCreatedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  storyUpvotes<T extends Prisma.User$storyUpvotesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storyUpvotesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StoryUpvotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  storyComments<T extends Prisma.User$storyCommentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$storyCommentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StoryCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1243,7 +1448,6 @@ export interface UserFieldRefs {
   readonly isActive: Prisma.FieldRef<"User", 'Boolean'>
   readonly isDeleted: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }
     
 
@@ -1685,27 +1889,75 @@ export type User$petsCreatedArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * User.petsUpdated
+ * User.storiesCreated
  */
-export type User$petsUpdatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$storiesCreatedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Pet
+   * Select specific fields to fetch from the Story
    */
-  select?: Prisma.PetSelect<ExtArgs> | null
+  select?: Prisma.StorySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Pet
+   * Omit specific fields from the Story
    */
-  omit?: Prisma.PetOmit<ExtArgs> | null
+  omit?: Prisma.StoryOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PetInclude<ExtArgs> | null
-  where?: Prisma.PetWhereInput
-  orderBy?: Prisma.PetOrderByWithRelationInput | Prisma.PetOrderByWithRelationInput[]
-  cursor?: Prisma.PetWhereUniqueInput
+  include?: Prisma.StoryInclude<ExtArgs> | null
+  where?: Prisma.StoryWhereInput
+  orderBy?: Prisma.StoryOrderByWithRelationInput | Prisma.StoryOrderByWithRelationInput[]
+  cursor?: Prisma.StoryWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.PetScalarFieldEnum | Prisma.PetScalarFieldEnum[]
+  distinct?: Prisma.StoryScalarFieldEnum | Prisma.StoryScalarFieldEnum[]
+}
+
+/**
+ * User.storyUpvotes
+ */
+export type User$storyUpvotesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StoryUpvote
+   */
+  select?: Prisma.StoryUpvoteSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StoryUpvote
+   */
+  omit?: Prisma.StoryUpvoteOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StoryUpvoteInclude<ExtArgs> | null
+  where?: Prisma.StoryUpvoteWhereInput
+  orderBy?: Prisma.StoryUpvoteOrderByWithRelationInput | Prisma.StoryUpvoteOrderByWithRelationInput[]
+  cursor?: Prisma.StoryUpvoteWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StoryUpvoteScalarFieldEnum | Prisma.StoryUpvoteScalarFieldEnum[]
+}
+
+/**
+ * User.storyComments
+ */
+export type User$storyCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the StoryComment
+   */
+  select?: Prisma.StoryCommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the StoryComment
+   */
+  omit?: Prisma.StoryCommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StoryCommentInclude<ExtArgs> | null
+  where?: Prisma.StoryCommentWhereInput
+  orderBy?: Prisma.StoryCommentOrderByWithRelationInput | Prisma.StoryCommentOrderByWithRelationInput[]
+  cursor?: Prisma.StoryCommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StoryCommentScalarFieldEnum | Prisma.StoryCommentScalarFieldEnum[]
 }
 
 /**

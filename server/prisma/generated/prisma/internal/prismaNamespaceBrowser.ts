@@ -52,13 +52,24 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Pet: 'Pet',
+  PetType: 'PetType',
+  PetTypeTranslation: 'PetTypeTranslation',
+  PetAge: 'PetAge',
+  PetAgeTranslation: 'PetAgeTranslation',
+  PetSize: 'PetSize',
+  PetSizeTranslation: 'PetSizeTranslation',
+  PetPersonality: 'PetPersonality',
+  PetPersonalityTranslation: 'PetPersonalityTranslation',
   PetLocation: 'PetLocation',
   Province: 'Province',
+  ProvinceTranslation: 'ProvinceTranslation',
   District: 'District',
-  PetType: 'PetType',
-  PetAge: 'PetAge',
-  PetSize: 'PetSize',
-  PetPersonality: 'PetPersonality',
+  DistrictTranslation: 'DistrictTranslation',
+  Story: 'Story',
+  StoryUpvote: 'StoryUpvote',
+  StoryComment: 'StoryComment',
+  StoryTag: 'StoryTag',
+  StoryTagTranslation: 'StoryTagTranslation',
   User: 'User',
   Token: 'Token'
 } as const
@@ -86,17 +97,82 @@ export const PetScalarFieldEnum = {
   typeId: 'typeId',
   ageTypeId: 'ageTypeId',
   sizeTypeId: 'sizeTypeId',
-  personalities: 'personalities',
   description: 'description',
   imageUrl: 'imageUrl',
   isAdopted: 'isAdopted',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  createdBy: 'createdBy',
-  updatedBy: 'updatedBy'
+  createdBy: 'createdBy'
 } as const
 
 export type PetScalarFieldEnum = (typeof PetScalarFieldEnum)[keyof typeof PetScalarFieldEnum]
+
+
+export const PetTypeScalarFieldEnum = {
+  id: 'id'
+} as const
+
+export type PetTypeScalarFieldEnum = (typeof PetTypeScalarFieldEnum)[keyof typeof PetTypeScalarFieldEnum]
+
+
+export const PetTypeTranslationScalarFieldEnum = {
+  id: 'id',
+  petTypeId: 'petTypeId',
+  languageId: 'languageId',
+  name: 'name'
+} as const
+
+export type PetTypeTranslationScalarFieldEnum = (typeof PetTypeTranslationScalarFieldEnum)[keyof typeof PetTypeTranslationScalarFieldEnum]
+
+
+export const PetAgeScalarFieldEnum = {
+  id: 'id'
+} as const
+
+export type PetAgeScalarFieldEnum = (typeof PetAgeScalarFieldEnum)[keyof typeof PetAgeScalarFieldEnum]
+
+
+export const PetAgeTranslationScalarFieldEnum = {
+  id: 'id',
+  petAgeId: 'petAgeId',
+  languageId: 'languageId',
+  name: 'name'
+} as const
+
+export type PetAgeTranslationScalarFieldEnum = (typeof PetAgeTranslationScalarFieldEnum)[keyof typeof PetAgeTranslationScalarFieldEnum]
+
+
+export const PetSizeScalarFieldEnum = {
+  id: 'id'
+} as const
+
+export type PetSizeScalarFieldEnum = (typeof PetSizeScalarFieldEnum)[keyof typeof PetSizeScalarFieldEnum]
+
+
+export const PetSizeTranslationScalarFieldEnum = {
+  id: 'id',
+  petSizeId: 'petSizeId',
+  languageId: 'languageId',
+  name: 'name'
+} as const
+
+export type PetSizeTranslationScalarFieldEnum = (typeof PetSizeTranslationScalarFieldEnum)[keyof typeof PetSizeTranslationScalarFieldEnum]
+
+
+export const PetPersonalityScalarFieldEnum = {
+  id: 'id'
+} as const
+
+export type PetPersonalityScalarFieldEnum = (typeof PetPersonalityScalarFieldEnum)[keyof typeof PetPersonalityScalarFieldEnum]
+
+
+export const PetPersonalityTranslationScalarFieldEnum = {
+  id: 'id',
+  petPersonalityId: 'petPersonalityId',
+  languageId: 'languageId',
+  name: 'name'
+} as const
+
+export type PetPersonalityTranslationScalarFieldEnum = (typeof PetPersonalityTranslationScalarFieldEnum)[keyof typeof PetPersonalityTranslationScalarFieldEnum]
 
 
 export const PetLocationScalarFieldEnum = {
@@ -117,6 +193,16 @@ export const ProvinceScalarFieldEnum = {
 export type ProvinceScalarFieldEnum = (typeof ProvinceScalarFieldEnum)[keyof typeof ProvinceScalarFieldEnum]
 
 
+export const ProvinceTranslationScalarFieldEnum = {
+  id: 'id',
+  provinceId: 'provinceId',
+  languageId: 'languageId',
+  name: 'name'
+} as const
+
+export type ProvinceTranslationScalarFieldEnum = (typeof ProvinceTranslationScalarFieldEnum)[keyof typeof ProvinceTranslationScalarFieldEnum]
+
+
 export const DistrictScalarFieldEnum = {
   id: 'id',
   provinceId: 'provinceId'
@@ -125,32 +211,64 @@ export const DistrictScalarFieldEnum = {
 export type DistrictScalarFieldEnum = (typeof DistrictScalarFieldEnum)[keyof typeof DistrictScalarFieldEnum]
 
 
-export const PetTypeScalarFieldEnum = {
+export const DistrictTranslationScalarFieldEnum = {
+  id: 'id',
+  districtId: 'districtId',
+  languageId: 'languageId',
+  name: 'name'
+} as const
+
+export type DistrictTranslationScalarFieldEnum = (typeof DistrictTranslationScalarFieldEnum)[keyof typeof DistrictTranslationScalarFieldEnum]
+
+
+export const StoryScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  content: 'content',
+  imageUrl: 'imageUrl',
+  upvotes: 'upvotes',
+  createdAt: 'createdAt',
+  createdBy: 'createdBy'
+} as const
+
+export type StoryScalarFieldEnum = (typeof StoryScalarFieldEnum)[keyof typeof StoryScalarFieldEnum]
+
+
+export const StoryUpvoteScalarFieldEnum = {
+  id: 'id',
+  storyId: 'storyId',
+  userId: 'userId'
+} as const
+
+export type StoryUpvoteScalarFieldEnum = (typeof StoryUpvoteScalarFieldEnum)[keyof typeof StoryUpvoteScalarFieldEnum]
+
+
+export const StoryCommentScalarFieldEnum = {
+  id: 'id',
+  storyId: 'storyId',
+  userId: 'userId',
+  content: 'content',
+  createdAt: 'createdAt'
+} as const
+
+export type StoryCommentScalarFieldEnum = (typeof StoryCommentScalarFieldEnum)[keyof typeof StoryCommentScalarFieldEnum]
+
+
+export const StoryTagScalarFieldEnum = {
   id: 'id'
 } as const
 
-export type PetTypeScalarFieldEnum = (typeof PetTypeScalarFieldEnum)[keyof typeof PetTypeScalarFieldEnum]
+export type StoryTagScalarFieldEnum = (typeof StoryTagScalarFieldEnum)[keyof typeof StoryTagScalarFieldEnum]
 
 
-export const PetAgeScalarFieldEnum = {
-  id: 'id'
+export const StoryTagTranslationScalarFieldEnum = {
+  id: 'id',
+  tagId: 'tagId',
+  language: 'language',
+  name: 'name'
 } as const
 
-export type PetAgeScalarFieldEnum = (typeof PetAgeScalarFieldEnum)[keyof typeof PetAgeScalarFieldEnum]
-
-
-export const PetSizeScalarFieldEnum = {
-  id: 'id'
-} as const
-
-export type PetSizeScalarFieldEnum = (typeof PetSizeScalarFieldEnum)[keyof typeof PetSizeScalarFieldEnum]
-
-
-export const PetPersonalityScalarFieldEnum = {
-  id: 'id'
-} as const
-
-export type PetPersonalityScalarFieldEnum = (typeof PetPersonalityScalarFieldEnum)[keyof typeof PetPersonalityScalarFieldEnum]
+export type StoryTagTranslationScalarFieldEnum = (typeof StoryTagTranslationScalarFieldEnum)[keyof typeof StoryTagTranslationScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -161,8 +279,7 @@ export const UserScalarFieldEnum = {
   role: 'role',
   isActive: 'isActive',
   isDeleted: 'isDeleted',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  createdAt: 'createdAt'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -189,10 +306,26 @@ export const SortOrder = {
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
 export const QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

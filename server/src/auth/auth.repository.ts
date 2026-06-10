@@ -41,7 +41,7 @@ export class AuthRepository {
         });
     }
 
-    async revokeToken(id: number) {
+    async revokeToken(id: string) {
         return this.prisma.token.update({
             where: { id },
             data: { isRevoked: true },
@@ -77,7 +77,7 @@ export class AuthRepository {
         });
     }
 
-    async markTokenAsUsed(id: number) {
+    async markTokenAsUsed(id: string) {
         return this.prisma.token.update({
             where: { id },
             data: { isRevoked: true },

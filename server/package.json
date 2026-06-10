@@ -6,15 +6,12 @@
   "license": "MIT",
   "scripts": {
     "redis:up": "docker compose -f ../docker-compose.yml up -d redis",
-    "prestart": "npm run redis:up",
-    "prestart:dev": "npm run redis:up",
-    "prestart:serverdebug": "npm run redis:up",
     "build": "nest build",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:serverdebug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "prisma:seed": "npx primsa db seed"
+    "prisma:seed": "npx prisma db seed"
   },
   "engines": {
     "npm": ">=10.0.0",

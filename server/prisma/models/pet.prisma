@@ -3,23 +3,91 @@ model Pet {
   name          String
   age           Int
   typeId        String
+  petType       PetType           @relation(fields: [typeId], references: [id])
   ageTypeId     String
+  petAge        PetAge            @relation(fields: [ageTypeId], references: [id])
   sizeTypeId    String
+  petSize       PetSize           @relation(fields: [sizeTypeId], references: [id])
 
   location    PetLocation?      @relation("PetLocation")
-  personalities String[]
+  petPersonalities PetPersonality[]
   description   String
   imageUrl      String[]
   isAdopted     Boolean           @default(false)
 
   createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt()
   createdBy     String
   createdByUser User              @relation("PetCreatedBy", fields: [createdBy], references: [id])
-  updatedBy     String
-  updatedByUser User              @relation("PetUpdatedBy", fields: [updatedBy], references: [id])
 
   @@index([typeId, ageTypeId, sizeTypeId])
+}
+
+model PetType {
+  id   String @id
+  pets Pet[]
+  translations PetTypeTranslation[]
+}
+
+model PetTypeTranslation {
+  id        Int @id @default(autoincrement())
+  petTypeId    String
+  languageId  String
+  name      String
+
+  petType      PetType @relation(fields: [petTypeId], references: [id], onDelete: Cascade)
+
+  @@unique([petTypeId, languageId])
+}
+
+model PetAge {
+  id   String @id
+  pets Pet[]
+  translations PetAgeTranslation[]
+}
+
+model PetAgeTranslation {
+  id        Int @id @default(autoincrement())
+  petAgeId     String
+  languageId  String
+  name      String
+
+  age       PetAge @relation(fields: [petAgeId], references: [id], onDelete: Cascade)
+
+  @@unique([petAgeId, languageId])
+}
+
+model PetSize {
+  id   String @id
+  pets Pet[]
+  translations PetSizeTranslation[]
+}
+
+model PetSizeTranslation {
+  id        Int @id @default(autoincrement())
+  petSizeId    String
+  languageId  String
+  name      String
+
+  size      PetSize @relation(fields: [petSizeId], references: [id], onDelete: Cascade)
+
+  @@unique([petSizeId, languageId])
+}
+
+model PetPersonality {
+  id   String @id
+  pets Pet[] 
+  translations PetPersonalityTranslation[]
+}
+
+model PetPersonalityTranslation {
+  id        Int @id @default(autoincrement())
+  petPersonalityId    String
+  languageId  String
+  name      String
+
+  personality      PetPersonality @relation(fields: [petPersonalityId], references: [id], onDelete: Cascade)
+
+  @@unique([petPersonalityId, languageId])
 }
 
 model PetLocation {
@@ -29,6 +97,8 @@ model PetLocation {
   petId String @unique
 
   address String
+  district District @relation(fields: [districtId], references: [id])
   districtId String
+  province Province @relation(fields: [provinceId], references: [id])
   provinceId String
 }

@@ -4,55 +4,80 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "./generated/prisma/client.js";
 
 const connectionString = `${process.env.DATABASE_URL}`;
+
 const pool = new Pool({ connectionString });
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 const user = {
-    email: "user@example.com",
-    password: "password",
-    name: "Dummy user",
+    email: process.env.EMAIL as string,
+    password: process.env.PASSWORD as string,
+    name: process.env.NAME as string,
     isActive: true
 }
 
-const petType = [
-    { id: 'dog' },
-    { id: 'cat' },
-    { id: 'rabbit' },
-    { id: 'bird' },
+const petTypes = [
+    { petTypeId: 'dog', languageId: 'EN', name: 'Dog' },
+    { petTypeId: 'dog', languageId: 'VN', name: 'Chó' },
+    { petTypeId: 'cat', languageId: 'EN', name: 'Cat' },
+    { petTypeId: 'cat', languageId: 'VN', name: 'Mèo' },
+    { petTypeId: 'rabbit', languageId: 'EN', name: 'Rabbit' },
+    { petTypeId: 'rabbit', languageId: 'VN', name: 'Thỏ' },
+    { petTypeId: 'bird', languageId: 'EN', name: 'Bird' },
+    { petTypeId: 'bird', languageId: 'VN', name: 'Chim' },
 ];
 
-const petAge = [
-    { id: 'baby' },
-    { id: 'young' },
-    { id: 'adult' },
+const petAges = [
+    { petAgeId: 'baby', languageId: 'EN', name: 'Baby' },
+    { petAgeId: 'baby', languageId: 'VN', name: 'Nhỏ' },
+    { petAgeId: 'young', languageId: 'EN', name: 'Young' },
+    { petAgeId: 'young', languageId: 'VN', name: 'Trẻ' },
+    { petAgeId: 'adult', languageId: 'EN', name: 'Adult' },
+    { petAgeId: 'adult', languageId: 'VN', name: 'Trưởng thành' },
+    { petAgeId: 'old', languageId: 'EN', name: 'Old' },
+    { petAgeId: 'old', languageId: 'VN', name: 'Già' },
 ];
 
-const petSize = [
-    { id: 'small' },
-    { id: 'medium' },
-    { id: 'large' },
+const petSizes = [
+    { petSizeId: 'small', languageId: 'EN', name: 'Small' },
+    { petSizeId: 'small', languageId: 'VN', name: 'Nhỏ' },
+    { petSizeId: 'medium', languageId: 'EN', name: 'Medium' },
+    { petSizeId: 'medium', languageId: 'VN', name: 'Trung bình' },
+    { petSizeId: 'large', languageId: 'EN', name: 'Large' },
+    { petSizeId: 'large', languageId: 'VN', name: 'Lớn' },
 ];
 
-const petPersonality = [
-    { id: 'friendly' },
-    { id: 'shy' },
-    { id: 'aggressive' },
+const petPersonalities = [
+    { petPersonalityId: 'friendly', languageId: 'EN', name: 'Friendly' },
+    { petPersonalityId: 'friendly', languageId: 'VN', name: 'Thân thiện' },
+    { petPersonalityId: 'shy', languageId: 'EN', name: 'Shy' },
+    { petPersonalityId: 'shy', languageId: 'VN', name: 'Nhút nhát' },
+    { petPersonalityId: 'aggressive', languageId: 'EN', name: 'Aggressive' },
+    { petPersonalityId: 'aggressive', languageId: 'VN', name: 'Hung hăng' },
 ];
 
-const district = [
-    { id: 'ben_nghe', provinceId: 'ho_chi_minh' },
-    { id: 'ben_thanh', provinceId: 'ho_chi_minh' },
-    { id: 'vo_thi_sau', provinceId: 'ho_chi_minh' },
-    { id: 'da_kao', provinceId: 'ho_chi_minh' },
-    { id: 'co_giang', provinceId: 'ho_chi_minh' },
-    { id: 'nguyen_thai_binh', provinceId: 'ho_chi_minh' },
+const districts = [
+    { districtId: 'ben_nghe', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Ben Nghe', },
+    { districtId: 'ben_nghe', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Bến Nghé', },
+    { districtId: 'ben_thanh', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Ben Thanh', },
+    { districtId: 'ben_thanh', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Bến Thành', },
+    { districtId: 'vo_thi_sau', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Vo Thi Sau', },
+    { districtId: 'vo_thi_sau', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Võ Thị Sáu', },
+    { districtId: 'da_kao', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Da Kao', },
+    { districtId: 'da_kao', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Đa Kao', },
+    { districtId: 'co_giang', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Co Giang', },
+    { districtId: 'co_giang', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Cô Giang', },
+    { districtId: 'nguyen_thai_binh', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Nguyen Thai Binh', },
+    { districtId: 'nguyen_thai_binh', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Nguyễn Thái Bình', },
 ];
 
-const province = [
-    { id: 'ho_chi_minh' },
-    { id: 'hanoi' },
-    { id: 'da_nang' }
+const provinces = [
+    { provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Ho Chi Minh' },
+    { provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Hồ Chí Minh' },
+    { provinceId: 'hanoi', languageId: 'EN', name: 'Hanoi' },
+    { provinceId: 'hanoi', languageId: 'VN', name: 'Hà Nội' },
+    { provinceId: 'da_nang', languageId: 'EN', name: 'Da Nang' },
+    { provinceId: 'da_nang', languageId: 'VN', name: 'Đà Nẵng' }
 ];
 
 const pets = [
@@ -189,28 +214,15 @@ const pets = [
 ];
 
 async function main() {
-    // Delete in FK-safe order
-    await prisma.pet.deleteMany();
-    await prisma.petLocation.deleteMany();
-    await prisma.token.deleteMany();
-    await prisma.user.deleteMany();
-    await prisma.petPersonality.deleteMany();
-    await prisma.petType.deleteMany();
-    await prisma.petAge.deleteMany();
-    await prisma.petSize.deleteMany();
-    await prisma.district.deleteMany();
-    await prisma.province.deleteMany();
-
-
     await Promise.all([
-        prisma.petType.createMany({ data: petType }),
-        prisma.petAge.createMany({ data: petAge }),
-        prisma.petSize.createMany({ data: petSize }),
-        prisma.petPersonality.createMany({ data: petPersonality }),
-        prisma.province.createMany({ data: province }),
+        prisma.petTypeTranslation.createMany({ data: petTypes }),
+        prisma.petAgeTranslation.createMany({ data: petAges }),
+        prisma.petSizeTranslation.createMany({ data: petSizes }),
+        prisma.petPersonalityTranslation.createMany({ data: petPersonalities }),
+        prisma.provinceTranslation.createMany({ data: provinces }),
     ]);
 
-    await prisma.district.createMany({ data: district });
+    await prisma.districtTranslation.createMany({ data: districts });
 
     const seededUser = await prisma.user.create({ data: user });
 
@@ -220,14 +232,19 @@ async function main() {
                 data: {
                     name: pet.name,
                     age: pet.age,
-                    typeId: pet.typeId,
-                    ageTypeId: pet.ageTypeId,
-                    sizeTypeId: pet.sizeTypeId,
+                    petType: {
+                        connect: { id: pet.typeId }
+                    },
+                    petAge: {
+                        connect: { id: pet.ageTypeId }
+                    },
+                    petSize: {
+                        connect: { id: pet.sizeTypeId }
+                    },
                     description: pet.description,
                     imageUrl: pet.imageUrl,
                     isAdopted: false,
                     createdByUser: { connect: { id: seededUser.id } },
-                    updatedByUser: { connect: { id: seededUser.id } },
                     location: {
                         create: {
                             address: pet.address,
@@ -235,7 +252,9 @@ async function main() {
                             provinceId: pet.provinceId
                         }
                     },
-                    personalities: pet.personalityIds
+                    petPersonalities: {
+                        connect: pet.personalityIds.map((id) => ({ id }))
+                    }
                 },
             }),
         ),
@@ -244,14 +263,12 @@ async function main() {
     console.log(`Seeded: Success`);
 }
 
-main()
-    .then(async () => {
-        await prisma.$disconnect();
-        await pool.end();
-    })
-    .catch(async (e) => {
-        console.error(e);
-        await prisma.$disconnect();
-        await pool.end();
-        process.exit(1);
-    });
+main().then(async () => {
+    await prisma.$disconnect();
+    await pool.end();
+}).catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    await pool.end();
+    process.exit(1);
+});

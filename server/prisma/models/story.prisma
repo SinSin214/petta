@@ -1,0 +1,54 @@
+model Story {
+    id          String   @id @default(uuid())
+    title       String
+    content     Json
+    imageUrl      String[]
+    upvotes     Int      @default(0)
+    upvotedBy   StoryUpvote[]   @relation("StoryUpvote")
+    tags        StoryTag[]     @relation("StoryTags")
+    comments    StoryComment[] @relation("StoryComments")
+
+    createdAt     DateTime          @default(now())
+    createdBy     String
+    createdByUser User              @relation("StoryCreatedBy", fields: [createdBy], references: [id])
+}
+
+model StoryUpvote {
+    id        String       @id @default(uuid())
+    storyId   String
+    userId    String
+
+    story     Story     @relation("StoryUpvote", fields: [storyId], references: [id], onDelete: Cascade)
+    user      User      @relation("StoryUpvoteByUser", fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([storyId, userId])
+}
+
+model StoryComment {
+    id        String       @id @default(uuid())
+    storyId   String
+    userId    String
+    content   String
+
+    story     Story     @relation("StoryComments", fields: [storyId], references: [id], onDelete: Cascade)
+    user      User      @relation("StoryCommentsByUser", fields: [userId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime  @default(now())
+}
+
+model StoryTag {
+    id        String @id
+    stories   Story[]   @relation("StoryTags")
+    translations StoryTagTranslation[]
+}
+
+model StoryTagTranslation {
+    id        Int @id @default(autoincrement())
+    tagId     String
+    language  String
+    name      String
+
+    tag       StoryTag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+    @@unique([tagId, language])
+}

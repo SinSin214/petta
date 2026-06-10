@@ -1,27 +1,36 @@
 model Province {
   id   String @id
   districts District[] @relation("DistrictProvince")
+  petLocations PetLocation[]
+  translations ProvinceTranslation[]
+}
+
+model ProvinceTranslation {
+  id        Int @id @default(autoincrement())
+  provinceId String
+  languageId  String
+  name      String
+
+  province      Province @relation(fields: [provinceId], references: [id], onDelete: Cascade)
+
+  @@unique([provinceId, languageId])
 }
 
 model District {
   id   String @id
   provinceId String
   province Province @relation("DistrictProvince", fields: [provinceId], references: [id])
+  petLocations PetLocation[]
+  translations DistrictTranslation[]
 }
 
+model DistrictTranslation {
+  id        Int @id @default(autoincrement())
+  districtId String
+  languageId  String
+  name      String
 
-model PetType {
-  id   String @id
-}
+  district      District @relation(fields: [districtId], references: [id], onDelete: Cascade)
 
-model PetAge {
-  id   String @id
-}
-
-model PetSize {
-  id   String @id
-}
-
-model PetPersonality {
-  id   String @id
+  @@unique([districtId, languageId])
 }

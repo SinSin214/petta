@@ -20,22 +20,12 @@ export type TokenModel = runtime.Types.Result.DefaultSelection<Prisma.$TokenPayl
 
 export type AggregateToken = {
   _count: TokenCountAggregateOutputType | null
-  _avg: TokenAvgAggregateOutputType | null
-  _sum: TokenSumAggregateOutputType | null
   _min: TokenMinAggregateOutputType | null
   _max: TokenMaxAggregateOutputType | null
 }
 
-export type TokenAvgAggregateOutputType = {
-  id: number | null
-}
-
-export type TokenSumAggregateOutputType = {
-  id: number | null
-}
-
 export type TokenMinAggregateOutputType = {
-  id: number | null
+  id: string | null
   userId: string | null
   tokenHash: string | null
   type: $Enums.TokenType | null
@@ -45,7 +35,7 @@ export type TokenMinAggregateOutputType = {
 }
 
 export type TokenMaxAggregateOutputType = {
-  id: number | null
+  id: string | null
   userId: string | null
   tokenHash: string | null
   type: $Enums.TokenType | null
@@ -65,14 +55,6 @@ export type TokenCountAggregateOutputType = {
   _all: number
 }
 
-
-export type TokenAvgAggregateInputType = {
-  id?: true
-}
-
-export type TokenSumAggregateInputType = {
-  id?: true
-}
 
 export type TokenMinAggregateInputType = {
   id?: true
@@ -143,18 +125,6 @@ export type TokenAggregateArgs<ExtArgs extends runtime.Types.Extensions.Internal
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: TokenAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: TokenSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: TokenMinAggregateInputType
@@ -185,14 +155,12 @@ export type TokenGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   _count?: TokenCountAggregateInputType | true
-  _avg?: TokenAvgAggregateInputType
-  _sum?: TokenSumAggregateInputType
   _min?: TokenMinAggregateInputType
   _max?: TokenMaxAggregateInputType
 }
 
 export type TokenGroupByOutputType = {
-  id: number
+  id: string
   userId: string
   tokenHash: string
   type: $Enums.TokenType
@@ -200,8 +168,6 @@ export type TokenGroupByOutputType = {
   expiresAt: Date
   createdAt: Date
   _count: TokenCountAggregateOutputType | null
-  _avg: TokenAvgAggregateOutputType | null
-  _sum: TokenSumAggregateOutputType | null
   _min: TokenMinAggregateOutputType | null
   _max: TokenMaxAggregateOutputType | null
 }
@@ -225,7 +191,7 @@ export type TokenWhereInput = {
   AND?: Prisma.TokenWhereInput | Prisma.TokenWhereInput[]
   OR?: Prisma.TokenWhereInput[]
   NOT?: Prisma.TokenWhereInput | Prisma.TokenWhereInput[]
-  id?: Prisma.IntFilter<"Token"> | number
+  id?: Prisma.StringFilter<"Token"> | string
   userId?: Prisma.StringFilter<"Token"> | string
   tokenHash?: Prisma.StringFilter<"Token"> | string
   type?: Prisma.EnumTokenTypeFilter<"Token"> | $Enums.TokenType
@@ -247,7 +213,7 @@ export type TokenOrderByWithRelationInput = {
 }
 
 export type TokenWhereUniqueInput = Prisma.AtLeast<{
-  id?: number
+  id?: string
   tokenHash?: string
   AND?: Prisma.TokenWhereInput | Prisma.TokenWhereInput[]
   OR?: Prisma.TokenWhereInput[]
@@ -269,17 +235,15 @@ export type TokenOrderByWithAggregationInput = {
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.TokenCountOrderByAggregateInput
-  _avg?: Prisma.TokenAvgOrderByAggregateInput
   _max?: Prisma.TokenMaxOrderByAggregateInput
   _min?: Prisma.TokenMinOrderByAggregateInput
-  _sum?: Prisma.TokenSumOrderByAggregateInput
 }
 
 export type TokenScalarWhereWithAggregatesInput = {
   AND?: Prisma.TokenScalarWhereWithAggregatesInput | Prisma.TokenScalarWhereWithAggregatesInput[]
   OR?: Prisma.TokenScalarWhereWithAggregatesInput[]
   NOT?: Prisma.TokenScalarWhereWithAggregatesInput | Prisma.TokenScalarWhereWithAggregatesInput[]
-  id?: Prisma.IntWithAggregatesFilter<"Token"> | number
+  id?: Prisma.StringWithAggregatesFilter<"Token"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Token"> | string
   tokenHash?: Prisma.StringWithAggregatesFilter<"Token"> | string
   type?: Prisma.EnumTokenTypeWithAggregatesFilter<"Token"> | $Enums.TokenType
@@ -289,6 +253,7 @@ export type TokenScalarWhereWithAggregatesInput = {
 }
 
 export type TokenCreateInput = {
+  id?: string
   tokenHash: string
   type: $Enums.TokenType
   isRevoked?: boolean
@@ -298,7 +263,7 @@ export type TokenCreateInput = {
 }
 
 export type TokenUncheckedCreateInput = {
-  id?: number
+  id?: string
   userId: string
   tokenHash: string
   type: $Enums.TokenType
@@ -308,6 +273,7 @@ export type TokenUncheckedCreateInput = {
 }
 
 export type TokenUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
   isRevoked?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -317,7 +283,7 @@ export type TokenUpdateInput = {
 }
 
 export type TokenUncheckedUpdateInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
@@ -327,7 +293,7 @@ export type TokenUncheckedUpdateInput = {
 }
 
 export type TokenCreateManyInput = {
-  id?: number
+  id?: string
   userId: string
   tokenHash: string
   type: $Enums.TokenType
@@ -337,6 +303,7 @@ export type TokenCreateManyInput = {
 }
 
 export type TokenUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
   isRevoked?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -345,7 +312,7 @@ export type TokenUpdateManyMutationInput = {
 }
 
 export type TokenUncheckedUpdateManyInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
@@ -374,10 +341,6 @@ export type TokenCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
 }
 
-export type TokenAvgOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-}
-
 export type TokenMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -396,10 +359,6 @@ export type TokenMinOrderByAggregateInput = {
   isRevoked?: Prisma.SortOrder
   expiresAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-}
-
-export type TokenSumOrderByAggregateInput = {
-  id?: Prisma.SortOrder
 }
 
 export type TokenCreateNestedManyWithoutUserInput = {
@@ -449,6 +408,7 @@ export type EnumTokenTypeFieldUpdateOperationsInput = {
 }
 
 export type TokenCreateWithoutUserInput = {
+  id?: string
   tokenHash: string
   type: $Enums.TokenType
   isRevoked?: boolean
@@ -457,7 +417,7 @@ export type TokenCreateWithoutUserInput = {
 }
 
 export type TokenUncheckedCreateWithoutUserInput = {
-  id?: number
+  id?: string
   tokenHash: string
   type: $Enums.TokenType
   isRevoked?: boolean
@@ -495,7 +455,7 @@ export type TokenScalarWhereInput = {
   AND?: Prisma.TokenScalarWhereInput | Prisma.TokenScalarWhereInput[]
   OR?: Prisma.TokenScalarWhereInput[]
   NOT?: Prisma.TokenScalarWhereInput | Prisma.TokenScalarWhereInput[]
-  id?: Prisma.IntFilter<"Token"> | number
+  id?: Prisma.StringFilter<"Token"> | string
   userId?: Prisma.StringFilter<"Token"> | string
   tokenHash?: Prisma.StringFilter<"Token"> | string
   type?: Prisma.EnumTokenTypeFilter<"Token"> | $Enums.TokenType
@@ -505,7 +465,7 @@ export type TokenScalarWhereInput = {
 }
 
 export type TokenCreateManyUserInput = {
-  id?: number
+  id?: string
   tokenHash: string
   type: $Enums.TokenType
   isRevoked?: boolean
@@ -514,6 +474,7 @@ export type TokenCreateManyUserInput = {
 }
 
 export type TokenUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
   isRevoked?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -522,7 +483,7 @@ export type TokenUpdateWithoutUserInput = {
 }
 
 export type TokenUncheckedUpdateWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
   isRevoked?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -531,7 +492,7 @@ export type TokenUncheckedUpdateWithoutUserInput = {
 }
 
 export type TokenUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
+  id?: Prisma.StringFieldUpdateOperationsInput | string
   tokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumTokenTypeFieldUpdateOperationsInput | $Enums.TokenType
   isRevoked?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -601,7 +562,7 @@ export type $TokenPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     user: Prisma.$UserPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
-    id: number
+    id: string
     userId: string
     tokenHash: string
     type: $Enums.TokenType
@@ -1032,7 +993,7 @@ export interface Prisma__TokenClient<T, Null = never, ExtArgs extends runtime.Ty
  * Fields of the Token model
  */
 export interface TokenFieldRefs {
-  readonly id: Prisma.FieldRef<"Token", 'Int'>
+  readonly id: Prisma.FieldRef<"Token", 'String'>
   readonly userId: Prisma.FieldRef<"Token", 'String'>
   readonly tokenHash: Prisma.FieldRef<"Token", 'String'>
   readonly type: Prisma.FieldRef<"Token", 'TokenType'>

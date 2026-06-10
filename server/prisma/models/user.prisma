@@ -21,14 +21,15 @@ model User {
   isDeleted Boolean @default(false)
   
   petsCreated  Pet[]    @relation("PetCreatedBy")
-  petsUpdated  Pet[]    @relation("PetUpdatedBy")
+  storiesCreated Story[]   @relation("StoryCreatedBy")
+  storyUpvotes  StoryUpvote[] @relation("StoryUpvoteByUser")
+  storyComments StoryComment[] @relation("StoryCommentsByUser")
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt()
 }
 
 model Token {
-  id        Int       @id @default(autoincrement())
+  id        String       @id @default(uuid())
   userId    String
   tokenHash String    @unique
   type      TokenType

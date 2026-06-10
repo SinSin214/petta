@@ -47,6 +47,46 @@ export { Prisma }
  */
 export type Pet = Prisma.PetModel
 /**
+ * Model PetType
+ * 
+ */
+export type PetType = Prisma.PetTypeModel
+/**
+ * Model PetTypeTranslation
+ * 
+ */
+export type PetTypeTranslation = Prisma.PetTypeTranslationModel
+/**
+ * Model PetAge
+ * 
+ */
+export type PetAge = Prisma.PetAgeModel
+/**
+ * Model PetAgeTranslation
+ * 
+ */
+export type PetAgeTranslation = Prisma.PetAgeTranslationModel
+/**
+ * Model PetSize
+ * 
+ */
+export type PetSize = Prisma.PetSizeModel
+/**
+ * Model PetSizeTranslation
+ * 
+ */
+export type PetSizeTranslation = Prisma.PetSizeTranslationModel
+/**
+ * Model PetPersonality
+ * 
+ */
+export type PetPersonality = Prisma.PetPersonalityModel
+/**
+ * Model PetPersonalityTranslation
+ * 
+ */
+export type PetPersonalityTranslation = Prisma.PetPersonalityTranslationModel
+/**
  * Model PetLocation
  * 
  */
@@ -57,30 +97,45 @@ export type PetLocation = Prisma.PetLocationModel
  */
 export type Province = Prisma.ProvinceModel
 /**
+ * Model ProvinceTranslation
+ * 
+ */
+export type ProvinceTranslation = Prisma.ProvinceTranslationModel
+/**
  * Model District
  * 
  */
 export type District = Prisma.DistrictModel
 /**
- * Model PetType
+ * Model DistrictTranslation
  * 
  */
-export type PetType = Prisma.PetTypeModel
+export type DistrictTranslation = Prisma.DistrictTranslationModel
 /**
- * Model PetAge
+ * Model Story
  * 
  */
-export type PetAge = Prisma.PetAgeModel
+export type Story = Prisma.StoryModel
 /**
- * Model PetSize
+ * Model StoryUpvote
  * 
  */
-export type PetSize = Prisma.PetSizeModel
+export type StoryUpvote = Prisma.StoryUpvoteModel
 /**
- * Model PetPersonality
+ * Model StoryComment
  * 
  */
-export type PetPersonality = Prisma.PetPersonalityModel
+export type StoryComment = Prisma.StoryCommentModel
+/**
+ * Model StoryTag
+ * 
+ */
+export type StoryTag = Prisma.StoryTagModel
+/**
+ * Model StoryTagTranslation
+ * 
+ */
+export type StoryTagTranslation = Prisma.StoryTagTranslationModel
 /**
  * Model User
  * 
