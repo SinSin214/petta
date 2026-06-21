@@ -12,29 +12,33 @@ import { RedisModule } from './redis/redis.module.js';
 import { REDIS_CLIENT } from './redis/redis.constants.js';
 import { RateLimitGuard } from './common/guards/rate-limit.guard.js';
 
+const customConfigModule = ConfigModule.forRoot({
+  envFilePath: '../.env',
+  isGlobal: true,
+});
+
+// Inject redis into throttler as rate limitting storage
+// Throttler is now use the same storage for all instances, so limits are shared across all endpoints and app instances.
+const customThrottlerModule = ThrottlerModule.forRootAsync({
+  inject: [ConfigService, REDIS_CLIENT],
+  useFactory: (_configService: ConfigService, redisClient: Redis) => ({
+    throttlers: [
+      {
+        // Default: 20 per request type per minute (covers all public/pet endpoints)
+        name: 'default',
+        ttl: 60_000,
+        limit: 10,
+      },
+    ],
+    storage: new ThrottlerStorageRedisService(redisClient),
+  }),
+});
+
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: '../.env',
-      isGlobal: true,
-    }),
+    customConfigModule,
     RedisModule,
-    // Inject redis into throttler as rate limitting storage
-    // Throttler is now use the same storage for all instances, so limits are shared across all endpoints and app instances.
-    ThrottlerModule.forRootAsync({
-      inject: [ConfigService, REDIS_CLIENT],
-      useFactory: (_configService: ConfigService, redisClient: Redis) => ({
-        throttlers: [
-          {
-            // Default: 20 requests per minute (covers all public/pet endpoints)
-            name: 'default',
-            ttl: 60_000,
-            limit: 10,
-          },
-        ],
-        storage: new ThrottlerStorageRedisService(redisClient),
-      }),
-    }),
+    customThrottlerModule,
     PetModule,
     AuthModule,
   ],

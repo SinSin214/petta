@@ -1,7 +1,8 @@
 import "dotenv/config";
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "./generated/prisma/client.js";
+import { Prisma, PrismaClient } from "./generated/prisma/client.js";
+import * as bcrypt from 'bcrypt';
 
 const connectionString = `${process.env.DATABASE_URL}`;
 
@@ -11,12 +12,12 @@ const prisma = new PrismaClient({ adapter });
 
 const user = {
     email: process.env.EMAIL as string,
-    password: process.env.PASSWORD as string,
+    password: await bcrypt.hash(process.env.PASSWORD as string, 10),
     name: process.env.NAME as string,
     isActive: true
 }
 
-const petTypes = [
+const petTypeTranslations = [
     { petTypeId: 'dog', languageId: 'EN', name: 'Dog' },
     { petTypeId: 'dog', languageId: 'VN', name: 'Chó' },
     { petTypeId: 'cat', languageId: 'EN', name: 'Cat' },
@@ -27,7 +28,7 @@ const petTypes = [
     { petTypeId: 'bird', languageId: 'VN', name: 'Chim' },
 ];
 
-const petAges = [
+const petAgeTranslations = [
     { petAgeId: 'baby', languageId: 'EN', name: 'Baby' },
     { petAgeId: 'baby', languageId: 'VN', name: 'Nhỏ' },
     { petAgeId: 'young', languageId: 'EN', name: 'Young' },
@@ -38,7 +39,7 @@ const petAges = [
     { petAgeId: 'old', languageId: 'VN', name: 'Già' },
 ];
 
-const petSizes = [
+const petSizeTranslations = [
     { petSizeId: 'small', languageId: 'EN', name: 'Small' },
     { petSizeId: 'small', languageId: 'VN', name: 'Nhỏ' },
     { petSizeId: 'medium', languageId: 'EN', name: 'Medium' },
@@ -47,7 +48,7 @@ const petSizes = [
     { petSizeId: 'large', languageId: 'VN', name: 'Lớn' },
 ];
 
-const petPersonalities = [
+const petPersonalityTranslations = [
     { petPersonalityId: 'friendly', languageId: 'EN', name: 'Friendly' },
     { petPersonalityId: 'friendly', languageId: 'VN', name: 'Thân thiện' },
     { petPersonalityId: 'shy', languageId: 'EN', name: 'Shy' },
@@ -57,21 +58,30 @@ const petPersonalities = [
 ];
 
 const districts = [
-    { districtId: 'ben_nghe', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Ben Nghe', },
-    { districtId: 'ben_nghe', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Bến Nghé', },
-    { districtId: 'ben_thanh', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Ben Thanh', },
-    { districtId: 'ben_thanh', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Bến Thành', },
-    { districtId: 'vo_thi_sau', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Vo Thi Sau', },
-    { districtId: 'vo_thi_sau', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Võ Thị Sáu', },
-    { districtId: 'da_kao', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Da Kao', },
-    { districtId: 'da_kao', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Đa Kao', },
-    { districtId: 'co_giang', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Co Giang', },
-    { districtId: 'co_giang', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Cô Giang', },
-    { districtId: 'nguyen_thai_binh', provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Nguyen Thai Binh', },
-    { districtId: 'nguyen_thai_binh', provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Nguyễn Thái Bình', },
+    { id: 'ben_nghe', provinceId: 'ho_chi_minh' },
+    { id: 'ben_thanh', provinceId: 'ho_chi_minh' },
+    { id: 'vo_thi_sau', provinceId: 'ho_chi_minh' },
+    { id: 'da_kao', provinceId: 'ho_chi_minh' },
+    { id: 'co_giang', provinceId: 'ho_chi_minh' },
+    { id: 'nguyen_thai_binh', provinceId: 'ho_chi_minh' },
 ];
 
-const provinces = [
+const districtTranslations = [
+    { districtId: 'ben_nghe', languageId: 'EN', name: 'Ben Nghe', },
+    { districtId: 'ben_nghe', languageId: 'VN', name: 'Bến Nghé', },
+    { districtId: 'ben_thanh', languageId: 'EN', name: 'Ben Thanh', },
+    { districtId: 'ben_thanh', languageId: 'VN', name: 'Bến Thành', },
+    { districtId: 'vo_thi_sau', languageId: 'EN', name: 'Vo Thi Sau', },
+    { districtId: 'vo_thi_sau', languageId: 'VN', name: 'Võ Thị Sáu', },
+    { districtId: 'da_kao', languageId: 'EN', name: 'Da Kao', },
+    { districtId: 'da_kao', languageId: 'VN', name: 'Đa Kao', },
+    { districtId: 'co_giang', languageId: 'EN', name: 'Co Giang', },
+    { districtId: 'co_giang', languageId: 'VN', name: 'Cô Giang', },
+    { districtId: 'nguyen_thai_binh', languageId: 'EN', name: 'Nguyen Thai Binh', },
+    { districtId: 'nguyen_thai_binh', languageId: 'VN', name: 'Nguyễn Thái Bình', },
+];
+
+const provinceTranslations = [
     { provinceId: 'ho_chi_minh', languageId: 'EN', name: 'Ho Chi Minh' },
     { provinceId: 'ho_chi_minh', languageId: 'VN', name: 'Hồ Chí Minh' },
     { provinceId: 'hanoi', languageId: 'EN', name: 'Hanoi' },
@@ -213,54 +223,75 @@ const pets = [
     },
 ];
 
+function getIdFromTypes (typeTranslations: any[], prefix: string) {
+    let types = typeTranslations.map((type) => ({ id: type[`${prefix}Id`] }));
+    types = [...new Map(types.map((item) => [item.id, item])).values()];
+    return types;
+}
+
 async function main() {
-    await Promise.all([
-        prisma.petTypeTranslation.createMany({ data: petTypes }),
-        prisma.petAgeTranslation.createMany({ data: petAges }),
-        prisma.petSizeTranslation.createMany({ data: petSizes }),
-        prisma.petPersonalityTranslation.createMany({ data: petPersonalities }),
-        prisma.provinceTranslation.createMany({ data: provinces }),
-    ]);
+    await prisma.$transaction(async (trx) => {
+        await Promise.all([
+            trx.petType.createMany({ data: getIdFromTypes(petTypeTranslations, "petType") }),
+            trx.petAge.createMany({ data: getIdFromTypes(petAgeTranslations, "petAge") }),
+            trx.petSize.createMany({ data: getIdFromTypes(petSizeTranslations, "petSize") }),
+            trx.petPersonality.createMany({ data: getIdFromTypes(petPersonalityTranslations, "petPersonality") }),
+            trx.province.createMany({ data: getIdFromTypes(provinceTranslations, "province") }),
+        ]),
 
-    await prisma.districtTranslation.createMany({ data: districts });
+        await trx.district.createMany({ data: districts });
+        
+        await Promise.all([
+            trx.petTypeTranslation.createMany({ data: petTypeTranslations }),
+            trx.petAgeTranslation.createMany({ data: petAgeTranslations }),
+            trx.petSizeTranslation.createMany({ data: petSizeTranslations }),
+            trx.petPersonalityTranslation.createMany({ data: petPersonalityTranslations }),
+            trx.provinceTranslation.createMany({ data: provinceTranslations }),
+        ]);
 
-    const seededUser = await prisma.user.create({ data: user });
+        await trx.districtTranslation.createMany({ data: districtTranslations });
 
-    await Promise.all(
-        pets.map((pet) =>
-            prisma.pet.create({
-                data: {
-                    name: pet.name,
-                    age: pet.age,
-                    petType: {
-                        connect: { id: pet.typeId }
-                    },
-                    petAge: {
-                        connect: { id: pet.ageTypeId }
-                    },
-                    petSize: {
-                        connect: { id: pet.sizeTypeId }
-                    },
-                    description: pet.description,
-                    imageUrl: pet.imageUrl,
-                    isAdopted: false,
-                    createdByUser: { connect: { id: seededUser.id } },
-                    location: {
-                        create: {
-                            address: pet.address,
-                            districtId: pet.districtId,
-                            provinceId: pet.provinceId
+        const seededUser = await trx.user.create({ data: user });
+
+        await Promise.all(
+            pets.map((pet) =>
+                trx.pet.create({
+                    data: {
+                        name: pet.name,
+                        age: pet.age,
+                        petType: {
+                            connect: { id: pet.typeId }
+                        },
+                        petAge: {
+                            connect: { id: pet.ageTypeId }
+                        },
+                        petSize: {
+                            connect: { id: pet.sizeTypeId }
+                        },
+                        description: pet.description,
+                        imageUrl: pet.imageUrl,
+                        isAdopted: false,
+                        createdByUser: { connect: { id: seededUser.id } },
+                        location: {
+                            create: {
+                                address: pet.address,
+                                districtId: pet.districtId,
+                                provinceId: pet.provinceId
+                            }
+                        },
+                        petPersonalities: {
+                            connect: pet.personalityIds.map((id) => ({ id }))
                         }
                     },
-                    petPersonalities: {
-                        connect: pet.personalityIds.map((id) => ({ id }))
-                    }
-                },
-            }),
-        ),
-    );
-
-    console.log(`Seeded: Success`);
+                }),
+            ),
+        );
+    },
+    {
+        maxWait: 5000, // Max wait to acquire transaction
+        timeout: 10000, // Max transaction run time
+        isolationLevel: Prisma.TransactionIsolationLevel.Serializable,
+    });
 }
 
 main().then(async () => {

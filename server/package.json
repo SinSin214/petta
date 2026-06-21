@@ -8,9 +8,8 @@
     "redis:up": "docker compose -f ../docker-compose.yml up -d redis",
     "build": "nest build",
     "start": "nest start",
-    "start:dev": "nest start --watch",
-    "start:serverdebug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:dev": "nest start --debug --watch",
+    "start:prod": "node dist && npm run redis:up",
     "prisma:seed": "npx prisma db seed"
   },
   "engines": {
